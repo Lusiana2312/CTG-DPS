@@ -193,7 +193,8 @@ def exportar_excel(datos):
                 cell.border = thin_border
                 cell.alignment = Alignment(vertical="center", wrap_text=True)
             row[0].alignment = Alignment(horizontal="center", vertical="center")
-
+            row[2].alignment = Alignment(horizontal="center", vertical="center")
+            row[3].alignment = Alignment(horizontal="center", vertical="center")
     output.seek(0)
     return output
 
@@ -207,6 +208,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{tipo_equipo.replace(' ', '_')}_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

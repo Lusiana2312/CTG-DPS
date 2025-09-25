@@ -127,8 +127,9 @@ datos.update(datos_definidos)
 datos.update(tensiones_residuales)
 
 
-# 📤 Función para exportar Excel con estilo
-def exportar_excel(datos):
+
+# 📤 Función para exportar Excel con estilo personalizado
+def exportar_excel(datos, fuente="Calibri", tamaño=9):
     unidades = {
         "Nivel de tensión (kV)": "kV",
         "Tensión asignada (Ur)": "kV",
@@ -183,28 +184,26 @@ def exportar_excel(datos):
             bottom=Side(style='thin', color='000000')
         )
 
-        for row in ws.iter_rows(min_row=2, max_row=4, min_col=1, max_col=4):  # A=1, D=4
+        for row in ws.iter_rows(min_row=2, max_row=4, min_col=1, max_col=4):
             for cell in row:
                 cell.border = black_border
 
-
-        # 🟪 Caja de título "CARACTERÍSTICAS GARANTIZADAS DESCARGADOR DE SOBRETENSIONES"
+        # 🟪 Caja de título
         ws.merge_cells("A2:D4")
         cell = ws.cell(row=2, column=1)
-        cell.value = "CARACTERÍSTICAS GARANTIZADAS DESCARGADOR DE SOBRETENSIONES"
-        cell.font = Font(bold=True, size=14, color="000000")  # Texto negro
+        cell.value = "CARACTERÍSTICAS GARANTIZADAS"
+        cell.font = Font(name=fuente, bold=True, size=14, color="000000")
         cell.alignment = Alignment(horizontal="center", vertical="center")
-
 
         # 🏷️ Título técnico
         ws.merge_cells("A5:D5")
         ws["A5"] = f"DESCARGADORES DE SOBRETENSIÓN {datos['Nivel de tensión (kV)']} kV"
-        ws["A5"].font = Font(bold=True, size=12)
+        ws["A5"].font = Font(name=fuente, bold=True, size=12)
         ws["A5"].alignment = Alignment(horizontal="center")
 
         # 🎨 Encabezados con estilo
         header_fill = PatternFill(start_color="003366", end_color="003366", fill_type="solid")
-        header_font = Font(color="FFFFFF", bold=True)
+        header_font = Font(name=fuente, size=tamaño, color="FFFFFF", bold=True)
         thin_border = Border(
             left=Side(style='thin'), right=Side(style='thin'),
             top=Side(style='thin'), bottom=Side(style='thin')
@@ -223,17 +222,19 @@ def exportar_excel(datos):
         ws.column_dimensions["C"].width = 10
         ws.column_dimensions["D"].width = 17
 
-        # 📋 Formato de filas
+        # 📋 Formato de filas con fuente personalizada
         for row in ws.iter_rows(min_row=7, max_row=ws.max_row, max_col=4):
             for cell in row:
                 cell.border = thin_border
                 cell.alignment = Alignment(vertical="center", wrap_text=True)
-            row[0].alignment = Alignment(horizontal="center", vertical="center")  # ÍTEM
-            row[2].alignment = Alignment(horizontal="center", vertical="center")  # UNIDAD
-            row[3].alignment = Alignment(horizontal="center", vertical="center")  # UNIDAD
+                cell.font = Font(name=fuente, size=tamaño)
+            row[0].alignment = Alignment(horizontal="center", vertical="center")
+            row[2].alignment = Alignment(horizontal="center", vertical="center")
+            row[3].alignment = Alignment(horizontal="center", vertical="center")
 
     output.seek(0)
     return output
+
 
 # 📥 Botón para generar y descargar
 if st.button("📊 Generar archivo CTG"):
@@ -244,6 +245,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{tipo_equipo.replace(' ', '_')}_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

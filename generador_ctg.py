@@ -207,14 +207,21 @@ if st.button("📊 Generar archivo CTG"):
     from openpyxl.drawing.image import Image  # Asegúrate de importar esto
 
 # Insertar imagen del logo
-logo_path = "siemens_logo.png"  # Ruta del archivo de imagen
-try:
-    img = Image(logo_path)
-    img.width = 120  # Ajusta el tamaño si lo deseas
-    img.height = 40
-    ws.add_image(img, "A1")  # Inserta el logo en la celda A1
-except FileNotFoundError:
-    print("⚠️ Logo no encontrado. Asegúrate de tener 'siemens_logo.png' en la carpeta del proyecto.")
+with pd.ExcelWriter(output, engine='openpyxl') as writer:
+    df.to_excel(writer, index=False, sheet_name="CTG", startrow=6)
+    wb = writer.book
+    ws = writer.sheets["CTG"]  # ← Aquí se define ws
+
+    # Ahora sí puedes insertar la imagen
+    logo_path = "siemens_logo.png"
+    try:
+        img = Image(logo_path)
+        img.width = 120
+        img.height = 40
+        ws.add_image(img, "A1")
+    except FileNotFoundError:
+        st.warning("⚠️ No se encontró el logo 'siemens_logo.png'. Asegúrate de subirlo al repositorio.")
+
 
 # Crear caja de "CARACTERÍSTICAS GARANTIZADAS"
 ws.merge_cells("B2:D2")
@@ -232,6 +239,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{tipo_equipo.replace(' ', '_')}_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

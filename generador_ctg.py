@@ -1,4 +1,6 @@
 import streamlit as st
+from openpyxl.drawing.image import Image
+
 
 # Diccionario de usuarios autorizados
 usuarios_autorizados = {
@@ -230,6 +232,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{tipo_equipo.replace(' ', '_')}_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

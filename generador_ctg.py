@@ -202,12 +202,32 @@ def exportar_excel(datos):
 # 📥 Botón para generar y descargar
 if st.button("📊 Generar archivo CTG"):
     archivo_excel = exportar_excel(datos)
+    from openpyxl.drawing.image import Image  # Asegúrate de importar esto
+
+# Insertar imagen del logo
+logo_path = "siemens_logo.png"  # Ruta del archivo de imagen
+try:
+    img = Image(logo_path)
+    img.width = 120  # Ajusta el tamaño si lo deseas
+    img.height = 40
+    ws.add_image(img, "A1")  # Inserta el logo en la celda A1
+except FileNotFoundError:
+    print("⚠️ Logo no encontrado. Asegúrate de tener 'siemens_logo.png' en la carpeta del proyecto.")
+
+# Crear caja de "CARACTERÍSTICAS GARANTIZADAS"
+ws.merge_cells("B2:D2")
+ws["B2"] = "CARACTERÍSTICAS GARANTIZADAS"
+ws["B2"].font = Font(bold=True, size=12, color="FFFFFF")
+ws["B2"].alignment = Alignment(horizontal="center", vertical="center")
+ws["B2"].fill = PatternFill(start_color="0070C0", end_color="0070C0", fill_type="solid")
+
     st.download_button(
         label="📥 Descargar archivo CTG en Excel",
         data=archivo_excel,
         file_name=f"CTG_{tipo_equipo.replace(' ', '_')}_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

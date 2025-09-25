@@ -171,14 +171,28 @@ def exportar_excel(datos):
             img = Image(logo_path)
             img.width = 300
             img.height = 100
-            ws.add_image(img, "A5")
-        except FileNotFoundError:
+            ws.add_image(img, "D2")
+        except FileNotFoundError
             st.warning("⚠️ No se encontró el logo 'siemens_logo.png'. Asegúrate de subirlo al repositorio.")
+        
+        #🧱 Crear borde negro alrededor de B2:E4
+        black_border = Border(
+            left=Side(style='thin', color='000000'),
+            right=Side(style='thin', color='000000'),
+            top=Side(style='thin', color='000000'),
+            bottom=Side(style='thin', color='000000')
+        )
+
+        for row in ws.iter_rows(min_row=2, max_row=4, min_col=2, max_col=5):  # B=2, E=5
+            for cell in row:
+                cell.border = black_border
+
+
 
         # 🟪 Caja de título "CARACTERÍSTICAS GARANTIZADAS"
-        ws.merge_cells("B2:E4")
+        ws.merge_cells("A2:D4")
         ws["B2"] = "CARACTERÍSTICAS GARANTIZADAS"
-        ws["B2"].font = Font(bold=True, size=12, color="FFFFFF")
+        ws["B2"].font = Font(bold=True, size=14, color="FFFFFF")
         ws["B2"].alignment = Alignment(horizontal="center", vertical="center")
         ws["B2"].fill = PatternFill(start_color="0070C0", end_color="0070C0", fill_type="solid")
 
@@ -230,6 +244,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{tipo_equipo.replace(' ', '_')}_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

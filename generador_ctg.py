@@ -169,14 +169,14 @@ def exportar_excel(datos):
         logo_path = "siemens_logo.png"
         try:
             img = Image(logo_path)
-            img.width = 120
-            img.height = 40
-            ws.add_image(img, "A1")
+            img.width = 300
+            img.height = 100
+            ws.add_image(img, "A5")
         except FileNotFoundError:
             st.warning("⚠️ No se encontró el logo 'siemens_logo.png'. Asegúrate de subirlo al repositorio.")
 
         # 🟪 Caja de título "CARACTERÍSTICAS GARANTIZADAS"
-        ws.merge_cells("B2:D2")
+        ws.merge_cells("B2:E4")
         ws["B2"] = "CARACTERÍSTICAS GARANTIZADAS"
         ws["B2"].font = Font(bold=True, size=12, color="FFFFFF")
         ws["B2"].alignment = Alignment(horizontal="center", vertical="center")
@@ -216,6 +216,7 @@ def exportar_excel(datos):
                 cell.alignment = Alignment(vertical="center", wrap_text=True)
             row[0].alignment = Alignment(horizontal="center", vertical="center")  # ÍTEM
             row[2].alignment = Alignment(horizontal="center", vertical="center")  # UNIDAD
+            row[3].alignment = Alignment(horizontal="center", vertical="center")  # UNIDAD
 
     output.seek(0)
     return output
@@ -229,6 +230,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{tipo_equipo.replace(' ', '_')}_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

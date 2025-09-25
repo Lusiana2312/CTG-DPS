@@ -36,7 +36,7 @@ st.title("📄 Generador de Archivos CTG")
 # 🛠️ Parámetros editables
 with st.expander("🛠️ Parámetros editables"):
     tipo_equipo = st.selectbox("Tipo de equipo:", ["Descargador de sobretensiones"])
-    nivel_tension = st.number_input("Nivel de tensión (kV):", min_value=1.0, value=15.0, step=0.1)
+    nivel_tension = st.selectbox("Nivel de tensión (kV):", [115, 230, 500])
     ur = st.number_input("Tensión asignada (Ur) [kV]:", min_value=1.0, step=0.1)
     altura_instalacion = st.number_input("Altura sobre el nivel del mar (m.s.n.m):", min_value=0, value=1000)
 
@@ -176,4 +176,5 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{tipo_equipo.replace(' ', '_')}_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 

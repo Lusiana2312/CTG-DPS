@@ -191,7 +191,7 @@ def exportar_excel(datos):
         # 🟪 Caja de título "CARACTERÍSTICAS GARANTIZADAS DESCARGADOR DE SOBRETENSIONES"
         ws.merge_cells("A2:D4")
         cell = ws.cell(row=2, column=1)
-        cell.value = "CARACTERÍSTICAS GARANTIZADAS"
+        cell.value = "CARACTERÍSTICAS GARANTIZADAS DESCARGADOR DE SOBRETENSIONES"
         cell.font = Font(bold=True, size=14, color="000000")  # Texto negro
         cell.alignment = Alignment(horizontal="center", vertical="center")
 
@@ -199,7 +199,7 @@ def exportar_excel(datos):
         # 🏷️ Título técnico
         ws.merge_cells("A5:D5")
         ws["A5"] = f"DESCARGADORES DE SOBRETENSIÓN {datos['Nivel de tensión (kV)']} kV"
-        ws["A5"].font = Font(bold=True, size=14)
+        ws["A5"].font = Font(bold=True, size=12)
         ws["A5"].alignment = Alignment(horizontal="center")
 
         # 🎨 Encabezados con estilo
@@ -218,10 +218,10 @@ def exportar_excel(datos):
             cell.border = thin_border
 
         # 📐 Ajuste de columnas
-        ws.column_dimensions["A"].width = 10
-        ws.column_dimensions["B"].width = 50
-        ws.column_dimensions["C"].width = 15
-        ws.column_dimensions["D"].width = 20
+        ws.column_dimensions["A"].width = 6
+        ws.column_dimensions["B"].width = 40
+        ws.column_dimensions["C"].width = 10
+        ws.column_dimensions["D"].width = 17
 
         # 📋 Formato de filas
         for row in ws.iter_rows(min_row=7, max_row=ws.max_row, max_col=4):
@@ -244,6 +244,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{tipo_equipo.replace(' ', '_')}_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

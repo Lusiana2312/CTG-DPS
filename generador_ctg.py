@@ -124,11 +124,31 @@ datos.update(tensiones_residuales)
 
 # 📤 Función para exportar Excel con estilo y hoja de portada
 def exportar_excel(datos):
+    unidades = {
+        "Nivel de tensión (kV)": "kV",
+        "Tensión asignada (Ur)": "kV",
+        "Altura de instalación (m.s.n.m)": "m.s.n.m",
+        "Coeficiente Ka": "",
+        "Coeficiente Km": "",
+        "Distancia mínima de fuga (mm)": "mm",
+        "Tensión residual al impulso de corriente de escalón (10 kA)": "kV",
+        "Tensión residual al impulso tipo maniobra (250 A)": "kV",
+        "Tensión residual al impulso tipo maniobra (500 A)": "kV",
+        "Tensión residual al impulso tipo maniobra (1000 A)": "kV",
+        "Tensión residual al impulso tipo maniobra (2000 A)": "kV",
+        "Tensión residual al impulso tipo rayo (5 kA)": "kV",
+        "Tensión residual al impulso tipo rayo (10 kA)": "kV",
+        "Tensión residual al impulso tipo rayo (20 kA)": "kV",
+        "Tensión asignada soportada a la frecuencia industrial (Ud)": "kV",
+        "Tensión asignada soportada al impulso tipo rayo (Up)": "kV",
+        "Tensión asignada soportada al impulso tipo maniobra (Us)": "kV"
+    }
+
     df = pd.DataFrame([
         {
             "ÍTEM": i + 1,
             "DESCRIPCIÓN": campo,
-            "UNIDAD": "",
+            "UNIDAD": unidades.get(campo, ""),  # Busca la unidad o deja vacío
             "REQUERIDO": valor
         }
         for i, (campo, valor) in enumerate(datos.items())
@@ -136,18 +156,6 @@ def exportar_excel(datos):
 
     output = BytesIO()
     with pd.ExcelWriter(output, engine='openpyxl') as writer:
-        # 🧾 Hoja de portada
-        portada = pd.DataFrame({
-            "Información": [
-                f"Tipo de equipo: {datos['Tipo de equipo']}",
-                f"Nivel de tensión: {datos['Nivel de tensión (kV)']} kV",
-                f"Tensión asignada (Ur): {datos['Tensión asignada (Ur)']} kV",
-                f"Fecha de generación: {pd.Timestamp.now().strftime('%d/%m/%Y')}"
-            ]
-        })
-        portada.to_excel(writer, index=False, sheet_name="Portada")
-
-        # 📋 Hoja principal CTG
         df.to_excel(writer, index=False, sheet_name="CTG", startrow=3)
         wb = writer.book
         ws = writer.sheets["CTG"]
@@ -189,6 +197,7 @@ def exportar_excel(datos):
     output.seek(0)
     return output
 
+
 # 📥 Botón para generar y descargar
 if st.button("📊 Generar archivo CTG"):
     archivo_excel = exportar_excel(datos)
@@ -198,6 +207,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{tipo_equipo.replace(' ', '_')}_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

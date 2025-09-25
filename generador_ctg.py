@@ -216,7 +216,7 @@ def exportar_excel(datos, fuente="Calibri", tamaño=9):
 
         # 📐 Ajuste de columnas
         ws.column_dimensions["A"].width = 6
-        ws.column_dimensions["B"].width = 40
+        ws.column_dimensions["B"].width = 50
         ws.column_dimensions["C"].width = 10
         ws.column_dimensions["D"].width = 17
 
@@ -246,5 +246,6 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 

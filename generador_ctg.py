@@ -122,7 +122,7 @@ datos = {
 datos.update(datos_definidos)
 datos.update(tensiones_residuales)
 
-# 📤 Función para exportar Excel con estilo
+# 📤 Función para exportar Excel con estilo y hoja de portada
 def exportar_excel(datos):
     df = pd.DataFrame([
         {
@@ -136,13 +136,25 @@ def exportar_excel(datos):
 
     output = BytesIO()
     with pd.ExcelWriter(output, engine='openpyxl') as writer:
+        # 🧾 Hoja de portada
+        portada = pd.DataFrame({
+            "Información": [
+                f"Tipo de equipo: {datos['Tipo de equipo']}",
+                f"Nivel de tensión: {datos['Nivel de tensión (kV)']} kV",
+                f"Tensión asignada (Ur): {datos['Tensión asignada (Ur)']} kV",
+                f"Fecha de generación: {pd.Timestamp.now().strftime('%d/%m/%Y')}"
+            ]
+        })
+        portada.to_excel(writer, index=False, sheet_name="Portada")
+
+        # 📋 Hoja principal CTG
         df.to_excel(writer, index=False, sheet_name="CTG", startrow=3)
         wb = writer.book
         ws = writer.sheets["CTG"]
 
         # Título
         ws.merge_cells("A1:D1")
-        ws["A1"] = f"DESCARGADORES DE SOBRETENSIÓN {nivel_tension} kV"
+        ws["A1"] = f"DESCARGADORES DE SOBRETENSIÓN {datos['Nivel de tensión (kV)']} kV"
         ws["A1"].font = Font(bold=True, size=14)
         ws["A1"].alignment = Alignment(horizontal="center")
 
@@ -186,6 +198,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{tipo_equipo.replace(' ', '_')}_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

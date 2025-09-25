@@ -235,6 +235,7 @@ def exportar_excel(datos, fuente="Calibri", tamaño=9):
 
 
 # 📥 Botón para generar y descargar
+archivo_excel = exportar_excel(datos)
 if st.button("📊 Generar archivo CTG"):
     archivo_excel = exportar_excel(datos, fuente=fuente, tamaño=tamaño)
     nivel_tension = datos.get("Nivel de tensión (kV)", "XX")
@@ -244,3 +245,4 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+

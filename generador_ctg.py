@@ -1,6 +1,8 @@
 import streamlit as st
 from openpyxl.drawing.image import Image
-
+from io import BytesIO
+import pandas as pd
+from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 
 # Diccionario de usuarios autorizados
 usuarios_autorizados = {
@@ -124,7 +126,8 @@ datos = {
 datos.update(datos_definidos)
 datos.update(tensiones_residuales)
 
-# 📤 Función para exportar Excel con estilo y hoja de portada
+
+# 📤 Función para exportar Excel con estilo
 def exportar_excel(datos):
     unidades = {
         "Nivel de tensión (kV)": "kV",
@@ -150,7 +153,7 @@ def exportar_excel(datos):
         {
             "ÍTEM": i + 1,
             "DESCRIPCIÓN": campo,
-            "UNIDAD": unidades.get(campo, ""),  # Busca la unidad o deja vacío
+            "UNIDAD": unidades.get(campo, ""),
             "REQUERIDO": valor
         }
         for i, (campo, valor) in enumerate(datos.items())
@@ -158,17 +161,34 @@ def exportar_excel(datos):
 
     output = BytesIO()
     with pd.ExcelWriter(output, engine='openpyxl') as writer:
-        df.to_excel(writer, index=False, sheet_name="CTG", startrow=3)
+        df.to_excel(writer, index=False, sheet_name="CTG", startrow=6)
         wb = writer.book
         ws = writer.sheets["CTG"]
 
-        # Título
-        ws.merge_cells("A1:D1")
-        ws["A1"] = f"DESCARGADORES DE SOBRETENSIÓN {datos['Nivel de tensión (kV)']} kV"
-        ws["A1"].font = Font(bold=True, size=14)
-        ws["A1"].alignment = Alignment(horizontal="center")
+        # 🖼️ Insertar imagen del logo
+        logo_path = "siemens_logo.png"
+        try:
+            img = Image(logo_path)
+            img.width = 120
+            img.height = 40
+            ws.add_image(img, "A1")
+        except FileNotFoundError:
+            st.warning("⚠️ No se encontró el logo 'siemens_logo.png'. Asegúrate de subirlo al repositorio.")
 
-        # Encabezados con estilo
+        # 🟪 Caja de título "CARACTERÍSTICAS GARANTIZADAS"
+        ws.merge_cells("B2:D2")
+        ws["B2"] = "CARACTERÍSTICAS GARANTIZADAS"
+        ws["B2"].font = Font(bold=True, size=12, color="FFFFFF")
+        ws["B2"].alignment = Alignment(horizontal="center", vertical="center")
+        ws["B2"].fill = PatternFill(start_color="0070C0", end_color="0070C0", fill_type="solid")
+
+        # 🏷️ Título técnico
+        ws.merge_cells("A5:D5")
+        ws["A5"] = f"DESCARGADORES DE SOBRETENSIÓN {datos['Nivel de tensión (kV)']} kV"
+        ws["A5"].font = Font(bold=True, size=14)
+        ws["A5"].alignment = Alignment(horizontal="center")
+
+        # 🎨 Encabezados con estilo
         header_fill = PatternFill(start_color="003366", end_color="003366", fill_type="solid")
         header_font = Font(color="FFFFFF", bold=True)
         thin_border = Border(
@@ -177,60 +197,30 @@ def exportar_excel(datos):
         )
 
         for col_num in range(1, 5):
-            cell = ws.cell(row=4, column=col_num)
+            cell = ws.cell(row=6, column=col_num)
             cell.fill = header_fill
             cell.font = header_font
             cell.alignment = Alignment(horizontal="center")
             cell.border = thin_border
 
-        # Ajuste de columnas
+        # 📐 Ajuste de columnas
         ws.column_dimensions["A"].width = 10
         ws.column_dimensions["B"].width = 50
         ws.column_dimensions["C"].width = 15
         ws.column_dimensions["D"].width = 20
 
-        # Formato de filas
-        for row in ws.iter_rows(min_row=5, max_row=ws.max_row, max_col=4):
+        # 📋 Formato de filas
+        for row in ws.iter_rows(min_row=7, max_row=ws.max_row, max_col=4):
             for cell in row:
                 cell.border = thin_border
                 cell.alignment = Alignment(vertical="center", wrap_text=True)
-            row[0].alignment = Alignment(horizontal="center", vertical="center")
-            row[2].alignment = Alignment(horizontal="center", vertical="center")
-            row[3].alignment = Alignment(horizontal="center", vertical="center")
+            row[0].alignment = Alignment(horizontal="center", vertical="center")  # ÍTEM
+            row[2].alignment = Alignment(horizontal="center", vertical="center")  # UNIDAD
+
     output.seek(0)
     return output
 
-
 # 📥 Botón para generar y descargar
-if st.button("📊 Generar archivo CTG"):
-    archivo_excel = exportar_excel(datos)
-    from openpyxl.drawing.image import Image  # Asegúrate de importar esto
-
-# Insertar imagen del logo
-with pd.ExcelWriter(output, engine='openpyxl') as writer:
-    df.to_excel(writer, index=False, sheet_name="CTG", startrow=6)
-    wb = writer.book
-    ws = writer.sheets["CTG"]  # ← Aquí se define ws
-
-    # Ahora sí puedes insertar la imagen
-    logo_path = "siemens_logo.png"
-    try:
-        img = Image(logo_path)
-        img.width = 120
-        img.height = 40
-        ws.add_image(img, "A1")
-    except FileNotFoundError:
-        st.warning("⚠️ No se encontró el logo 'siemens_logo.png'. Asegúrate de subirlo al repositorio.")
-
-
-# Crear caja de "CARACTERÍSTICAS GARANTIZADAS"
-ws.merge_cells("B2:D2")
-ws["B2"] = "CARACTERÍSTICAS GARANTIZADAS"
-ws["B2"].font = Font(bold=True, size=12, color="FFFFFF")
-ws["B2"].alignment = Alignment(horizontal="center", vertical="center")
-ws["B2"].fill = PatternFill(start_color="0070C0", end_color="0070C0", fill_type="solid")
-
-   # 📥 Botón para generar y descargar
 if st.button("📊 Generar archivo CTG"):
     archivo_excel = exportar_excel(datos)
     st.download_button(
@@ -239,7 +229,6 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{tipo_equipo.replace(' ', '_')}_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
-
 
 
 

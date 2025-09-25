@@ -111,7 +111,6 @@ with st.expander("⚡ Tensiones residuales"):
 
 # 📋 Consolidar todos los datos
 datos = {
-    "Tipo de equipo": tipo_equipo,
     "Nivel de tensión (kV)": nivel_tension,
     "Tensión asignada (Ur)": ur,
     "Altura de instalación (m.s.n.m)": altura_instalacion,
@@ -244,6 +243,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{tipo_equipo.replace(' ', '_')}_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

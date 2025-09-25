@@ -175,7 +175,7 @@ def exportar_excel(datos):
         except FileNotFoundError:
             st.warning("⚠️ No se encontró el logo 'siemens_logo.png'. Asegúrate de subirlo al repositorio.")
         
-        #🧱 Crear borde negro alrededor de B2:E4
+        #🧱 Crear borde negro alrededor de A2:D4
         black_border = Border(
             left=Side(style='thin', color='000000'),
             right=Side(style='thin', color='000000'),
@@ -183,12 +183,12 @@ def exportar_excel(datos):
             bottom=Side(style='thin', color='000000')
         )
 
-        for row in ws.iter_rows(min_row=2, max_row=4, min_col=2, max_col=5):  # B=2, E=5
+        for row in ws.iter_rows(min_row=2, max_row=4, min_col=1, max_col=4):  # A=1, D=4
             for cell in row:
                 cell.border = black_border
 
 
-        # 🟪 Caja de título "CARACTERÍSTICAS GARANTIZADAS"
+        # 🟪 Caja de título "CARACTERÍSTICAS GARANTIZADAS DESCARGADOR DE SOBRETENSIONES"
         ws.merge_cells("A2:D4")
         cell = ws.cell(row=2, column=1)
         cell.value = "CARACTERÍSTICAS GARANTIZADAS"
@@ -244,6 +244,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{tipo_equipo.replace(' ', '_')}_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

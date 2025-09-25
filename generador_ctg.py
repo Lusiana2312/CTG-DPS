@@ -1,4 +1,30 @@
 import streamlit as st
+
+# Diccionario de usuarios autorizados
+usuarios_autorizados = {
+    "lusiana": "clave123",
+    "daniel": "clave456"
+}
+
+# Pantalla de login
+st.set_page_config(page_title="Acceso CTG", layout="wide")
+st.title("🔐 Acceso privado")
+
+usuario = st.text_input("Usuario")
+clave = st.text_input("Contraseña", type="password")
+
+if usuario in usuarios_autorizados and usuarios_autorizados[usuario] == clave:
+    st.success("✅ Acceso concedido")
+    
+    # Aquí va TODO tu código original
+    # Puedes copiar y pegar desde donde empieza: `st.title("📄 Generador de Archivos CTG")`
+    
+else:
+    st.warning("🔒 Ingresa tus credenciales para continuar")
+    st.stop()
+
+#empieza codigo
+import streamlit as st
 import pandas as pd
 from io import BytesIO
 from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
@@ -150,3 +176,4 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{tipo_equipo.replace(' ', '_')}_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+

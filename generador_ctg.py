@@ -39,7 +39,6 @@ st.title("📄 Generador de Archivos CTG")
 
 # 🛠️ Parámetros editables
 with st.expander("🛠️ Parámetros editables"):
-    tipo_equipo = st.selectbox("Tipo de equipo:", ["Descargador de sobretensiones"])
     nivel_tension = st.selectbox("Nivel de tensión (kV):", [115, 230, 500])
     # Diccionario de Ur según nivel de tensión
     ur_por_nivel = {
@@ -245,6 +244,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{tipo_equipo.replace(' ', '_')}_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

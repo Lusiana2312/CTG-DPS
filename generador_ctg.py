@@ -172,7 +172,7 @@ def exportar_excel(datos):
             img.width = 300
             img.height = 100
             ws.add_image(img, "D2")
-        except FileNotFoundError
+        except FileNotFoundError:
             st.warning("⚠️ No se encontró el logo 'siemens_logo.png'. Asegúrate de subirlo al repositorio.")
         
         #🧱 Crear borde negro alrededor de B2:E4
@@ -244,6 +244,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{tipo_equipo.replace(' ', '_')}_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

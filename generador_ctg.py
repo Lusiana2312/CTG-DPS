@@ -188,12 +188,12 @@ def exportar_excel(datos):
                 cell.border = black_border
 
 
-
         # 🟪 Caja de título "CARACTERÍSTICAS GARANTIZADAS"
         ws.merge_cells("A2:D4")
-        ws["A2"] = "CARACTERÍSTICAS GARANTIZADAS"
-        ws["A2"].font = Font(bold=True, size=14, color="FFFFFF")
-        ws["A2"].alignment = Alignment(horizontal="center", vertical="center")
+        cell = ws.cell(row=2, column=2)
+        cell.value = "CARACTERÍSTICAS GARANTIZADAS"
+        cell.font = Font(bold=True, size=14, color="000000")  # Texto negro
+        cell.alignment = Alignment(horizontal="center", vertical="center")
 
 
         # 🏷️ Título técnico
@@ -244,6 +244,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{tipo_equipo.replace(' ', '_')}_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

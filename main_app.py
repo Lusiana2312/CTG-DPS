@@ -1,7 +1,6 @@
 import streamlit as st
-streamlit run main_app.py
 
-# 🔐 Login de usuario
+# 🔐 Login
 usuarios_autorizados = {
     "lusiana": "clave123",
     "fer": "hola6"
@@ -22,9 +21,12 @@ st.success("✅ Acceso concedido")
 # 🧭 Selector de equipo
 equipo = st.selectbox("Selecciona el tipo de equipo", ["CTG DPS", "CT"])
 
-# ▶️ Ejecutar el código correspondiente según el equipo
+# ▶️ Ejecutar solo la función correspondiente
 if equipo == "CTG DPS":
-    import generador_ctg  # Ejecuta el código de CTG DPS
+    import generador_ctg
+    generador_ctg.mostrar_app()
+
 elif equipo == "CT":
-    import generador_ct  # Ejecuta el código de CT
+    import generador_ct
+    generador_ct.mostrar_app()
 

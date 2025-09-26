@@ -154,7 +154,7 @@ def exportar_excel(datos, fuente="Calibri", tamaño=9):
             "DESCRIPCIÓN": campo,
             "UNIDAD": unidades.get(campo, ""),
             "REQUERIDO": valor,
-            "OFRECIDO: " #Columna vacía
+            "OFRECIDO": "" #Columna vacía
         }
         for i, (campo, valor) in enumerate(datos.items())
     ])
@@ -250,6 +250,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

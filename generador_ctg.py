@@ -153,7 +153,8 @@ def exportar_excel(datos, fuente="Calibri", tamaño=9):
             "ÍTEM": i + 1,
             "DESCRIPCIÓN": campo,
             "UNIDAD": unidades.get(campo, ""),
-            "REQUERIDO": valor
+            "REQUERIDO": valor,
+            "OFRECIDO: " #Columna vacía
         }
         for i, (campo, valor) in enumerate(datos.items())
     ])
@@ -207,7 +208,7 @@ def exportar_excel(datos, fuente="Calibri", tamaño=9):
             top=Side(style='thin'), bottom=Side(style='thin')
         )
 
-        for col_num in range(1, 5):
+        for col_num in range(1, 6):
             cell = ws.cell(row=6, column=col_num)
             cell.fill = header_fill
             cell.font = header_font
@@ -219,9 +220,10 @@ def exportar_excel(datos, fuente="Calibri", tamaño=9):
         ws.column_dimensions["B"].width = 50
         ws.column_dimensions["C"].width = 10
         ws.column_dimensions["D"].width = 17
+        ws.column_dimensions["E"].width = 17
 
         # 📋 Formato de filas con fuente personalizada
-        for row in ws.iter_rows(min_row=7, max_row=ws.max_row, max_col=4):
+        for row in ws.iter_rows(min_row=7, max_row=ws.max_row, max_col=5):
             for cell in row:
                 cell.border = thin_border
                 cell.alignment = Alignment(vertical="center", wrap_text=True)
@@ -229,6 +231,8 @@ def exportar_excel(datos, fuente="Calibri", tamaño=9):
             row[0].alignment = Alignment(horizontal="center", vertical="center")
             row[2].alignment = Alignment(horizontal="center", vertical="center")
             row[3].alignment = Alignment(horizontal="center", vertical="center")
+            row[4].alignment = Alignment(horizontal="center", vertical="center")  # Alineación para OFRECIDO
+
 
     output.seek(0)
     return output
@@ -246,6 +250,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

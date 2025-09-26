@@ -1,10 +1,28 @@
 import streamlit as st
 
-# 🧭 Selector de equipo
-equipo = st.selectbox("Selecciona el tipo de equipo", ["CTG DPS", "Otro equipo"])
+# 🔐 Login de usuario
+usuarios_autorizados = {
+    "lusiana": "clave123",
+    "fer": "hola6"
+}
 
-# 📦 Importar función según el equipo seleccionado
-if equipo == "Descargador de sobretensiones":
-    from generador_ctg import exportar_excel, obtener_nombre_archivo
-elif equipo == "Otro equipo":
-    from generador_otro_equipo import exportar_excel, obtener_nombre_archivo
+st.set_page_config(page_title="Generador CTG", layout="wide")
+st.title("🔐 Acceso privado")
+
+usuario = st.text_input("Usuario")
+clave = st.text_input("Contraseña", type="password")
+
+if usuario not in usuarios_autorizados or usuarios_autorizados[usuario] != clave:
+    st.warning("🔒 Ingresa tus credenciales para continuar")
+    st.stop()
+
+st.success("✅ Acceso concedido")
+
+# 🧭 Selector de equipo
+equipo = st.selectbox("Selecciona el tipo de equipo", ["CTG DPS", "CT"])
+
+# ▶️ Ejecutar el código correspondiente según el equipo
+if equipo == "CTG DPS":
+    import generador_ctg  # Ejecuta el código de CTG DPS
+elif equipo == "CT":
+    import generador_ct  # Ejecuta el código de CT

@@ -188,7 +188,7 @@ def exportar_excel(datos, fuente="Calibri", tamaño=9):
                 cell.border = black_border
 
         # 🟪 Caja de título
-        ws.merge_cells("A2:D4")
+        ws.merge_cells("A2:E4")
         cell = ws.cell(row=2, column=1)
         cell.value = "CARACTERÍSTICAS GARANTIZADAS"
         cell.font = Font(name=fuente, bold=True, size=14, color="000000")
@@ -250,6 +250,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

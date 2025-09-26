@@ -7,7 +7,7 @@ from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 # Diccionario de usuarios autorizados
 usuarios_autorizados = {
     "lusiana": "clave123",
-    "daniel": "clave456"
+    "fer": "hola6"
 }
 
 # Pantalla de login
@@ -175,7 +175,7 @@ def exportar_excel(datos, fuente="Calibri", tamaño=9):
         except FileNotFoundError:
             st.warning("⚠️ No se encontró el logo 'siemens_logo.png'. Asegúrate de subirlo al repositorio.")
         
-        #🧱 Crear borde negro alrededor de A2:D4
+        #🧱 Crear borde negro alrededor de A2:E4
         black_border = Border(
             left=Side(style='thin', color='000000'),
             right=Side(style='thin', color='000000'),
@@ -183,7 +183,7 @@ def exportar_excel(datos, fuente="Calibri", tamaño=9):
             bottom=Side(style='thin', color='000000')
         )
 
-        for row in ws.iter_rows(min_row=2, max_row=4, min_col=1, max_col=4):
+        for row in ws.iter_rows(min_row=2, max_row=4, min_col=1, max_col=5):
             for cell in row:
                 cell.border = black_border
 
@@ -250,6 +250,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

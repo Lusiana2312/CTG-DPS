@@ -1,4 +1,5 @@
 import streamlit as st
+streamlit run main_app.py
 
 # 🔐 Login de usuario
 usuarios_autorizados = {
@@ -26,3 +27,4 @@ if equipo == "CTG DPS":
     import generador_ctg  # Ejecuta el código de CTG DPS
 elif equipo == "CT":
     import generador_ct  # Ejecuta el código de CT
+

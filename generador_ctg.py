@@ -219,8 +219,8 @@ def exportar_excel(datos, fuente="Calibri", tamaño=9):
         ws.column_dimensions["A"].width = 6
         ws.column_dimensions["B"].width = 50
         ws.column_dimensions["C"].width = 10
-        ws.column_dimensions["D"].width = 17
-        ws.column_dimensions["E"].width = 17
+        ws.column_dimensions["D"].width = 12
+        ws.column_dimensions["E"].width = 12
 
         # 📋 Formato de filas con fuente personalizada
         for row in ws.iter_rows(min_row=7, max_row=ws.max_row, max_col=5):
@@ -250,6 +250,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

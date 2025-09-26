@@ -7,7 +7,7 @@ from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 from openpyxl.utils import get_column_letter
 from openpyxl.drawing.image import Image
 
-def mostrar _app():
+def mostrar_app():
     st.title("Generador CTG DPS")
     
 st.set_page_config(page_title="Generador CTG", layout="wide")
@@ -226,6 +226,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

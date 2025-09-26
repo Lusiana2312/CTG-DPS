@@ -1,4 +1,4 @@
-
+import streamlit as st
 from openpyxl.drawing.image import Image
 from io import BytesIO
 import pandas as pd
@@ -250,6 +250,7 @@ if st.button("📊 Generar archivo CTG"):
         file_name=f"CTG_{nivel_tension}kV.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
 

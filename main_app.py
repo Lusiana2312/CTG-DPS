@@ -29,4 +29,3 @@ if equipo == "CTG DPS":
 elif equipo == "CT":
     import generador_ct
     generador_ct.mostrar_app()
-

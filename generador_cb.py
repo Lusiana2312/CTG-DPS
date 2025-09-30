@@ -219,6 +219,40 @@ def mostrar_app():
     diferencia_tiempo_contactos = st.text_input(
         "Máxima diferencia de tiempo entre contactos de diferente polo al tocarse durante un cierre o al separarse durante una apertura"
     )
+    
+    # Maniobra de apertura
+    st.markdown("### 🔧 Maniobra de apertura")
+
+    tiempo_apertura = st.text_input("a) Tiempo de apertura")
+    tiempo_arco = st.text_input("b) Tiempo de arco")
+    tiempo_max_corte = st.text_input("c) Tiempo máximo de corte asignado")
+
+    # Tiempo muerto
+    st.markdown("### ⏳ Tiempo muerto")
+    tiempo_muerto = st.text_input("Tiempo muerto")
+
+    # Maniobra de cierre
+    st.markdown("### 🔧 Maniobra de cierre")
+
+    tiempo_establecimiento = st.text_input("a) Tiempo de establecimiento")
+    tiempo_prearco = st.text_input("b) Tiempo de prearco")
+    tiempo_cierre = st.text_input("c) Tiempo de cierre")
+
+    # Gas SF6 - Interruptor
+    st.markdown("### 🧪 Gas SF₆ – Interruptor")
+
+    presion_maniobra = st.text_input("a) Presión de gas asignada para maniobra (Pob)")
+    presion_corte = st.text_input("b) Presión de gas asignada para el corte (Pcb)")
+
+    # Volumen total de SF6 por polo a 0,1 MPa
+    st.markdown("### 🧪 Volumen total de SF₆ por polo a 0,1 MPa")
+    volumen_sf6 = st.text_input("Volumen total de SF₆ por polo a 0,1 MPa")
+
+    # Pérdida máxima de SF6 por año (valor fijo)
+    st.markdown("### 🧪 Pérdida máxima de SF₆ por año")
+    perdida_sf6 = "≤ 0.5%"
+    st.markdown(f"**Pérdida máxima de SF₆ por año:** {perdida_sf6}")
+
 
     # BOTÓN PARA GENERAR FICHA
     if st.button("Generar ficha CTG"):
@@ -289,7 +323,20 @@ def mostrar_app():
             "Apertura inductiva - Sobretensión de maniobra máxima": sobretension_inductiva,
             "Número de operaciones mecánicas": num_operaciones_mecanicas,
             "Probabilidad de reencendido": probabilidad_reencendido,
-            "Máxima diferencia de tiempo entre contactos de diferente polo": diferencia_tiempo_contactos
+            "Máxima diferencia de tiempo entre contactos de diferente polo": diferencia_tiempo_contactos,
+            "Maniobra de apertura - Tiempo de apertura": tiempo_apertura,
+            "Maniobra de apertura - Tiempo de arco": tiempo_arco,
+            "Maniobra de apertura - Tiempo máximo de corte asignado": tiempo_max_corte,
+            "Tiempo muerto": tiempo_muerto,
+            "Maniobra de cierre - Tiempo de establecimiento": tiempo_establecimiento,
+            "Maniobra de cierre - Tiempo de prearco": tiempo_prearco,
+            "Maniobra de cierre - Tiempo de cierre": tiempo_cierre,
+            "Gas SF6 - Presión de maniobra (Pob)": presion_maniobra,
+            "Gas SF6 - Presión de corte (Pcb)": presion_corte,
+            "Volumen total de SF6 por polo a 0,1 MPa": volumen_sf6,
+            "Pérdida máxima de SF6 por año": perdida_sf6
+
+
 
 
         }

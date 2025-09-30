@@ -3,7 +3,7 @@ import streamlit as st
 from openpyxl import Workbook
 from io import BytesIO
 from datetime import datetime
-
+import pandas as pd
 
 def mostrar_app():
     st.set_page_config(page_title="Generador CTG - Interruptor de Potencia", layout="wide")

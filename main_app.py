@@ -27,11 +27,11 @@ try:
         import generador_dps
         generador_dps.mostrar_app()
 
-    elif equipo == "Transformador de corriente":
+    elif equipo == "CT":
         import generador_ct
         generador_ct.mostrar_app()
 
-    elif equipo == "Transformador de tensión":
+    elif equipo == "PT":
         import generador_pt
         generador_pt.mostrar_app()
 
@@ -41,6 +41,7 @@ except AttributeError:
     st.error("⚠️ El módulo existe pero no tiene la función 'mostrar_app()'. Verifica que esté correctamente definida.")
 except Exception as e:
     st.error(f"⚠️ Ocurrió un error inesperado: {e}")
+
 
 
 

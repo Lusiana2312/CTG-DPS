@@ -253,6 +253,35 @@ def mostrar_app():
     perdida_sf6 = "≤ 0.5%"
     st.markdown(f"**Pérdida máxima de SF₆ por año:** {perdida_sf6}")
 
+    
+    # 🧪 Resistencia máxima entre terminales
+    st.markdown("### 🧪 Resistencia máxima entre terminales")
+    resistencia_max_terminales = st.text_input("Resistencia máxima entre terminales (μΩ)")
+
+    # 🧪 Capacitancia
+    st.markdown("### 🧪 Capacitancia")
+
+    cap_entre_contactos_con_resistencia = st.text_input("a) Entre contactos abiertos - Con resistencia de preinserción (pF)")
+    cap_entre_contactos_sin_resistencia = st.text_input("a) Entre contactos abiertos - Sin resistencia de preinserción (pF)")
+    cap_entre_contactos_tierra = st.text_input("b) Entre contactos y tierra (pF)")
+    cap_condensador_gradiente = st.text_input("c) Condensador de gradiente (***) (pF)")
+
+    # 🧪 Material de los empaques
+    st.markdown("### 🧪 Material de los empaques")
+    material_empaques = st.text_input("Material de los empaques")
+
+    # 🧪 Operación con mando sincronizado
+    st.markdown("### 🧪 Operación con mando sincronizado")
+    mando_sincronizado = st.radio("¿Operación con mando sincronizado?", ["Sí", "No"])
+
+    # 🧪 Resistencia de preinserción
+    st.markdown("### 🧪 Resistencia de preinserción")
+    resistencia_preinsercion = st.radio("¿Resistencia de preinserción?", ["Sí", "No"])
+
+
+
+
+
 
     # BOTÓN PARA GENERAR FICHA
     if st.button("Generar ficha CTG"):
@@ -334,7 +363,17 @@ def mostrar_app():
             "Gas SF6 - Presión de maniobra (Pob)": presion_maniobra,
             "Gas SF6 - Presión de corte (Pcb)": presion_corte,
             "Volumen total de SF6 por polo a 0,1 MPa": volumen_sf6,
-            "Pérdida máxima de SF6 por año": perdida_sf6
+            "Pérdida máxima de SF6 por año": perdida_sf6,
+            "Resistencia máxima entre terminales (μΩ)": resistencia_max_terminales,
+            "Capacitancia - Entre contactos abiertos con resistencia de preinserción (pF)": cap_entre_contactos_con_resistencia,
+            "Capacitancia - Entre contactos abiertos sin resistencia de preinserción (pF)": cap_entre_contactos_sin_resistencia,
+            "Capacitancia - Entre contactos y tierra (pF)": cap_entre_contactos_tierra,
+            "Capacitancia - Condensador de gradiente (***) (pF)": cap_condensador_gradiente,
+            "Material de los empaques": material_empaques,
+            "Operación con mando sincronizado": mando_sincronizado,
+            "Resistencia de preinserción": resistencia_preinsercion
+
+
 
 
 

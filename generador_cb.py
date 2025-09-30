@@ -67,6 +67,14 @@ def mostrar_app():
     st.markdown(f"b) Entre fases: **{us_valores['entre_fases']}**")
     st.markdown(f"c) A través de interruptor abierto: **{us_valores['interruptor_abierto']}**")
 
+    # Asignación automática de Up según Ur
+    up_por_ur = {
+        "145 kV": "650 kV",
+        "245 kV": "1050 kV",
+        "550 kV": "1800 kV"
+    }
+    up_rayo = up_por_ur.get(ur, "")
+    st.markdown(f"**Tensión asignada soportada al impulso tipo rayo (Up):** {up_rayo}")
     # BOTÓN PARA GENERAR FICHA
     if st.button("Generar ficha CTG"):
         ficha_cb = {

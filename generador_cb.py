@@ -104,8 +104,28 @@ def mostrar_app():
     # Poder de cierre asignado en cortocircuito (Ip)
     st.markdown("**Poder de cierre asignado en cortocircuito (Ip):** 2.6 × Ics")
 
+    # Factor de primer polo según Ur
+    factor_primer_polo_por_ur = {
+        "145 kV": "1.3",
+        "245 kV": "1.5",
+        "550 kV": "1.5"
+    }
+    factor_primer_polo = factor_primer_polo_por_ur.get(ur, "")
+    st.markdown(f"**Factor de primer polo:** {factor_primer_polo}")
 
+    # Tensión transitoria de restablecimiento asignada para fallas en bornes
+    st.markdown("### ⚡ Tensión transitoria de restablecimiento asignada para fallas en bornes")
 
+    u1 = st.text_input("a) Primera tensión de referencia (u1)")
+    t1 = st.text_input("b) Tiempo t1")
+    uc = st.text_input("c) Valor cresta del TTR (uc)")
+    t2 = st.text_input("d) Tiempo t2")
+    td = st.text_input("e) Retardo td")
+    u_prima = st.text_input("f) Tensión u’")
+    t_prima = st.text_input("g) Tiempo t’")
+    vel_crecimiento = st.text_input("h) Velocidad de crecimiento (u1 / t1)")
+    
+    
     # BOTÓN PARA GENERAR FICHA
     if st.button("Generar ficha CTG"):
         ficha_cb = {
@@ -136,6 +156,15 @@ def mostrar_app():
             "Duración del cortocircuito asignado (Ics)": duracion_ics,
             "Porcentaje de corriente aperiódica (%)": porcentaje_ap,
             "Poder de cierre asignado en cortocircuito (Ip)": "2.6 × Ics",
+            "Factor de primer polo": factor_primer_polo,
+            "TTR - Primera tensión de referencia (u1)": u1,
+            "TTR - Tiempo t1": t1,
+            "TTR - Valor cresta del TTR (uc)": uc,
+            "TTR - Tiempo t2": t2,
+            "TTR - Retardo td": td,
+            "TTR - Tensión u’": u_prima,
+            "TTR - Tiempo t’": t_prima,
+            "TTR - Velocidad de crecimiento (u1 / t1)": vel_crecimiento,
 
 
         }

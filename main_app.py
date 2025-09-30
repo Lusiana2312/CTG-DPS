@@ -34,10 +34,6 @@ try:
     elif equipo == "Transformador de tensión":
         import generador_pt
         generador_pt.mostrar_app()
-        
-    elif equipo == "Interruptor":
-        import generador_cb
-        generador_cb.mostrar_app()
 
 except ModuleNotFoundError as e:
     st.error(f"❌ No se encontró el módulo: {e.name}")
@@ -45,5 +41,6 @@ except AttributeError:
     st.error("⚠️ El módulo existe pero no tiene la función 'mostrar_app()'. Verifica que esté correctamente definida.")
 except Exception as e:
     st.error(f"⚠️ Ocurrió un error inesperado: {e}")
+
 
 

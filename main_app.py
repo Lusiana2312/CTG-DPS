@@ -34,10 +34,3 @@ try:
     elif equipo == "PT":
         import generador_pt
         generador_pt.mostrar_app()
-
-
-
-
-
-
-

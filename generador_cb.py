@@ -298,13 +298,35 @@ def mostrar_app():
 
     # 🧪 Datos sísmicos
     st.markdown("### 🧪 Datos sísmicos")
-
     desempeno_sismico_ieee = st.text_input("Desempeño sísmico según IEEE-693-Vigente (**)")
     frecuencia_natural_vibracion = st.text_input("a) Frecuencia natural de vibración (Hz)")
     coef_amortiguamiento_critico = st.text_input("b) Coeficiente de amortiguamiento crítico (%)")
 
+    # 🧪 Cargas admisibles en bornes
+    st.markdown("### 🧪 Cargas admisibles en bornes")
+    carga_estatica_admisible = st.text_input("a) Carga estática admisible (N)")
+    carga_dinamica_admisible = st.text_input("b) Carga dinámica admisible (N)")
+    
+    # 🧪 Fuerzas asociadas a la operación del equipo
+    st.markdown("### 🧪 Fuerzas asociadas a la operación del equipo")
 
+    fuerza_vertical = st.text_input("a) Fuerza vertical (N)")
+    fuerza_horizontal = st.text_input("b) Fuerza horizontal (N)")
 
+    # 🧪 Masa neta de un polo completo con estructura
+    st.markdown("### 🧪 Masa neta de un polo completo con estructura")
+    masa_neta_polo = st.text_input("Masa neta de un polo completo con estructura (kg)")
+
+    # 🧪 Dimensiones para transporte
+    st.markdown("### 🧪 Dimensiones para transporte")
+    dimensiones_transporte = st.text_input("Dimensiones para transporte (Alto x Ancho x Largo) [mm]")
+
+    # 🧪 Datos adicionales para transporte y campo eléctrico
+    st.markdown("### 🧪 Datos adicionales")
+
+    masa_neta_transporte = st.text_input("Masa neta para transporte (kg)")
+    volumen_total_transporte = st.text_input("Volumen total para transporte (m³)")
+    campo_electrico_1m = st.text_input("Campo eléctrico a 1 metro de separación del piso (kV/m)")
 
     # BOTÓN PARA GENERAR FICHA
     if st.button("Generar ficha CTG"):
@@ -402,10 +424,17 @@ def mostrar_app():
             "Distancia mínima de fuga (mm)": distancia_minima_fuga,
             "Desempeño sísmico según IEEE-693-Vigente (**)": desempeno_sismico_ieee,
             "Frecuencia natural de vibración (Hz)": frecuencia_natural_vibracion,
-            "Coeficiente de amortiguamiento crítico (%)": coef_amortiguamiento_critico
-
-
-
+            "Coeficiente de amortiguamiento crítico (%)": coef_amortiguamiento_critico,
+            "Cargas admisibles en bornes - Carga estática admisible (N)": carga_estatica_admisible,
+            "Cargas admisibles en bornes - Carga dinámica admisible (N)": carga_dinamica_admisible,
+            "Fuerzas asociadas a la operación del equipo - Vertical (N)": fuerza_vertical,
+            "Fuerzas asociadas a la operación del equipo - Horizontal (N)": fuerza_horizontal,
+            "Masa neta de un polo completo con estructura (kg)": masa_neta_polo,
+            "Dimensiones para transporte (Alto x Ancho x Largo) [mm]": dimensiones_transporte,
+            "Masa neta para transporte (kg)": masa_neta_transporte,
+            "Volumen total para transporte (m³)": volumen_total_transporte,
+            "Campo eléctrico a 1 metro de separación del piso (kV/m)": campo_electrico_1m
+            
         }
 
         # Crear Excel en memoria

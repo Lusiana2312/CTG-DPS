@@ -98,6 +98,13 @@ def mostrar_app():
     # Duración del cortocircuito asignado (Ics)
     duracion_ics = st.selectbox("Duración del cortocircuito asignado (Ics)", ["1 s", "2 s", "3 s"])
 
+    # Porcentaje de corriente aperiódica (%)
+    porcentaje_ap = st.text_input("Porcentaje de corriente aperiódica (%)")
+
+    # Poder de cierre asignado en cortocircuito (Ip)
+    st.markdown("**Poder de cierre asignado en cortocircuito (Ip):** 2.6 × Ics")
+
+
 
     # BOTÓN PARA GENERAR FICHA
     if st.button("Generar ficha CTG"):
@@ -126,7 +133,10 @@ def mostrar_app():
             "Tensión asignada soportada al impulso tipo rayo (Up)": up_rayo,
             "Corriente asignada en servicio continuo (Ir)": ir,
             "Poder de corte asignado en cortocircuito (Ics)": ics,
-            "Duración del cortocircuito asignado (Ics)": duracion_ics
+            "Duración del cortocircuito asignado (Ics)": duracion_ics,
+            "Porcentaje de corriente aperiódica (%)": porcentaje_ap,
+            "Poder de cierre asignado en cortocircuito (Ip)": "2.6 × Ics",
+
 
         }
 

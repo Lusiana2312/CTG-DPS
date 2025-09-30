@@ -99,6 +99,7 @@ def mostrar_app():
             "Us - Fase-Tierra [kV]": us_valores["fase_tierra"],
             "Us - Entre fases [kV]": us_valores["entre_fases"],
             "Us - A través de interruptor abierto [kV]": us_valores["interruptor_abierto"]
+            "Tensión asignada soportada al impulso tipo rayo (Up)": up_rayo
         }
 
         # Crear Excel en memoria

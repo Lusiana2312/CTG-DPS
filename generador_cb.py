@@ -542,7 +542,7 @@ def mostrar_app():
     tamaño = 9
     if st.button("📊 Generar archivo CTG"):
         archivo_excel = exportar_excel(ficha_cb, fuente=fuente, tamaño=tamaño)
-        nivel_tension = datos.get("Nivel de tensión (kV)", "XX")
+        nivel_tension = ficha_cb.get("Nivel de tensión (kV)", "XX")
         st.download_button(
             label="📥 Descargar archivo CTG en Excel",
             data=archivo_excel,

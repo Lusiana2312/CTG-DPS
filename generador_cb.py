@@ -193,6 +193,20 @@ def mostrar_app():
     id_t2 = st.text_input("d) Tiempo t2 [Id]")
     id_vel_crecimiento = st.text_input("e) Velocidad de crecimiento (u1 / t1) [Id]")
 
+    # Apertura de líneas en vacío
+    st.markdown("### ⚡ Apertura de líneas en vacío")
+
+    ir_apertura_linea = st.text_input("a) Poder de corte asignado (Ir) [Apertura de líneas en vacío]")
+    sobretension_maniobra = st.text_input("b) Sobretensión de maniobra presente")
+
+    # Apertura de corrientes inductivas pequeñas
+    st.markdown("### ⚡ Apertura de corrientes inductivas pequeñas")
+
+    apertura_inductiva = st.selectbox("¿Aplica apertura de corrientes inductivas pequeñas?", ["Sí", "No"])
+    ir_inductiva = st.text_input("a) Poder de corte asignado [corrientes inductivas pequeñas]")
+    sobretension_inductiva = st.text_input("b) Sobretensión de maniobra máxima")
+
+
 
 
     # BOTÓN PARA GENERAR FICHA
@@ -257,6 +271,12 @@ def mostrar_app():
             "Poder de corte en discordancia de fases - uc": id_uc,
             "Poder de corte en discordancia de fases - t2": id_t2,
             "Poder de corte en discordancia de fases - velocidad de crecimiento (u1 / t1)": id_vel_crecimiento,
+            "Apertura de líneas en vacío - Poder de corte asignado (Ir)": ir_apertura_linea,
+            "Apertura de líneas en vacío - Sobretensión de maniobra presente": sobretension_maniobra,
+            "Apertura de corrientes inductivas pequeñas": apertura_inductiva,
+            "Apertura inductiva - Poder de corte asignado": ir_inductiva,
+            "Apertura inductiva - Sobretensión de maniobra máxima": sobretension_inductiva,
+
 
         }
 

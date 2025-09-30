@@ -543,17 +543,17 @@ def mostrar_app():
         output.seek(0)
         return output
     
-            if st.button("📊 Generar archivo CTG"):
-                # ✅ Verifica que ficha_cb esté definida
-                try:
-                    archivo_excel = exportar_excel(ficha_cb, fuente="Calibri", tamaño=9)
+        if st.button("📊 Generar archivo CTG"):
+            # ✅ Verifica que ficha_cb esté definida
+            try:
+                archivo_excel = exportar_excel(ficha_cb, fuente="Calibri", tamaño=9)
             
-                    st.success("✅ Archivo CTG generado correctamente.")
-                    st.download_button(
-                        label="📥 Descargar archivo CTG en Excel",
-                        data=archivo_excel,
-                        file_name="CTG_InterruptorPotencia.xlsx",
-                        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                    )
-                except Exception as e:
-                    st.error(f"❌ Error al generar el archivo: {e}")
+                st.success("✅ Archivo CTG generado correctamente.")
+                st.download_button(
+                    label="📥 Descargar archivo CTG en Excel",
+                    data=archivo_excel,
+                    file_name="CTG_InterruptorPotencia.xlsx",
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                )
+            except Exception as e:
+                st.error(f"❌ Error al generar el archivo: {e}")

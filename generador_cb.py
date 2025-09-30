@@ -330,7 +330,7 @@ def mostrar_app():
 
     # BOTÓN PARA GENERAR FICHA
     if st.button("Generar ficha CTG"):
-        ficha_cb = {
+        datos = {
             "Fabricante": fabricante,
             "País": pais,
             "Referencia": referencia,

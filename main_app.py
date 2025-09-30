@@ -23,11 +23,12 @@ equipo = st.selectbox("Selecciona el tipo de equipo", ["CTG DPS", "CT"])
 
 # ▶️ Ejecutar solo la función correspondiente
 if equipo == "CTG DPS":
-    import generador_ctg
-    generador_ctg.mostrar_app()
+    import generador_dps
+    generador_dps.mostrar_app()
 
 elif equipo == "CT":
     import generador_ct
     generador_ct.mostrar_app()
+
 
 

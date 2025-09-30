@@ -184,6 +184,17 @@ def mostrar_app():
     st.markdown("### 🔁 Secuencia de maniobras asignada")
     secuencia_maniobras = st.text_input("Secuencia de maniobras asignada")
 
+    # Poder de corte en discordancia de fases (Id)
+    st.markdown("### ⚡ Poder de corte en discordancia de fases (Id)")
+
+    id_u1 = st.text_input("a) Primera tensión de referencia (u1) [Id]")
+    id_t1 = st.text_input("b) Tiempo t1 [Id]")
+    id_uc = st.text_input("c) Valor cresta del TTR (uc) [Id]")
+    id_t2 = st.text_input("d) Tiempo t2 [Id]")
+    id_vel_crecimiento = st.text_input("e) Velocidad de crecimiento (u1 / t1) [Id]")
+
+
+
     # BOTÓN PARA GENERAR FICHA
     if st.button("Generar ficha CTG"):
         ficha_cb = {
@@ -240,7 +251,12 @@ def mostrar_app():
             "TRV - Tiempo máximo t₃ Load circuit 2": trv_t3_circuito2,
             "Tiempo de arco mínimo (Minimum Arcing Time)": tiempo_arco_minimo,
             "Número de corte λ (Chopping Number λ)": numero_corte_lambda,
-            "Secuencia de maniobras asignada": secuencia_maniobras
+            "Secuencia de maniobras asignada": secuencia_maniobras,
+            "Poder de corte en discordancia de fases - u1": id_u1,
+            "Poder de corte en discordancia de fases - t1": id_t1,
+            "Poder de corte en discordancia de fases - uc": id_uc,
+            "Poder de corte en discordancia de fases - t2": id_t2,
+            "Poder de corte en discordancia de fases - velocidad de crecimiento (u1 / t1)": id_vel_crecimiento,
 
         }
 

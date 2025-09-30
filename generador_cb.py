@@ -75,6 +75,19 @@ def mostrar_app():
     }
     up_rayo = up_por_ur.get(ur, "")
     st.markdown(f"**Tensión asignada soportada al impulso tipo rayo (Up):** {up_rayo}")
+    # Opciones de corriente asignada según Ur
+    ir_por_ur = {
+        "145 kV": ["1200 A", "2000 A", "3150 A"],
+        "245 kV": ["1200 A", "2000 A", "2500 A", "3000 A", "4000 A"],
+        "550 kV": ["3000 A", "4000 A", "5000 A", "6300 A"]
+    }
+
+    # Mostrar opciones de Ir según Ur
+    opciones_ir = ir_por_ur.get(ur, [])
+    ir = st.selectbox("Corriente asignada en servicio continuo (Ir)", opciones_ir)
+
+
+    
     # BOTÓN PARA GENERAR FICHA
     if st.button("Generar ficha CTG"):
         ficha_cb = {
@@ -99,7 +112,8 @@ def mostrar_app():
             "Us - Fase-Tierra [kV]": us_valores["fase_tierra"],
             "Us - Entre fases [kV]": us_valores["entre_fases"],
             "Us - A través de interruptor abierto [kV]": us_valores["interruptor_abierto"],
-            "Tensión asignada soportada al impulso tipo rayo (Up)": up_rayo
+            "Tensión asignada soportada al impulso tipo rayo (Up)": up_rayo,
+            "Corriente asignada en servicio continuo (Ir)": ir
         }
 
         # Crear Excel en memoria

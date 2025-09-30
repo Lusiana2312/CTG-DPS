@@ -292,6 +292,17 @@ def mostrar_app():
         ["Ligera", "Media", "Pesada", "Muy pesada"]
     )
 
+    # 🧪 Distancia mínima de fuga
+    st.markdown("### 🧪 Distancia mínima de fuga")
+    distancia_minima_fuga = st.text_input("Distancia mínima de fuga (mm)")
+
+    # 🧪 Datos sísmicos
+    st.markdown("### 🧪 Datos sísmicos")
+
+    desempeno_sismico_ieee = st.text_input("Desempeño sísmico según IEEE-693-Vigente (**)")
+    frecuencia_natural_vibracion = st.text_input("a) Frecuencia natural de vibración (Hz)")
+    coef_amortiguamiento_critico = st.text_input("b) Coeficiente de amortiguamiento crítico (%)")
+
 
 
 
@@ -387,10 +398,11 @@ def mostrar_app():
             "Distancia mínima en aire - Entre polos (mm)": distancia_entre_polos,
             "Distancia mínima en aire - A tierra (mm)": distancia_a_tierra,
             "Distancia mínima en aire - A través del polo (mm)": distancia_a_traves_polo,
-            "Clase de severidad de contaminación del sitio (SPS)": sps_clase
-
-
-
+            "Clase de severidad de contaminación del sitio (SPS)": sps_clase,
+            "Distancia mínima de fuga (mm)": distancia_minima_fuga,
+            "Desempeño sísmico según IEEE-693-Vigente (**)": desempeno_sismico_ieee,
+            "Frecuencia natural de vibración (Hz)": frecuencia_natural_vibracion,
+            "Coeficiente de amortiguamiento crítico (%)": coef_amortiguamiento_critico
 
 
 

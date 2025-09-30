@@ -206,6 +206,9 @@ def mostrar_app():
     ir_inductiva = st.text_input("a) Poder de corte asignado [corrientes inductivas pequeñas]")
     sobretension_inductiva = st.text_input("b) Sobretensión de maniobra máxima")
 
+    # Número de operaciones mecánicas
+    st.markdown("### ⚙️ Número de operaciones mecánicas")
+    num_operaciones_mecanicas = st.selectbox("Número de operaciones mecánicas", ["M1", "M2", "M3"])
 
 
 
@@ -276,6 +279,7 @@ def mostrar_app():
             "Apertura de corrientes inductivas pequeñas": apertura_inductiva,
             "Apertura inductiva - Poder de corte asignado": ir_inductiva,
             "Apertura inductiva - Sobretensión de maniobra máxima": sobretension_inductiva,
+            "Número de operaciones mecánicas": num_operaciones_mecanicas
 
 
         }

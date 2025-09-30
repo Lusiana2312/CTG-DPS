@@ -23,17 +23,21 @@ equipo = st.selectbox("Selecciona el tipo de equipo", ["CTG DPS", "CT", "PT"])
 
 # ▶️ Ejecutar solo la función correspondiente
 try:
-    if equipo == "CTG DPS":
+    if equipo == "Descargador de sobretensiones":
         import generador_dps
         generador_dps.mostrar_app()
 
-    elif equipo == "CT":
+    elif equipo == "Transformador de corriente":
         import generador_ct
         generador_ct.mostrar_app()
 
-    elif equipo == "PT":
+    elif equipo == "Transformador de tensión":
         import generador_pt
         generador_pt.mostrar_app()
+        
+    elif equipo == "Interruptor":
+        import generador_cb
+        generador_cb.mostrar_app()
 
 except ModuleNotFoundError as e:
     st.error(f"❌ No se encontró el módulo: {e.name}")
@@ -41,4 +45,5 @@ except AttributeError:
     st.error("⚠️ El módulo existe pero no tiene la función 'mostrar_app()'. Verifica que esté correctamente definida.")
 except Exception as e:
     st.error(f"⚠️ Ocurrió un error inesperado: {e}")
+
 

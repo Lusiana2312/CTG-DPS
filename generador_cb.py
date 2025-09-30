@@ -148,7 +148,6 @@ def mostrar_app():
     
     # Característica de TRV de pequeñas corrientes inductivas según IEC 62271-110
     st.markdown("### ⚡ Característica de TRV de pequeñas corrientes inductivas según IEC 62271-110")
-
     # Rangos de referencia según Ur
     rangos_trv = {
         "145 kV": {
@@ -172,7 +171,18 @@ def mostrar_app():
     trv_t3_circuito1 = st.text_input(f"b) Tiempo máximo t₃ Load circuit 1 (Ej: {valores_trv['t3_1']})")
     trv_t3_circuito2 = st.text_input(f"c) Tiempo máximo t₃ Load circuit 2 (Ej: {valores_trv['t3_2']})")
 
+    # Tiempo de arco mínimo ante pequeñas corrientes inductivas
+    st.markdown("### ⏱️ Tiempo de arco mínimo ante pequeñas corrientes inductivas")
+    tiempo_arco_minimo = st.text_input("Tiempo de arco mínimo (Minimum Arcing Time)")
 
+
+    # Número de corte λ ("Chopping Number λ")
+    st.markdown("### 🔢 Número de corte λ (Chopping Number λ)")
+    numero_corte_lambda = st.text_input("Número de corte λ (Chopping Number λ)")
+
+    # Secuencia de maniobras asignada
+    st.markdown("### 🔁 Secuencia de maniobras asignada")
+    secuencia_maniobras = st.text_input("Secuencia de maniobras asignada")
 
     # BOTÓN PARA GENERAR FICHA
     if st.button("Generar ficha CTG"):
@@ -227,7 +237,11 @@ def mostrar_app():
             "Fallas próximas - retardo (tdl)": tdl_linea,
             "TRV - Valor mínimo pico de TRV Uc": trv_uc_min,
             "TRV - Tiempo máximo t₃ Load circuit 1": trv_t3_circuito1,
-            "TRV - Tiempo máximo t₃ Load circuit 2": trv_t3_circuito2
+            "TRV - Tiempo máximo t₃ Load circuit 2": trv_t3_circuito2,
+            "Tiempo de arco mínimo (Minimum Arcing Time)": tiempo_arco_minimo,
+            "Número de corte λ (Chopping Number λ)": numero_corte_lambda,
+            "Secuencia de maniobras asignada": secuencia_maniobras
+
         }
 
         # Crear Excel en memoria

@@ -22,17 +22,20 @@ st.success("✅ Acceso concedido")
 equipo = st.selectbox("Selecciona el tipo de equipo", ["CTG DPS", "CT"])
 
 # ▶️ Ejecutar solo la función correspondiente
-if equipo == "CTG DPS":
-    import generador_dps
-    generador_dps.mostrar_app()
+try:
+    if equipo == "CTG DPS":
+        import generador_ctg
+        generador_ctg.mostrar_app()
 
-elif equipo == "CT":
-    import generador_ct
-    generador_ct.mostrar_app()
-    
-elif equipo == "PT":
-    import generador_pt
-    generador_pt.mostrar_app()
+    elif equipo == "CT":
+        import generador_ct
+        generador_ct.mostrar_app()
+
+    elif equipo == "PT":
+        import generador_pt
+        generador_pt.mostrar_app()
+
+
 
 
 

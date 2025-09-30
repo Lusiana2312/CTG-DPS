@@ -210,7 +210,15 @@ def mostrar_app():
     st.markdown("### ⚙️ Número de operaciones mecánicas")
     num_operaciones_mecanicas = st.selectbox("Número de operaciones mecánicas", ["M1", "M2", "M3"])
 
+    # Probabilidad de reencendido
+    st.markdown("### 🔄 Probabilidad de reencendido")
+    probabilidad_reencendido = st.selectbox("Probabilidad de reencendido", ["C1", "C2"])
 
+    # Máxima diferencia de tiempo entre contactos de diferente polo
+    st.markdown("### ⏱️ Máxima diferencia de tiempo entre contactos de diferente polo")
+    diferencia_tiempo_contactos = st.text_input(
+        "Máxima diferencia de tiempo entre contactos de diferente polo al tocarse durante un cierre o al separarse durante una apertura"
+    )
 
     # BOTÓN PARA GENERAR FICHA
     if st.button("Generar ficha CTG"):
@@ -279,7 +287,9 @@ def mostrar_app():
             "Apertura de corrientes inductivas pequeñas": apertura_inductiva,
             "Apertura inductiva - Poder de corte asignado": ir_inductiva,
             "Apertura inductiva - Sobretensión de maniobra máxima": sobretension_inductiva,
-            "Número de operaciones mecánicas": num_operaciones_mecanicas
+            "Número de operaciones mecánicas": num_operaciones_mecanicas,
+            "Probabilidad de reencendido": probabilidad_reencendido,
+            "Máxima diferencia de tiempo entre contactos de diferente polo": diferencia_tiempo_contactos
 
 
         }

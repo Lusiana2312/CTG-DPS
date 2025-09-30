@@ -87,12 +87,10 @@ def mostrar_app():
             "Categoría de corrosión del ambiente": categoria_corrosion,
             "Frecuencia asignada (fr)": frecuencia_asignada,
             "Tensión asignada (Ur) [kV]": ur,
-            "Ud - Fase-Tierra [kV]": ud_fase_tierra,
-            "Ud - Entre fases [kV]": ud_entre_fases,
-            "Ud - A través de interruptor abierto [kV]": ud_interruptor_abierto,
-            "Us - Fase-Tierra [kV]": us_fase_tierra,
-            "Us - Entre fases [kV]": us_entre_fases,
-            "Us - A través de interruptor abierto [kV]": us_interruptor_abierto
+            "Tensión asignada soportada a frecuencia industrial (Ud)": ud_frecuencia,
+            "Us - Fase-Tierra [kV]": us_valores["fase_tierra"],
+            "Us - Entre fases [kV]": us_valores["entre_fases"],
+            "Us - A través de interruptor abierto [kV]": us_valores["interruptor_abierto"]
         }
 
         # Crear Excel en memoria

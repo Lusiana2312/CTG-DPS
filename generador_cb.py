@@ -16,14 +16,16 @@ def mostrar_app():
     fabricante = st.text_input("Fabricante")
     pais = st.text_input("País")
     referencia = st.text_input("Referencia")
-    norma_fabricacion = st.text_input("Norma de fabricación")
-    norma_calidad = st.text_input("Norma de calidad")
+    norma_fabricacion = "IEC 62271-100 / IEC 62271-110"
+    st.markdown(f"**Norma de fabricación:** {norma_fabricacion}")
+    norma_calidad = "ISO 9001"
+    st.markdown(f"**Norma de calidad:** {norma_calidad}")
 
     # 2. CARACTERÍSTICAS TÉCNICAS
     st.markdown("### ⚙️ Características técnicas")
     medio_extincion = st.selectbox("Medio de extinción", ["Vacío", "SF6", "Aceite", "Aire comprimido"])
-    num_polos = st.selectbox("Número de polos", [1, 2, 3])
-    camaras_por_polo = st.selectbox("Número de cámaras por polo", [1, 2])
+    num_polos = st.selectbox("Número de polos", [1, 2, 3, 4])
+    camaras_por_polo = st.text_input("Número de cámaras por polo")
     tipo_ejecucion = st.selectbox("Tipo de ejecución", ["Exterior", "Interior"])
     altura_instalacion = st.number_input("Altura de instalación (m.s.n.m)", min_value=0, value=1000)
 
@@ -42,17 +44,28 @@ def mostrar_app():
     )
 
     frecuencia_asignada = st.selectbox("Frecuencia asignada (fr)", options=["50 Hz", "60 Hz"])
-    ur = st.text_input("Tensión asignada (Ur) [kV]")
+    ur = st.selectbox("Tensión asignada (Ur)", options=["145 kV", "245 kV", "550 kV"])
+    
+    # Asignación automática de Ud según Ur
+    ud_por_ur = {
+        "145 kV": "275 kV",
+        "245 kV": "640 kV",
+        "550 kV": "830 kV"
+    }
+    ud_frecuencia = ud_por_ur.get(ur, "")
+    st.markdown(f"**Tensión asignada soportada a frecuencia industrial (Ud):** {ud_frecuencia}")
 
-    st.markdown("#### Tensión asignada soportada a frecuencia industrial (Ud)")
-    ud_fase_tierra = st.text_input("Fase-Tierra [kV]")
-    ud_entre_fases = st.text_input("Entre fases [kV]")
-    ud_interruptor_abierto = st.text_input("A través de interruptor abierto [kV]")
-
+    # Asignación automática de Us por componente según Ur
+    us_por_ur = {
+        "145 kV": {"fase_tierra": "N.A.", "entre_fases": "N.A.", "interruptor_abierto": "N.A."},
+        "245 kV": {"fase_tierra": "N.A.", "entre_fases": "N.A.", "interruptor_abierto": "N.A."},
+        "550 kV": {"fase_tierra": "1175 kV", "entre_fases": "1175 kV", "interruptor_abierto": "1175 kV"}
+    }
+    us_valores = us_por_ur.get(ur, {"fase_tierra": "", "entre_fases": "", "interruptor_abierto": ""})
     st.markdown("#### Tensión asignada soportada a impulso de maniobra (Us)")
-    us_fase_tierra = st.text_input("a) Fase-Tierra [kV]")
-    us_entre_fases = st.text_input("b) Entre fases [kV]")
-    us_interruptor_abierto = st.text_input("c) A través de interruptor abierto [kV]")
+    st.markdown(f"a) Fase-Tierra: **{us_valores['fase_tierra']}**")
+    st.markdown(f"b) Entre fases: **{us_valores['entre_fases']}**")
+    st.markdown(f"c) A través de interruptor abierto: **{us_valores['interruptor_abierto']}**")
 
     # BOTÓN PARA GENERAR FICHA
     if st.button("Generar ficha CTG"):

@@ -6,7 +6,7 @@ from datetime import datetime
 import numpy as np
 
 def mostrar_app():
-    st.set_page_config(page_title="Generador CTG - Transformador de Corriente", layout="centered")
+    st.set_page_config(page_title="Generador CTG - Transformador de Corriente", layout="wide")
 
     st.title("📄 Generador de Ficha CTG")
     st.subheader("Transformador de Corriente")

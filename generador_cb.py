@@ -543,16 +543,17 @@ def mostrar_app():
         output.seek(0)
         return output
     
-
-            # 📥 Botón para generar y descargar
-            fuente = "Calibri"
-            tamaño = 9
             if st.button("📊 Generar archivo CTG"):
-                archivo_excel = exportar_excel(datos, fuente=fuente, tamaño=tamaño)
-                nivel_tension = datos.get("Nivel de tensión (kV)", "XX")
-                st.download_button(
-                    label="📥 Descargar archivo CTG en Excel",
-                    data=archivo_excel,
-                    file_name=f"CTG_{nivel_tension}kV.xlsx",
-                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                )
+                # ✅ Verifica que ficha_cb esté definida
+                try:
+                    archivo_excel = exportar_excel(ficha_cb, fuente="Calibri", tamaño=9)
+            
+                    st.success("✅ Archivo CTG generado correctamente.")
+                    st.download_button(
+                        label="📥 Descargar archivo CTG en Excel",
+                        data=archivo_excel,
+                        file_name="CTG_InterruptorPotencia.xlsx",
+                        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    )
+                except Exception as e:
+                    st.error(f"❌ Error al generar el archivo: {e}")

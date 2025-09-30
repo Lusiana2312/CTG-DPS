@@ -81,13 +81,24 @@ def mostrar_app():
         "245 kV": ["1200 A", "2000 A", "2500 A", "3000 A", "4000 A"],
         "550 kV": ["3000 A", "4000 A", "5000 A", "6300 A"]
     }
-
     # Mostrar opciones de Ir según Ur
     opciones_ir = ir_por_ur.get(ur, [])
     ir = st.selectbox("Corriente asignada en servicio continuo (Ir)", opciones_ir)
-
-
     
+    # Opciones de poder de corte asignado (Ics) según Ur
+    ics_por_ur = {
+        "145 kV": ["25 kA", "31.5 kA", "40 kA"],
+        "245 kV": ["40 kA", "50 kA", "63 kA"],
+        "550 kV": ["50 kA", "63 kA"]
+    }
+    # Mostrar opciones de Ics según Ur
+    opciones_ics = ics_por_ur.get(ur, [])
+    ics = st.selectbox("Poder de corte asignado en cortocircuito (Ics)", opciones_ics)
+
+    # Duración del cortocircuito asignado (Ics)
+    duracion_ics = st.selectbox("Duración del cortocircuito asignado (Ics)", ["1 s", "2 s", "3 s"])
+
+
     # BOTÓN PARA GENERAR FICHA
     if st.button("Generar ficha CTG"):
         ficha_cb = {
@@ -113,7 +124,10 @@ def mostrar_app():
             "Us - Entre fases [kV]": us_valores["entre_fases"],
             "Us - A través de interruptor abierto [kV]": us_valores["interruptor_abierto"],
             "Tensión asignada soportada al impulso tipo rayo (Up)": up_rayo,
-            "Corriente asignada en servicio continuo (Ir)": ir
+            "Corriente asignada en servicio continuo (Ir)": ir,
+            "Poder de corte asignado en cortocircuito (Ics)": ics,
+            "Duración del cortocircuito asignado (Ics)": duracion_ics
+
         }
 
         # Crear Excel en memoria

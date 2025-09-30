@@ -24,8 +24,8 @@ equipo = st.selectbox("Selecciona el tipo de equipo", ["CTG DPS", "CT", "PT"])
 # ▶️ Ejecutar solo la función correspondiente
 try:
     if equipo == "CTG DPS":
-        import generador_ctg
-        generador_ctg.mostrar_app()
+        import generador_dps
+        generador_dps.mostrar_app()
 
     elif equipo == "CT":
         import generador_ct
@@ -41,3 +41,4 @@ except AttributeError:
     st.error("⚠️ El módulo existe pero no tiene la función 'mostrar_app()'. Verifica que esté correctamente definida.")
 except Exception as e:
     st.error(f"⚠️ Ocurrió un error inesperado: {e}")
+

@@ -436,11 +436,6 @@ def mostrar_app():
             "Campo eléctrico a 1 metro de separación del piso (kV/m)": campo_electrico_1m
             
         }
-    from io import BytesIO
-    import pandas as pd
-    from openpyxl import Workbook
-    from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
-    from openpyxl.drawing.image import Image
     
     # 📤 Función para exportar Excel con estilo personalizado
     def exportar_excel(datos, fuente="Calibri", tamaño=9):

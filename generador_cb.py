@@ -278,7 +278,19 @@ def mostrar_app():
     st.markdown("### 🧪 Resistencia de preinserción")
     resistencia_preinsercion = st.radio("¿Resistencia de preinserción?", ["Sí", "No"])
 
+    # 🧪 Distancia mínima en aire
+    st.markdown("### 🧪 Distancia mínima en aire")
 
+    distancia_entre_polos = st.text_input("a) Entre polos (mm)")
+    distancia_a_tierra = st.text_input("b) A tierra (mm)")
+    distancia_a_traves_polo = st.text_input("c) A través del polo (mm)")
+
+    # 🧪 Clase de severidad de contaminación del sitio (SPS)
+    st.markdown("### 🧪 Clase de severidad de contaminación del sitio (SPS)")
+    sps_clase = st.selectbox(
+        "Clase de severidad de contaminación del sitio (SPS)",
+        ["Ligera", "Media", "Pesada", "Muy pesada"]
+    )
 
 
 
@@ -371,7 +383,11 @@ def mostrar_app():
             "Capacitancia - Condensador de gradiente (***) (pF)": cap_condensador_gradiente,
             "Material de los empaques": material_empaques,
             "Operación con mando sincronizado": mando_sincronizado,
-            "Resistencia de preinserción": resistencia_preinsercion
+            "Resistencia de preinserción": resistencia_preinsercion,
+            "Distancia mínima en aire - Entre polos (mm)": distancia_entre_polos,
+            "Distancia mínima en aire - A tierra (mm)": distancia_a_tierra,
+            "Distancia mínima en aire - A través del polo (mm)": distancia_a_traves_polo,
+            "Clase de severidad de contaminación del sitio (SPS)": sps_clase
 
 
 

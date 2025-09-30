@@ -98,7 +98,7 @@ def mostrar_app():
             "Tensión asignada soportada a frecuencia industrial (Ud)": ud_frecuencia,
             "Us - Fase-Tierra [kV]": us_valores["fase_tierra"],
             "Us - Entre fases [kV]": us_valores["entre_fases"],
-            "Us - A través de interruptor abierto [kV]": us_valores["interruptor_abierto"]
+            "Us - A través de interruptor abierto [kV]": us_valores["interruptor_abierto"],
             "Tensión asignada soportada al impulso tipo rayo (Up)": up_rayo
         }
 

@@ -330,7 +330,7 @@ def mostrar_app():
 
     # BOTÓN PARA GENERAR FICHA
     if st.button("Generar ficha CTG"):
-        datos = {
+        ficha_cb = {
             "Fabricante": fabricante,
             "País": pais,
             "Referencia": referencia,
@@ -542,7 +542,7 @@ def mostrar_app():
     fuente = "Calibri"
     tamaño = 9
     if st.button("📊 Generar archivo CTG"):
-        archivo_excel = exportar_excel(datos, fuente=fuente, tamaño=tamaño)
+        archivo_excel = exportar_excel(ficha_cb, fuente=fuente, tamaño=tamaño)
         nivel_tension = datos.get("Nivel de tensión (kV)", "XX")
         st.download_button(
             label="📥 Descargar archivo CTG en Excel",

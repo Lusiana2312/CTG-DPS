@@ -116,16 +116,64 @@ def mostrar_app():
     # Tensión transitoria de restablecimiento asignada para fallas en bornes
     st.markdown("### ⚡ Tensión transitoria de restablecimiento asignada para fallas en bornes")
 
-    u1 = st.text_input("a) Primera tensión de referencia (u1)")
-    t1 = st.text_input("b) Tiempo t1")
-    uc = st.text_input("c) Valor cresta del TTR (uc)")
-    t2 = st.text_input("d) Tiempo t2")
-    td = st.text_input("e) Retardo td")
-    u_prima = st.text_input("f) Tensión u’")
-    t_prima = st.text_input("g) Tiempo t’")
-    vel_crecimiento = st.text_input("h) Velocidad de crecimiento (u1 / t1)")
+    u1 = st.text_input("a) Primera tensión de referencia (u1) kV")
+    t1 = st.text_input("b) Tiempo t1 ms")
+    uc = st.text_input("c) Valor cresta del TTR (uc) kV")
+    t2 = st.text_input("d) Tiempo t2 ms")
+    td = st.text_input("e) Retardo td ms")
+    u_prima = st.text_input("f) Tensión u’ kV")
+    t_prima = st.text_input("g) Tiempo t’ ms")
+    vel_crecimiento = st.text_input("h) Velocidad de crecimiento (u1 / t1) kV/ms")
+
+    # Características asignadas para fallas próximas en líneas
+    st.markdown("### ⚡ Características asignadas para fallas próximas en líneas")
+
+    # a) Características asignadas del circuito de alimentación
+    st.markdown("#### a) Características asignadas del circuito de alimentación")
+    u1_alimentacion = st.text_input("• Primera tensión de referencia (u1) [alimentación]")
+    t1_alimentacion = st.text_input("• Tiempo t1 [alimentación]")
+    uc_alimentacion = st.text_input("• Valor cresta del TTR (uc) [alimentación]")
+    t2_alimentacion = st.text_input("• Tiempo t2 [alimentación]")
+    td_alimentacion = st.text_input("• Retardo td [alimentación]")
+    u_prima_alimentacion = st.text_input("• Tensión u’ [alimentación]")
+    t_prima_alimentacion = st.text_input("• Tiempo t’ [alimentación]")
+    vel_crecimiento_alimentacion = st.text_input("• Velocidad de crecimiento (u1 / t1) [alimentación]")
+
+    # b) Características asignadas de la línea
+    st.markdown("#### b) Características asignadas de la línea")
+    z_linea = st.text_input("• Impedancia de onda asignada (Z)")
+    k_linea = st.text_input("• Factor de cresta asignada (k)")
+    s_linea = st.text_input("• Factor de TCTR (s)")
+    tdl_linea = st.text_input("• Retardo (tdl)")
     
-    
+    # Característica de TRV de pequeñas corrientes inductivas según IEC 62271-110
+    st.markdown("### ⚡ Característica de TRV de pequeñas corrientes inductivas según IEC 62271-110")
+
+    # Rangos de referencia según Ur
+    rangos_trv = {
+        "145 kV": {
+            "Uc": "250–300 kV",
+            "t3_1": "100–150 µs",
+            "t3_2": "200–250 µs"
+        },
+        "245 kV": {
+            "Uc": "350–400 kV",
+            "t3_1": "150–200 µs",
+            "t3_2": "250–300 µs"
+        },
+        "550 kV": {
+            "Uc": "600–700 kV",
+            "t3_1": "200–300 µs",
+            "t3_2": "300–400 µs"
+        }
+    }
+    valores_trv = rangos_trv.get(ur, {"Uc": "", "t3_1": "", "t3_2": ""})
+    trv_uc_min = st.text_input(f"a) Valor mínimo pico de TRV Uc (Ej: {valores_trv['Uc']})")
+    trv_t3_circuito1 = st.text_input(f"b) Tiempo máximo t₃ Load circuit 1 (Ej: {valores_trv['t3_1']})")
+    trv_t3_circuito2 = st.text_input(f"c) Tiempo máximo t₃ Load circuit 2 (Ej: {valores_trv['t3_2']})")
+
+
+
     # BOTÓN PARA GENERAR FICHA
     if st.button("Generar ficha CTG"):
         ficha_cb = {
@@ -165,8 +213,21 @@ def mostrar_app():
             "TTR - Tensión u’": u_prima,
             "TTR - Tiempo t’": t_prima,
             "TTR - Velocidad de crecimiento (u1 / t1)": vel_crecimiento,
-
-
+            "Fallas próximas - u1 alimentación": u1_alimentacion,
+            "Fallas próximas - t1 alimentación": t1_alimentacion,
+            "Fallas próximas - uc alimentación": uc_alimentacion,
+            "Fallas próximas - t2 alimentación": t2_alimentacion,
+            "Fallas próximas - td alimentación": td_alimentacion,
+            "Fallas próximas - u’ alimentación": u_prima_alimentacion,
+            "Fallas próximas - t’ alimentación": t_prima_alimentacion,
+            "Fallas próximas - velocidad crecimiento alimentación": vel_crecimiento_alimentacion,
+            "Fallas próximas - impedancia de onda (Z)": z_linea,
+            "Fallas próximas - factor de cresta (k)": k_linea,
+            "Fallas próximas - factor de TCTR (s)": s_linea,
+            "Fallas próximas - retardo (tdl)": tdl_linea,
+            "TRV - Valor mínimo pico de TRV Uc": trv_uc_min,
+            "TRV - Tiempo máximo t₃ Load circuit 1": trv_t3_circuito1,
+            "TRV - Tiempo máximo t₃ Load circuit 2": trv_t3_circuito2
         }
 
         # Crear Excel en memoria

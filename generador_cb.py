@@ -4,6 +4,7 @@ from openpyxl import Workbook
 from io import BytesIO
 from datetime import datetime
 import pandas as pd
+from openpyxl.drawing.image import Image
 
 def mostrar_app():
     st.set_page_config(page_title="Generador CTG - Interruptor de Potencia", layout="wide")

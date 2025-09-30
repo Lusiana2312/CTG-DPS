@@ -6,7 +6,7 @@ from datetime import datetime
 import numpy as np
 
 def mostrar_app():
-    st.set_page_config(page_title="Generador CTG - Transformador de Tensión", layout="centered")
+    st.set_page_config(page_title="Generador CTG - Transformador de Tensión", layout="wide")
 
     st.title("📄 Generador de Ficha CTG")
     st.subheader("Transformador de Tensión")
@@ -114,3 +114,4 @@ def mostrar_app():
             file_name="CTG_TransformadorTension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+

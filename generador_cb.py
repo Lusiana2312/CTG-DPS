@@ -436,23 +436,118 @@ def mostrar_app():
             "Campo eléctrico a 1 metro de separación del piso (kV/m)": campo_electrico_1m
             
         }
-
-        # Crear Excel en memoria
-        wb = Workbook()
-        ws = wb.active
-        ws.title = "Ficha CTG"
-        ws.append(["Parámetro", "Valor"])
-        for parametro, valor in ficha_cb.items():
-            ws.append([parametro, valor])
-
+    from io import BytesIO
+    import pandas as pd
+    from openpyxl import Workbook
+    from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
+    from openpyxl.drawing.image import Image
+    
+    # 📤 Función para exportar Excel con estilo personalizado
+    def exportar_excel(datos, fuente="Calibri", tamaño=9):
+        # Diccionario de unidades (puedes ampliarlo según tus campos)
+        unidades = {
+            "Tensión asignada (Ur) [kV]": "kV",
+            "Altura de instalación (m.s.n.m)": "m.s.n.m",
+            "Temperatura mínima anual (°C)": "°C",
+            "Temperatura máxima anual (°C)": "°C",
+            "Temperatura media (24 h) (°C)": "°C",
+            "Frecuencia asignada (fr)": "Hz",
+            "Corriente asignada en servicio continuo (Ir)": "A",
+            "Poder de corte asignado en cortocircuito (Ics)": "kA",
+            "Duración del cortocircuito asignado (Ics)": "s",
+            "Porcentaje de corriente aperiódica (%)": "%",
+            "Distancia mínima en aire - Entre polos (mm)": "mm",
+            "Distancia mínima de fuga (mm)": "mm",
+            "Campo eléctrico a 1 metro de separación del piso (kV/m)": "kV/m",
+            "Masa neta para transporte (kg)": "kg",
+            "Volumen total para transporte (m³)": "m³",
+            "Dimensiones para transporte (Alto x Ancho x Largo) [mm]": "mm",
+            "Masa neta de un polo completo con estructura (kg)": "kg"
+            # Añade más unidades según tus campos
+        }
+    
+        # Crear DataFrame con estructura personalizada
+        df = pd.DataFrame([
+            {
+                "ÍTEM": i + 1,
+                "DESCRIPCIÓN": campo,
+                "UNIDAD": unidades.get(campo, ""),
+                "REQUERIDO": valor,
+                "OFRECIDO": ""  # Columna vacía para completar manualmente
+            }
+            for i, (campo, valor) in enumerate(datos.items())
+        ])
+    
         output = BytesIO()
-        wb.save(output)
+        with pd.ExcelWriter(output, engine='openpyxl') as writer:
+            df.to_excel(writer, index=False, sheet_name="CTG", startrow=6)
+            wb = writer.book
+            ws = writer.sheets["CTG"]
+    
+            # 🖼️ Insertar imagen del logo (opcional)
+            logo_path = "siemens_logo.png"
+            try:
+                img = Image(logo_path)
+                img.width = 300
+                img.height = 100
+                ws.add_image(img, "C1")
+            except FileNotFoundError:
+                st.warning("⚠️ No se encontró el logo 'siemens_logo.png'. Asegúrate de subirlo al repositorio.")
+    
+            # 🟪 Caja de título
+            ws.merge_cells("A2:E4")
+            cell = ws.cell(row=2, column=1)
+            cell.value = "FICHA TÉCNICA INTERRUPTOR DE POTENCIA"
+            cell.font = Font(name=fuente, bold=True, size=14, color="000000")
+            cell.alignment = Alignment(horizontal="center", vertical="center")
+    
+            # 🏷️ Subtítulo técnico
+            ws.merge_cells("A5:D5")
+            ws["A5"] = f"CARACTERÍSTICAS GARANTIZADAS"
+            ws["A5"].font = Font(name=fuente, bold=True, size=12)
+            ws["A5"].alignment = Alignment(horizontal="center")
+    
+            # 🎨 Encabezados con estilo
+            header_fill = PatternFill(start_color="003366", end_color="003366", fill_type="solid")
+            header_font = Font(name=fuente, size=tamaño, color="FFFFFF", bold=True)
+            thin_border = Border(
+                left=Side(style='thin'), right=Side(style='thin'),
+                top=Side(style='thin'), bottom=Side(style='thin')
+            )
+    
+            for col_num in range(1, 6):
+                cell = ws.cell(row=6, column=col_num)
+                cell.fill = header_fill
+                cell.font = header_font
+                cell.alignment = Alignment(horizontal="center")
+                cell.border = thin_border
+    
+            # 📐 Ajuste de columnas
+            ws.column_dimensions["A"].width = 5
+            ws.column_dimensions["B"].width = 55
+            ws.column_dimensions["C"].width = 12
+            ws.column_dimensions["D"].width = 15
+            ws.column_dimensions["E"].width = 15
+    
+            # 📋 Formato de filas con fuente personalizada
+            for row in ws.iter_rows(min_row=7, max_row=ws.max_row, max_col=5):
+                for cell in row:
+                    cell.border = thin_border
+                    cell.alignment = Alignment(vertical="center", wrap_text=True)
+                    cell.font = Font(name=fuente, size=tamaño)
+                row[0].alignment = Alignment(horizontal="center", vertical="center")
+                row[2].alignment = Alignment(horizontal="center", vertical="center")
+                row[3].alignment = Alignment(horizontal="center", vertical="center")
+                row[4].alignment = Alignment(horizontal="center", vertical="center")
+    
         output.seek(0)
-
-        st.success("✅ Ficha CTG generada correctamente.")
-        st.download_button(
-            label="📥 Descargar Excel",
-            data=output,
-            file_name="CTG_InterruptorPotencia.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        )
+        return output
+    
+        if st.button("📊 Generar archivo CTG"):
+            archivo_excel = exportar_excel(ficha_cb, fuente="Calibri", tamaño=9)
+            st.download_button(
+                label="📥 Descargar archivo CTG en Excel",
+                data=archivo_excel,
+                file_name="CTG_InterruptorPotencia.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )

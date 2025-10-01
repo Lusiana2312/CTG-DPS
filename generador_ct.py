@@ -74,11 +74,13 @@ def mostrar_app():
     idyn = "2.6 × Ith"
     st.markdown(f"**Corriente dinámica asignada (Idyn):** {idyn}")
 
-    # 4. CANTIDAD Y CLASE DE NÚCLEOS
+    # 4. CONFIGURACIÓN DE NÚCLEOS
     st.markdown("### 🧲 Configuración de núcleos")
     
+    # Número total de núcleos
     cantidad_nucleos = st.number_input("Número total de núcleos", min_value=1, max_value=6, value=6)
     
+    # Selección del tipo de cada núcleo
     tipos_nucleo = {}
     for i in range(1, cantidad_nucleos + 1):
         tipo = st.selectbox(
@@ -88,15 +90,41 @@ def mostrar_app():
         )
         tipos_nucleo[f"Núcleo {i}"] = tipo
     
-    # Agrupación visual
+    # Agrupación visual: Núcleos de Medida
     st.markdown("### 🔹 Núcleos de Medida")
+    
+    # Descripción general antes de los núcleos individuales
+    st.markdown("#### 📋 Descripción general de núcleos de medida")
+    relacion_opciones = ["2500-1250-625/1", "2500-1250-600-2"]
+    clase_opciones = ["1P", "2P", "3P", "4P", "5P"]
+    
+    relacion_general_asignada = st.selectbox(
+        "a) Relación de transformación asignada (general)",
+        options=relacion_opciones,
+        key="relacion_general_asignada"
+    )
+    
+    relacion_general_exactitud = st.selectbox(
+        "b) Relación para la que debe cumplir la exactitud (general)",
+        options=relacion_opciones,
+        key="relacion_general_exactitud"
+    )
+    
+    clase_general_exactitud = st.selectbox(
+        "c) Clase de exactitud (general)",
+        options=clase_opciones,
+        key="clase_general_exactitud"
+    )
+    
+    carga_general_exactitud = st.text_input(
+        "d) Carga de exactitud núcleos de medida (general)",
+        key="carga_general_exactitud"
+    )
+    
+    # Núcleos individuales de medida
     for i in range(1, cantidad_nucleos + 1):
         if tipos_nucleo[f"Núcleo {i}"] == "Medida":
             st.markdown(f"#### Núcleo {i} - Medida")
-    
-            relacion_opciones = ["2500-1250-625/1", "2500-1250-600-2"]
-            clase_opciones = ["1P", "2P", "3P", "4P", "5P"]
-            factor_opciones = ["50", "60", "70"]
     
             relacion_asignada = st.selectbox(
                 f"a) Relación de transformación asignada - Núcleo {i}",
@@ -117,13 +145,14 @@ def mostrar_app():
             )
     
             if i == 6:
+                factor_opciones = ["50", "60", "70"]
                 factor_precision = st.selectbox(
                     f"d) Factor límite de precisión - Núcleo {i}",
                     options=factor_opciones,
                     key=f"factor_precision_{i}"
                 )
     
-                st.markdown("e) Carga de exactitud - Núcleo 6:")
+                st.markdown(f"e) Carga de exactitud - Núcleo {i}:")
                 st.write("• 625/1 (1S3-1S4): N.A")
                 st.write("• 1250/1 (1S2-1S4): N.A")
                 st.write("• 2500/1 (1S1-1S4): N.A")
@@ -132,17 +161,16 @@ def mostrar_app():
                 st.write("• 1600/1 (1S1-1S4): N.A")
             else:
                 carga_exactitud = st.text_input(
-                    f"e) Carga de exactitud (VA) - Núcleo {i}",
+                    f"d) Carga de exactitud (VA) - Núcleo {i}",
                     key=f"carga_exactitud_{i}"
                 )
     
-    # Sección separada para núcleos de protección
+    # Agrupación visual: Núcleos de Protección
     st.markdown("### 🔸 Núcleos de Protección convencional")
     for i in range(1, cantidad_nucleos + 1):
         if tipos_nucleo[f"Núcleo {i}"] == "Protección convencional":
             st.markdown(f"#### Núcleo {i} - Protección convencional")
             st.markdown("*Este núcleo está clasificado como protección convencional. Puedes definir sus parámetros más adelante.*")
-
 
 
 

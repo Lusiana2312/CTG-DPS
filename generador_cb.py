@@ -520,11 +520,11 @@ def mostrar_app():
                 cell.border = thin_border
     
             # 📐 Ajuste de columnas
-            ws.column_dimensions["A"].width = 5
-            ws.column_dimensions["B"].width = 55
-            ws.column_dimensions["C"].width = 12
-            ws.column_dimensions["D"].width = 15
-            ws.column_dimensions["E"].width = 15
+            ws.column_dimensions["A"].width = 4
+            ws.column_dimensions["B"].width = 50
+            ws.column_dimensions["C"].width = 10
+            ws.column_dimensions["D"].width = 12
+            ws.column_dimensions["E"].width = 12
     
             
             

@@ -16,39 +16,27 @@ def mostrar_app():
     # 🛠️ Parámetros editables
     with st.expander("🛠️ Parámetros editables"):
         nivel_tension = st.selectbox("Nivel de tensión (kV):", [115, 230, 500])
-        # Diccionario de Ur según nivel de tensión
-        ur_por_nivel = {
-            115: 100,
-            230: 200,
-            500: 400
-        }
-        
-        # Obtener Ur automáticamente
+        ur_por_nivel = {115: 100, 230: 200, 500: 400}
         ur = ur_por_nivel[nivel_tension]
         st.markdown(f"🔌 Tensión asignada (Ur): **{ur} kV**")
-        
+    
         altura_instalacion = st.number_input("Altura sobre el nivel del mar (m.s.n.m):", min_value=0, value=1000)
-        
-        sps_opciones = {
-            "Bajo": 16,
-            "Medio": 20,
-            "Pesado": 25,
-            "Muy Pesado": 31
-        }
+    
+        sps_opciones = {"Bajo": 16, "Medio": 20, "Pesado": 25, "Muy Pesado": 31}
         sps_seleccion = st.selectbox("Clase de severidad de contaminación del sitio (SPS):", list(sps_opciones.keys()))
         valor_sps = sps_opciones[sps_seleccion]
         st.markdown(f"🔢 Valor SPS seleccionado: **{valor_sps}**")
-        
+    
         ka = st.number_input("Coeficiente Ka:", min_value=1.0, max_value=2.0, value=1.0, step=0.1)
         km = st.number_input("Coeficiente Km:", min_value=1.0, max_value=2.0, value=1.0, step=0.1)
-        
+    
         desempeno_sismico = st.selectbox("Desempeño sísmico vigente:", ["Alto", "Moderado"])
-        
+    
         distancia_fuga = nivel_tension * valor_sps * ka * km
         st.markdown(f"📏 **Distancia mínima de fuga requerida:** {distancia_fuga:.2f} mm")
-        
-    # 📘 Parámetros definidos por norma
-    with st.expander("📘 Parámetros definidos por norma"):
+
+    # 📘 Parámetros estandarizados
+    with st.expander("📘 Parámetros estandarizados"):
         datos_definidos = {
             "Norma de fabricación": "IEC 60099-4",
             "Norma de calidad": "IEC 9001",
@@ -66,9 +54,7 @@ def mostrar_app():
         }
         for campo, valor in datos_definidos.items():
             st.markdown(f"**{campo}:** {valor}")
-        
-    # ⚡ Tensiones residuales
-    with st.expander("⚡ Tensiones residuales"):
+        st.markdown("### ⚡ Tensiones residuales")
         tensiones_residuales = {
             "Tensión residual al impulso de corriente de escalón (10 kA)": "",
             "Tensión residual al impulso tipo maniobra (250 A)": "",
@@ -82,10 +68,11 @@ def mostrar_app():
             "Tensión asignada soportada al impulso tipo rayo (Up)": "",
             "Tensión asignada soportada al impulso tipo maniobra (Us)": ""
         }
+    
         for campo in tensiones_residuales:
             tensiones_residuales[campo] = st.text_input(campo, value="")
-        
-    # 📋 Consolidar todos los datos
+
+    # Consolidar todos los datos
     datos = {
         "Nivel de tensión (kV)": nivel_tension,
         "Tensión asignada (Ur)": ur,
@@ -238,6 +225,7 @@ def mostrar_app():
     
     
     
+
 
 
 

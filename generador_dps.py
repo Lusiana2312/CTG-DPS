@@ -245,43 +245,44 @@ def mostrar_app():
     # 📤 Función para exportar Excel con estilo personalizado
     def exportar_excel(datos, fuente="Calibri", tamaño=9):
         unidades = {
-            "Nivel de tensión (kV)": "kV",
+            "Altura sobre el nivel del mar (m.s.n.m)": "m.s.n.m",
             "Tensión asignada (Ur)": "kV",
-            "Altura de instalación (m.s.n.m)": "m.s.n.m",
-            "Coeficiente Ka": "",
-            "Coeficiente Km": "",
-            "Distancia mínima de fuga (mm)": "mm",
+            "Tensión más elevada para el material (Um)": "kV",
+            "Tensión continua de operación (Uc)": "kV",
+            "Corriente de descarga asignada (In)": "kA",
+            "Corriente asignada del dispositivo de alivio de presión (0.2 seg)": "kA",
             "Tensión residual al impulso de corriente de escalón (10 kA)": "kV",
-            "Tensión residual al impulso tipo maniobra (250 A)": "kV",
-            "Tensión residual al impulso tipo maniobra (500 A)": "kV",
-            "Tensión residual al impulso tipo maniobra (1000 A)": "kV",
-            "Tensión residual al impulso tipo maniobra (2000 A)": "kV",
-            "Tensión residual al impulso tipo rayo (5 kA)": "kV",
-            "Tensión residual al impulso tipo rayo (10 kA)": "kV",
-            "Tensión residual al impulso tipo rayo (20 kA)": "kV",
-            "Tensión asignada soportada a la frecuencia industrial (Ud)": "kV",
-            "Tensión asignada soportada al impulso tipo rayo (Up)": "kV",
-            "Tensión asignada soportada al impulso tipo maniobra (Us)": "kV"
+            "Tensión residual al impulso tipo maniobra (Ures) - 250 A": "kV",
+            "Tensión residual al impulso tipo maniobra (Ures) - 500 A": "kV",
+            "Tensión residual al impulso tipo maniobra (Ures) - 1000 A": "kV",
+            "Tensión residual al impulso tipo maniobra (Ures) - 2000 A": "kV",
+            "Tensión residual al impulso tipo rayo (Ures) - 5 kA": "kV",
+            "Tensión residual al impulso tipo rayo (Ures) - 10 kA": "kV",
+            "Tensión residual al impulso tipo rayo (Ures) - 20 kA": "kV",
+            "Distancia mínima de fuga (mm)": "mm",
+            "Tensión soportada a frecuencia industrial (Ud)": "kV",
+            "Tensión soportada al impulso tipo rayo (Up)": "kV",
+            "Tensión soportada al impulso tipo maniobra (Us)": "kV"
         }
-        
+    
         df = pd.DataFrame([
             {
                 "ÍTEM": i + 1,
                 "DESCRIPCIÓN": campo,
                 "UNIDAD": unidades.get(campo, ""),
                 "REQUERIDO": valor,
-                "OFRECIDO": "" #Columna vacía
+                "OFRECIDO": ""
             }
             for i, (campo, valor) in enumerate(datos.items())
         ])
-        
+    
         output = BytesIO()
         with pd.ExcelWriter(output, engine='openpyxl') as writer:
             df.to_excel(writer, index=False, sheet_name="CTG", startrow=6)
             wb = writer.book
             ws = writer.sheets["CTG"]
-        
-            # 🖼️ Insertar imagen del logo
+    
+            # Logo
             logo_path = "siemens_logo.png"
             try:
                 img = Image(logo_path)
@@ -290,55 +291,54 @@ def mostrar_app():
                 ws.add_image(img, "C1")
             except FileNotFoundError:
                 st.warning("⚠️ No se encontró el logo 'siemens_logo.png'. Asegúrate de subirlo al repositorio.")
-                
-            #🧱 Crear borde negro alrededor de A2:E4
+    
+            # Borde negro
             black_border = Border(
                 left=Side(style='thin', color='000000'),
                 right=Side(style='thin', color='000000'),
                 top=Side(style='thin', color='000000'),
                 bottom=Side(style='thin', color='000000')
             )
-        
             for row in ws.iter_rows(min_row=2, max_row=4, min_col=1, max_col=5):
                 for cell in row:
                     cell.border = black_border
-        
-            # 🟪 Caja de título
+    
+            # Título principal
             ws.merge_cells("A2:E4")
             cell = ws.cell(row=2, column=1)
             cell.value = "CARACTERÍSTICAS GARANTIZADAS"
             cell.font = Font(name=fuente, bold=True, size=14, color="000000")
             cell.alignment = Alignment(horizontal="center", vertical="center")
-        
-            # 🏷️ Título técnico
+    
+            # Título técnico
+            tension_texto = datos.get("Tensión asignada (Ur)", "XX")
             ws.merge_cells("A5:D5")
-            ws["A5"] = f"DESCARGADORES DE SOBRETENSIÓN {datos['Nivel de tensión (kV)']} kV"
+            ws["A5"] = f"DESCARGADORES DE SOBRETENSIÓN {tension_texto}"
             ws["A5"].font = Font(name=fuente, bold=True, size=12)
             ws["A5"].alignment = Alignment(horizontal="center")
-        
-            # 🎨 Encabezados con estilo
+    
+            # Encabezados
             header_fill = PatternFill(start_color="003366", end_color="003366", fill_type="solid")
             header_font = Font(name=fuente, size=tamaño, color="FFFFFF", bold=True)
             thin_border = Border(
                 left=Side(style='thin'), right=Side(style='thin'),
                 top=Side(style='thin'), bottom=Side(style='thin')
             )
-        
             for col_num in range(1, 6):
                 cell = ws.cell(row=6, column=col_num)
                 cell.fill = header_fill
                 cell.font = header_font
                 cell.alignment = Alignment(horizontal="center")
                 cell.border = thin_border
-        
-            # 📐 Ajuste de columnas
+    
+            # Ajuste de columnas
             ws.column_dimensions["A"].width = 4
             ws.column_dimensions["B"].width = 50
             ws.column_dimensions["C"].width = 10
             ws.column_dimensions["D"].width = 12
             ws.column_dimensions["E"].width = 12
-        
-            # 📋 Formato de filas con fuente personalizada
+    
+            # Formato de filas
             for row in ws.iter_rows(min_row=7, max_row=ws.max_row, max_col=5):
                 for cell in row:
                     cell.border = thin_border
@@ -347,23 +347,20 @@ def mostrar_app():
                 row[0].alignment = Alignment(horizontal="center", vertical="center")
                 row[2].alignment = Alignment(horizontal="center", vertical="center")
                 row[3].alignment = Alignment(horizontal="center", vertical="center")
-                row[4].alignment = Alignment(horizontal="center", vertical="center")  # Alineación para OFRECIDO
-        
-        
+                row[4].alignment = Alignment(horizontal="center", vertical="center")
+    
         output.seek(0)
         return output
         
         
     # 📥 Botón para generar y descargar
-    fuente = "Calibri"
-    tamaño = 9
     if st.button("📊 Generar archivo CTG"):
-        archivo_excel = exportar_excel(datos, fuente=fuente, tamaño=tamaño)
-        nivel_tension = datos.get("Nivel de tensión (kV)", "XX")
+        archivo_excel = exportar_excel(datos, fuente="Calibri", tamaño=9)
+        tension_texto = datos.get("Tensión asignada (Ur)", "XX")
         st.download_button(
             label="📥 Descargar archivo CTG en Excel",
             data=archivo_excel,
-            file_name=f"CTG_{nivel_tension}kV.xlsx",
+            file_name=f"CTG_{tension_texto}.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
         
@@ -378,6 +375,7 @@ def mostrar_app():
     
     
     
+
 
 
 

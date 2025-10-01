@@ -6,6 +6,7 @@ from datetime import datetime
 import pandas as pd
 from openpyxl.drawing.image import Image
 from openpyxl.styles import Font, Alignment, Border, Side, PatternFill
+import textwrap
 
 def mostrar_app():
     st.set_page_config(page_title="Generador CTG - Interruptor de Potencia", layout="wide")
@@ -535,6 +536,18 @@ def mostrar_app():
                 row[2].alignment = Alignment(horizontal="center", vertical="center")
                 row[3].alignment = Alignment(horizontal="center", vertical="center")
                 row[4].alignment = Alignment(horizontal="center", vertical="center")
+                
+            # Ajuste dinámico de altura de filas según contenido
+            for row in ws.iter_rows(min_row=7, max_row=ws.max_row, max_col=5):
+                max_lines = 1  # Mínimo una línea
+                for cell in row:
+                    if cell.value and isinstance(cell.value, str):
+                        # Estimar número de líneas según ancho de columna (por ejemplo, 55 caracteres en columna B)
+                        wrapped = textwrap.wrap(cell.value, width=55)
+                        max_lines = max(max_lines, len(wrapped))
+                # Ajustar altura de la fila (aprox. 15 puntos por línea)
+                ws.row_dimensions[cell.row].height = max_lines * 15
+
     
         output.seek(0)
         return output

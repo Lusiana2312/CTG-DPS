@@ -5,80 +5,135 @@ from io import BytesIO
 from datetime import datetime
 import numpy as np
 
+import streamlit as st
+
 def mostrar_app():
     st.set_page_config(page_title="Generador CTG - Transformador de Corriente", layout="wide")
 
     st.title("📄 Generador de Ficha CTG")
     st.subheader("Transformador de Corriente")
 
-    # 1. DATOS PARA ANOTACIÓN MANUAL
-    st.markdown("### 🖊️ Datos para anotación manual")
-    responsable = st.text_input("Nombre del responsable")
-    fecha_elaboracion = st.date_input("Fecha de elaboración")
-    area_tecnica = st.text_input("Área técnica")
-    proyecto = st.text_input("Proyecto o ubicación general")
+    # 1. DATOS GENERALES
+    st.markdown("### 🖊️ Datos generales")
+    fabricante = st.text_input("Fabricante")
+    pais = st.text_input("País")
+    referencia = st.text_input("Referencia")
+    norma_fabricacion = "IEC 61869-1 y IEC 61869-2"
+    norma_calidad = "ISO 9001"
+    st.markdown(f"**Norma de fabricación:** {norma_fabricacion}")
+    st.markdown(f"**Norma de calidad:** {norma_calidad}")
+
+    tipo_ejecucion = st.selectbox("Tipo de ejecución", options=["Exterior", "Interior"])
+    altura_instalacion = st.number_input("Altura de instalación [msnm]", min_value=0)
+    material_aislador = st.selectbox("Material del aislador", options=["Compuesto Siliconado", "Material"])
 
     # 2. PARÁMETROS DE TENSIÓN
     st.markdown("### ⚡ Parámetros de tensión")
-    tension_material = st.selectbox(
-        "Tensión más elevada para el material (Um)",
-        options=["115 kV", "245 kV", "550 kV"]
-    )
+    tension_material = st.selectbox("Tensión más elevada para el material (Um)", options=["145 kV", "245 kV", "550 kV"])
 
-    # Asignación automática de tensiones e Ith según Um
-    if tension_material == "115 kV":
-        tension_nominal = "110 kV"
-        tension_ensayo = "195 kV"
-        tension_impulso = "250 kV"
-        ith_sugerido = "35"
+    # Asignación automática de tensiones
+    if tension_material == "145 kV":
+        ud_interno = "360 kV"
+        up_interno = "750 kV"
+        ipn = "1000 A"
     elif tension_material == "245 kV":
-        tension_nominal = "230 kV"
-        tension_ensayo = "395 kV"
-        tension_impulso = "460 kV"
-        ith_sugerido = "40"
+        ud_interno = "460 kV"
+        up_interno = "1050 kV"
+        ipn = "2500 A"
     elif tension_material == "550 kV":
-        tension_nominal = "525 kV"
-        tension_ensayo = "610 kV"
-        tension_impulso = "1000 kV"
-        ith_sugerido = "63"
+        ud_interno = "700 kV"
+        up_interno = "1550 kV"
+        ipn = "3000 A"
     else:
-        tension_nominal = ""
-        tension_ensayo = ""
-        tension_impulso = ""
-        ith_sugerido = ""
+        ud_interno = ""
+        up_interno = ""
+        ipn = ""
 
-    st.write("**Tensión nominal asignada:**", tension_nominal)
-    st.write("**Tensión de ensayo asignada:**", tension_ensayo)
-    st.write("**Tensión de impulso asignada:**", tension_impulso)
+    ud_externo = f"{ud_interno} a {altura_instalacion} msnm" if ud_interno else ""
+    up_externo = f"{up_interno} a {altura_instalacion} msnm" if up_interno else ""
+
+    st.write("**Tensión asignada soportada a la frecuencia industrial (Ud) - Aislamiento Interno:**", ud_interno)
+    st.write("**Tensión asignada soportada a la frecuencia industrial (Ud) - Aislamiento Externo:**", ud_externo)
+    st.write("**Tensión asignada soportada al impulso tipo rayo (Up) - Aislamiento Interno:**", up_interno)
+    st.write("**Tensión asignada soportada al impulso tipo rayo (Up) - Aislamiento Externo:**", up_externo)
+
+    us_interno = st.text_input("Tensión asignada soportada al impulso tipo maniobra (Us) - Aislamiento Interno")
+    us_externo = st.text_input("Tensión asignada soportada al impulso tipo maniobra (Us) - Aislamiento Externo")
 
     # 3. PARÁMETROS ELÉCTRICOS
     st.markdown("### 🔌 Parámetros eléctricos")
-    st.markdown("**Frecuencia asignada (fr):** 60 Hz  \n*Valor fijo para sistemas eléctricos en Colombia*")
     frecuencia = "60 Hz"
-    st.markdown(f"**Corriente de cortocircuito térmica asignada (Ith):** {ith_sugerido} kA  \n*Asignada automáticamente según Um*")
-    ith = f"{ith_sugerido} kA"
+    st.markdown(f"**Frecuencia asignada (fr):** {frecuencia}")
+    st.markdown(f"**Corriente primaria asignada (Ipn):** {ipn}")
+    factor_ipn = "1"
+    st.markdown(f"**Factor de la corriente primaria continua asignada:** {factor_ipn}")
+    isn = "1"
+    st.markdown(f"**Corriente secundaria asignada (Isn):** {isn}")
+    ith = "40 kA"
+    st.markdown(f"**Corriente de cortocircuito térmica asignada (Ith) en 1 segundo:** {ith}")
+    idyn = "2.6 × Ith"
+    st.markdown(f"**Corriente dinámica asignada (Idyn):** {idyn}")
 
-    valores_entre_1_y_2 = [f"{v:.1f}" for v in np.arange(1.0, 2.1, 0.1)]
-    ipn = st.text_input("Corriente primaria asignada (Ipn) [A]")
-    factor_ipn = st.selectbox("Factor de corriente primaria continua asignada", options=valores_entre_1_y_2)
-    isn = st.selectbox("Corriente secundaria asignada (Isn) [A]", options=valores_entre_1_y_2)
-    idyn = st.text_input("Corriente dinámica asignada (Idyn) [kA]")
+    # 4. CANTIDAD Y CLASE DE NÚCLEOS
+    st.markdown("### 🧲 Cantidad y clase de núcleos")
+    cantidad_nucleos = st.number_input("Cantidad total de núcleos", min_value=1, max_value=6, value=6)
 
-    # 4. PARÁMETROS DE NÚCLEOS
-    st.markdown("### 🧲 Parámetros de núcleos")
-    num_nucleos = st.selectbox("Número de núcleos", options=[1, 2, 3, 4, 5, 6])
-    relaciones_fijas = ["625/1", "800/1", "1000/1", "1200/1", "1400/1", "1600/1"]
-    cargas_por_nucleo = {}
+    tipos_nucleo = {}
+    for i in range(1, cantidad_nucleos + 1):
+        tipo = st.selectbox(
+            f"Tipo de núcleo {i}",
+            options=["Medida", "Protección convencional"],
+            key=f"tipo_nucleo_{i}"
+        )
+        tipos_nucleo[f"Núcleo {i}"] = tipo
 
-    for i in range(1, num_nucleos + 1):
-        st.markdown(f"#### Núcleo {i}")
-        cargas_por_nucleo[f"Núcleo {i}"] = {}
-        for relacion in relaciones_fijas:
-            carga_va = st.text_input(
-                f"Carga (VA) para relación {relacion} en núcleo {i}",
-                key=f"carga_{i}_{relacion}"
+    st.markdown("#### 🧾 Resumen de núcleos")
+    for nucleo, tipo in tipos_nucleo.items():
+        st.write(f"{nucleo}: {tipo}")
+
+    # 5. DESCRIPCIÓN DE NÚCLEOS
+    st.markdown("### 📘 Descripción de núcleos")
+
+    relaciones_transformacion = [
+        "625/1 (1S3-1S4)",
+        "1250/1 (1S2-1S4)",
+        "2500/1 (1S1-1S4)",
+        "400/1 (1S3-1S4)",
+        "800/1 (1S2-1S4)",
+        "1600/1 (1S1-1S4)"
+    ]
+
+    for i in range(1, cantidad_nucleos + 1):
+        tipo = tipos_nucleo[f"Núcleo {i}"]
+        st.markdown(f"#### 🔹 Núcleo {i} ({tipo})")
+
+        if tipo == "Medida":
+            relacion_asignada = st.selectbox(
+                f"Relación de transformación asignada - Núcleo {i}",
+                options=relaciones_transformacion,
+                key=f"relacion_asignada_{i}"
             )
-            cargas_por_nucleo[f"Núcleo {i}"][relacion] = carga_va
+
+            relacion_exactitud = st.selectbox(
+                f"Relación para la que debe cumplir la exactitud - Núcleo {i}",
+                options=relaciones_transformacion,
+                key=f"relacion_exactitud_{i}"
+            )
+
+            clase_exactitud = st.selectbox(
+                f"Clase de exactitud - Núcleo {i}",
+                options=["0.2", "0.5", "1.0", "3.0"],
+                key=f"clase_exactitud_{i}"
+            )
+
+            carga_exactitud = st.text_input(
+                f"Carga de exactitud (VA) - Núcleo {i}",
+                key=f"carga_exactitud_{i}"
+            )
+
+        elif tipo == "Protección convencional":
+            st.markdown("*Este núcleo está clasificado como protección convencional. Puedes definir sus parámetros más adelante.*")
+
 
     # BOTÓN PARA GENERAR FICHA
     if st.button("Generar ficha CTG"):

@@ -9,120 +9,237 @@ from openpyxl.drawing.image import Image
     
 def mostrar_app():
     st.title("Generador CTG DPS")
-        
     st.set_page_config(page_title="Generador CTG", layout="wide")
     st.title("📄 Generador de Archivos CTG")
-        
-    # 🛠️ Parámetros editables
-    with st.expander("🛠️ Parámetros editables"):
-        nivel_tension = st.selectbox("Nivel de tensión (kV):", [115, 230, 500])
-        ur_por_nivel = {115: 100, 230: 200, 500: 400}
-        ur = ur_por_nivel[nivel_tension]
-        st.markdown(f"🔌 Tensión asignada (Ur): **{ur} kV**")
     
-        altura_instalacion = st.number_input("Altura sobre el nivel del mar (m.s.n.m):", min_value=0, value=1000)
+    # 1. Altura de instalación
+    altura_instalacion = st.number_input("### 🧱 Altura sobre el nivel del mar (m.s.n.m)", min_value=0, value=1000, step=10)
     
-        sps_opciones = {"Bajo": 16, "Medio": 20, "Pesado": 25, "Muy Pesado": 31}
-        sps_seleccion = st.selectbox("Clase de severidad de contaminación del sitio (SPS):", list(sps_opciones.keys()))
-        valor_sps = sps_opciones[sps_seleccion]
-        st.markdown(f"🔢 Valor SPS seleccionado: **{valor_sps}**")
+    # 2. Fabricante
+    fabricante = st.text_input("### 🏢 Fabricante")
     
-        ka = st.number_input("Coeficiente Ka:", min_value=1.0, max_value=2.0, value=1.0, step=0.1)
-        km = st.number_input("Coeficiente Km:", min_value=1.0, max_value=2.0, value=1.0, step=0.1)
+    # 3. Referencia
+    referencia = st.text_input("### 🏷️ Referencia")
     
-        desempeno_sismico = st.selectbox("Desempeño sísmico vigente:", ["Alto", "Moderado"])
+    # 4. Norma de fabricación (fijo)
+    norma_fabricacion = "IEC 60099-4"
+    st.text("### 📘 Norma de fabricación: " + norma_fabricacion)
     
-        distancia_fuga = nivel_tension * valor_sps * ka * km
-        st.markdown(f"📏 **Distancia mínima de fuga requerida:** {distancia_fuga:.2f} mm")
+    # 5. Norma de calidad
+    norma_calidad = st.selectbox("### 📘 Norma de calidad", ["IEC 9001", "ISO 9001"])
     
-    # Parámetros normativos
-    with st.expander("📘 Parámetros estandarizados"):
-        datos_definidos = {
-            "Norma de fabricación": "IEC 60099-4",
-            "Norma de calidad": "IEC 9001",
-            "Tipo de ejecución": "Exterior",
-            "Frecuencia asignada (f)": "60",
-            "Material cubierta": "Polimérico",
-            "Número de columnas": "1",
-            "Tensión más elevada para el material (Um)": "245",
-            "Tensión continua de operación (Uc)": "20",
-            "Corriente de descarga asignada (In)": "40",
-            "Clase de descarga de línea": "4",
-            "Capacidad mínima de disipación de energía asignada para dos impulsos de larga duración kJ/kV (Ur)": "≥10",
-            "Transferencia de carga repetitiva Qrs": "≥2.4",
-            "Contador de descargas": "Sí"
-        }
+    # 6. Tipo de ejecución
+    tipo_ejecucion = st.selectbox("### 🏗️ Tipo de ejecución", ["Exterior", "Interior"])
     
-        for campo, valor in datos_definidos.items():
-            st.markdown(f"**{campo}:** {valor}")
+    # 7. Frecuencia asignada (fijo)
+    frecuencia_asignada = "60 Hz"
+    st.text("### ⚡ Frecuencia asignada: " + frecuencia_asignada)
     
-        # Subdivisión de tensiones residuales
-        st.markdown("### ⚡ Tensiones residuales")
+    # 8. Material cubierta
+    material_cubierta = st.selectbox("### 🧩 Material de la cubierta", ["Polimérico", "Porcelana"])
     
-        # Impulso tipo maniobra (Ures)
-        st.markdown("**Tensión residual al impulso tipo maniobra (Ures):**")
-        maniobra_ures = {
-            "Para 250 A": "",
-            "Para 500 A": "",
-            "Para 1000 A": "",
-            "Para 2000 A": ""
-        }
-        for campo in maniobra_ures:
-            maniobra_ures[campo] = st.text_input(f"Ures {campo}", value="")
+    # 9. Número de columnas
+    numero_columnas = st.selectbox("### 🔢 Número de columnas", [1, 2])
     
-        # Impulso tipo rayo (Ures)
-        st.markdown("**Tensión residual al impulso tipo rayo (Ures):**")
-        rayo_ures = {
-            "5 kA": "",
-            "10 kA": "",
-            "20 kA": ""
-        }
-        for campo in rayo_ures:
-            rayo_ures[campo] = st.text_input(f"Ures {campo}", value="")
+    # 10. Número de cuerpos
+    numero_cuerpos = st.text_input("### 🔢 Número de cuerpos")
     
-        # Tensiones asignadas soportadas
-        soportadas = {
-            "Tensión residual al impulso de corriente de escalón (10 kA)": "",
-            "Tensión asignada soportada a la frecuencia industrial (Ud)": "",
-            "Tensión asignada soportada al impulso tipo rayo (Up)": "",
-            "Tensión asignada soportada al impulso tipo maniobra (Us)": ""
-        }
-        for campo in soportadas:
-            soportadas[campo] = st.text_input(campo, value="")
+    # 11. Tensión más elevada para el material (Um)
+    um = st.selectbox("### ⚡ Tensión más elevada para el material (Um)", ["145 kV", "245 kV", "550 kV"])
+    
+    # 12. Tensión asignada (Ur)
+    ur_por_um = {"145 kV": "110 kV", "245 kV": "198 kV", "550 kV": "210 kV"}
+    ur = ur_por_um.get(um, "")
+    st.text(f"### ⚡ Tensión asignada (Ur): {ur}")
+    
+    # 13. Tensión continua de operación (Uc)
+    uc = st.text_input("### ⚡ Tensión continua de operación (Uc)")
+    
+    # 14. Corriente de descarga asignada (In)
+    in_por_um = {"145 kV": "10 kA", "245 kV": "20 kA", "550 kV": "30 kA"}
+    in_corriente = in_por_um.get(um, "")
+    st.text(f"### ⚡ Corriente de descarga asignada (In): {in_corriente}")
+    
+    # 15. Corriente asignada del dispositivo de alivio de presión (0.2 seg)
+    alivio_por_um = {"245 kV": "20 kA", "550 kV": "30 kA"}
+    corriente_alivio = alivio_por_um.get(um, "")
+    st.text(f"### ⚡ Corriente asignada del dispositivo de alivio de presión (0.2 seg): {corriente_alivio if corriente_alivio else 'No aplica'}")
+    
+    # 16. Tensión residual al impulso de corriente de escalón (10 kA)
+    ures_escalon = st.text_input("### ⚡ Tensión residual al impulso de corriente de escalón (10 kA)")
+    
+    # 17. Tensión residual al impulso tipo maniobra (Ures)
+    st.markdown("### ⚡ Tensión residual al impulso tipo maniobra (Ures)")
+    ures_maniobra_250 = st.text_input("Ures - Para 250 A", value="")
+    ures_maniobra_500 = st.text_input("Ures - Para 500 A", value="")
+    ures_maniobra_1000 = st.text_input("Ures - Para 1000 A", value="")
+    ures_maniobra_2000 = st.text_input("Ures - Para 2000 A", value="")
+    
+    # 18. Tensión residual al impulso tipo rayo (Ures)
+    st.markdown("### ⚡ Tensión residual al impulso tipo rayo (Ures)")
+    ures_rayo_5ka = st.text_input("Ures - 5 kA", value="")
+    ures_rayo_10ka = st.text_input("Ures - 10 kA", value="")
+    ures_rayo_20ka = st.text_input("Ures - 20 kA", value="")
+    
+    # 19. Clase de descarga de línea
+    clase_descarga = st.selectbox("### ⚡ Clase de descarga de línea", [1, 2, 3, 4, 5])
+    
+    # 20. Capacidad mínima de disipación de energía
+    capacidad_duracion = "≥10 kJ/kV"
+    st.text(f"### ⚡ Capacidad mínima de disipación de energía (2 impulsos largos): {capacidad_duracion}")
+    
+    # 21. Transferencia de carga repetitiva Qrs
+    qrs = "≥2.4"
+    st.text(f"### ⚡ Transferencia de carga repetitiva Qrs: {qrs}")
+    
+    # 22. Mínima sobretensión temporal soportada
+    st.markdown("### ⚡ Mínima sobretensión temporal soportada luego de absorber la energía asignada")
+    sobretension_1s = st.text_input("Durante 1s", value="")
+    sobretension_10s = st.text_input("Durante 10s", value="")
+    
+    # 23. Capacitancia fase-tierra
+    capacitancia = st.text_input("### ⚡ Capacitancia fase-tierra", value="")
+    
+    # 24. Distancia de arco
+    distancia_arco = st.text_input("### ⚡ Distancia de arco (con anillos anticorona si aplica)", value="")
+    
+    # 25. Clase de severidad de contaminación del sitio (SPS)
+    st.markdown("### 🌫️ Clase de severidad de contaminación del sitio (SPS)")
+    sps_opciones = {"Bajo": 16, "Medio": 20, "Pesado": 25, "Muy Pesado": 31}
+    sps_seleccion = st.selectbox("Selecciona la clase SPS", list(sps_opciones.keys()))
+    valor_sps = sps_opciones[sps_seleccion]
+    
+    # 26. Distancia mínima de fuga = Um * SPS
+    st.markdown("### 📏 Distancia mínima de fuga requerida")
+    um_valores = {"145 kV": 145, "245 kV": 245, "550 kV": 550}
+    um_num = um_valores.get(um, 0)
+    distancia_fuga = um_num * valor_sps
+    st.text(f"Distancia mínima de fuga: {distancia_fuga} mm")
+    
+    # 27. Aislamiento de la envolvente
+    st.markdown("### 🧪 Aislamiento de la envolvente (con anillos anticorona si aplica)")
+    ud = st.text_input("Tensión asignada soportada a la frecuencia industrial (Ud)", value="")
+    up = st.text_input("Tensión asignada soportada al impulso tipo rayo (Up)", value="")
+    us = st.text_input("Tensión asignada soportada al impulso tipo maniobra (Us)", value="")
+    
+    # 28. Datos sísmicos
+    st.markdown("### 🌍 Datos sísmicos según IEEE-693 vigente")
+    desempeno_sismico = st.selectbox("Desempeño sísmico", ["Alto", "Moderado", "Bajo"])
+    frecuencia_natural = st.text_input("Frecuencia natural de vibración", value="")
+    amortiguamiento_critico = st.text_input("Coeficiente de amortiguamiento crítico", value="")
+    
+    # 29. Cargas admisibles en bornes
+    st.markdown("### 🧱 Cargas admisibles en bornes")
+    carga_estatica = st.text_input("Carga estática admisible", value="")
+    carga_dinamica = st.text_input("Carga dinámica admisible", value="")
+    
+    # 30. Altura total
+    altura_total = st.text_input("### 📏 Altura total", value="")
+    
+    # 31. Dimensiones para transporte
+    dimensiones_transporte = st.text_input("### 📦 Dimensiones para transporte (Alto x Ancho x Largo)", value="")
+    
+    # 32. Masa neta para transporte
+    masa_transporte = st.text_input("### ⚖️ Masa neta para transporte", value="")
+    
+    # 33. Volumen total
+    volumen_total = st.text_input("### 📦 Volumen total", value="")
+    
+    # 34. Anillo corona y de distribución de campo
+    anillo_corona = st.text_input("### 🧲 Anillo corona y de distribución de campo", value="")
+    
+    # 35. Contador de descargas
+    contador_descargas = st.selectbox("### 🔌 Contador de descargas", ["Sí", "No"])
+    
+    # 36. Accesorios
+    accesorios = st.text_input("### 🧰 Accesorios", value="")
 
+    
     
     # Consolidar todos los datos en un solo diccionario
     datos = {
-        # 🛠️ Parámetros editables
-        "Nivel de tensión (kV)": nivel_tension,
+        # 1–3
+        "Altura sobre el nivel del mar (m.s.n.m)": altura_instalacion,
+        "Fabricante": fabricante,
+        "Referencia": referencia,
+    
+        # 4–7
+        "Norma de fabricación": norma_fabricacion,
+        "Norma de calidad": norma_calidad,
+        "Tipo de ejecución": tipo_ejecucion,
+        "Frecuencia asignada (Hz)": frecuencia_asignada,
+    
+        # 8–10
+        "Material de la cubierta": material_cubierta,
+        "Número de columnas": numero_columnas,
+        "Número de cuerpos": numero_cuerpos,
+    
+        # 11–12
+        "Tensión más elevada para el material (Um)": um,
         "Tensión asignada (Ur)": ur,
-        "Altura de instalación (m.s.n.m)": altura_instalacion,
+    
+        # 13–15
+        "Tensión continua de operación (Uc)": uc,
+        "Corriente de descarga asignada (In)": in_corriente,
+        "Corriente asignada del dispositivo de alivio de presión (0.2 seg)": corriente_alivio,
+    
+        # 16
+        "Tensión residual al impulso de corriente de escalón (10 kA)": ures_escalon,
+    
+        # 17
+        "Tensión residual al impulso tipo maniobra (Ures) - 250 A": ures_maniobra_250,
+        "Tensión residual al impulso tipo maniobra (Ures) - 500 A": ures_maniobra_500,
+        "Tensión residual al impulso tipo maniobra (Ures) - 1000 A": ures_maniobra_1000,
+        "Tensión residual al impulso tipo maniobra (Ures) - 2000 A": ures_maniobra_2000,
+    
+        # 18
+        "Tensión residual al impulso tipo rayo (Ures) - 5 kA": ures_rayo_5ka,
+        "Tensión residual al impulso tipo rayo (Ures) - 10 kA": ures_rayo_10ka,
+        "Tensión residual al impulso tipo rayo (Ures) - 20 kA": ures_rayo_20ka,
+    
+        # 19–21
+        "Clase de descarga de línea": clase_descarga,
+        "Capacidad mínima de disipación de energía (kJ/kV)": capacidad_duracion,
+        "Transferencia de carga repetitiva Qrs": qrs,
+    
+        # 22
+        "Sobretensión temporal soportada - 1s": sobretension_1s,
+        "Sobretensión temporal soportada - 10s": sobretension_10s,
+    
+        # 23–24
+        "Capacitancia fase-tierra": capacitancia,
+        "Distancia de arco (con anillos anticorona)": distancia_arco,
+    
+        # 25–26
         "Clase SPS": sps_seleccion,
         "Valor SPS": valor_sps,
-        "Coeficiente Ka": ka,
-        "Coeficiente Km": km,
-        "Distancia mínima de fuga (mm)": round(distancia_fuga, 2),
-        "Desempeño sísmico vigente": desempeno_sismico
+        "Distancia mínima de fuga (mm)": distancia_fuga,
+    
+        # 27
+        "Tensión soportada a frecuencia industrial (Ud)": ud,
+        "Tensión soportada al impulso tipo rayo (Up)": up,
+        "Tensión soportada al impulso tipo maniobra (Us)": us,
+    
+        # 28
+        "Desempeño sísmico": desempeno_sismico,
+        "Frecuencia natural de vibración": frecuencia_natural,
+        "Coeficiente de amortiguamiento crítico": amortiguamiento_critico,
+    
+        # 29
+        "Carga estática admisible": carga_estatica,
+        "Carga dinámica admisible": carga_dinamica,
+    
+        # 30–34
+        "Altura total": altura_total,
+        "Dimensiones para transporte (Alto x Ancho x Largo)": dimensiones_transporte,
+        "Masa neta para transporte": masa_transporte,
+        "Volumen total": volumen_total,
+        "Anillo corona y de distribución de campo": anillo_corona,
+    
+        # 35–36
+        "Contador de descargas": contador_descargas,
+        "Accesorios": accesorios
     }
-    
-    # 📘 Parámetros definidos por norma
-    datos.update(datos_definidos)
-    
-    # ⚡ Tensiones residuales subdivididas
-    
-    # Impulso tipo maniobra (Ures)
-    datos["Tensión residual al impulso tipo maniobra (Ures) - 250 A"] = maniobra_ures["Para 250 A"]
-    datos["Tensión residual al impulso tipo maniobra (Ures) - 500 A"] = maniobra_ures["Para 500 A"]
-    datos["Tensión residual al impulso tipo maniobra (Ures) - 1000 A"] = maniobra_ures["Para 1000 A"]
-    datos["Tensión residual al impulso tipo maniobra (Ures) - 2000 A"] = maniobra_ures["Para 2000 A"]
-    
-    # Impulso tipo rayo (Ures)
-    datos["Tensión residual al impulso tipo rayo (Ures) - 5 kA"] = rayo_ures["5 kA"]
-    datos["Tensión residual al impulso tipo rayo (Ures) - 10 kA"] = rayo_ures["10 kA"]
-    datos["Tensión residual al impulso tipo rayo (Ures) - 20 kA"] = rayo_ures["20 kA"]
-    
-    # Otras tensiones asignadas
-    datos.update(soportadas)
         
         
     # 📤 Función para exportar Excel con estilo personalizado
@@ -261,6 +378,7 @@ def mostrar_app():
     
     
     
+
 
 
 

@@ -34,8 +34,8 @@ def mostrar_app():
     
         distancia_fuga = nivel_tension * valor_sps * ka * km
         st.markdown(f"📏 **Distancia mínima de fuga requerida:** {distancia_fuga:.2f} mm")
-
-    # 📘 Parámetros estandarizados
+    
+    # Parámetros normativos
     with st.expander("📘 Parámetros estandarizados"):
         datos_definidos = {
             "Norma de fabricación": "IEC 60099-4",
@@ -52,28 +52,48 @@ def mostrar_app():
             "Transferencia de carga repetitiva Qrs": "≥2.4",
             "Contador de descargas": "Sí"
         }
+    
         for campo, valor in datos_definidos.items():
             st.markdown(f"**{campo}:** {valor}")
+    
+        # Subdivisión de tensiones residuales
         st.markdown("### ⚡ Tensiones residuales")
-        tensiones_residuales = {
+    
+        # Impulso tipo maniobra (Ures)
+        st.markdown("**Tensión residual al impulso tipo maniobra (Ures):**")
+        maniobra_ures = {
+            "Para 250 A": "",
+            "Para 500 A": "",
+            "Para 1000 A": "",
+            "Para 2000 A": ""
+        }
+        for campo in maniobra_ures:
+            maniobra_ures[campo] = st.text_input(f"Ures {campo}", value="")
+    
+        # Impulso tipo rayo (Ures)
+        st.markdown("**Tensión residual al impulso tipo rayo (Ures):**")
+        rayo_ures = {
+            "5 kA": "",
+            "10 kA": "",
+            "20 kA": ""
+        }
+        for campo in rayo_ures:
+            rayo_ures[campo] = st.text_input(f"Ures {campo}", value="")
+    
+        # Tensiones asignadas soportadas
+        soportadas = {
             "Tensión residual al impulso de corriente de escalón (10 kA)": "",
-            "Tensión residual al impulso tipo maniobra (250 A)": "",
-            "Tensión residual al impulso tipo maniobra (500 A)": "",
-            "Tensión residual al impulso tipo maniobra (1000 A)": "",
-            "Tensión residual al impulso tipo maniobra (2000 A)": "",
-            "Tensión residual al impulso tipo rayo (5 kA)": "",
-            "Tensión residual al impulso tipo rayo (10 kA)": "",
-            "Tensión residual al impulso tipo rayo (20 kA)": "",
             "Tensión asignada soportada a la frecuencia industrial (Ud)": "",
             "Tensión asignada soportada al impulso tipo rayo (Up)": "",
             "Tensión asignada soportada al impulso tipo maniobra (Us)": ""
         }
-    
-        for campo in tensiones_residuales:
-            tensiones_residuales[campo] = st.text_input(campo, value="")
+        for campo in soportadas:
+            soportadas[campo] = st.text_input(campo, value="")
 
-    # Consolidar todos los datos
+    
+    # Consolidar todos los datos en un solo diccionario
     datos = {
+        # 🛠️ Parámetros editables
         "Nivel de tensión (kV)": nivel_tension,
         "Tensión asignada (Ur)": ur,
         "Altura de instalación (m.s.n.m)": altura_instalacion,
@@ -84,9 +104,25 @@ def mostrar_app():
         "Distancia mínima de fuga (mm)": round(distancia_fuga, 2),
         "Desempeño sísmico vigente": desempeno_sismico
     }
+    
+    # 📘 Parámetros definidos por norma
     datos.update(datos_definidos)
-    datos.update(tensiones_residuales)
-        
+    
+    # ⚡ Tensiones residuales subdivididas
+    
+    # Impulso tipo maniobra (Ures)
+    datos["Tensión residual al impulso tipo maniobra (Ures) - 250 A"] = maniobra_ures["Para 250 A"]
+    datos["Tensión residual al impulso tipo maniobra (Ures) - 500 A"] = maniobra_ures["Para 500 A"]
+    datos["Tensión residual al impulso tipo maniobra (Ures) - 1000 A"] = maniobra_ures["Para 1000 A"]
+    datos["Tensión residual al impulso tipo maniobra (Ures) - 2000 A"] = maniobra_ures["Para 2000 A"]
+    
+    # Impulso tipo rayo (Ures)
+    datos["Tensión residual al impulso tipo rayo (Ures) - 5 kA"] = rayo_ures["5 kA"]
+    datos["Tensión residual al impulso tipo rayo (Ures) - 10 kA"] = rayo_ures["10 kA"]
+    datos["Tensión residual al impulso tipo rayo (Ures) - 20 kA"] = rayo_ures["20 kA"]
+    
+    # Otras tensiones asignadas
+    datos.update(soportadas)
         
         
     # 📤 Función para exportar Excel con estilo personalizado
@@ -225,6 +261,7 @@ def mostrar_app():
     
     
     
+
 
 
 

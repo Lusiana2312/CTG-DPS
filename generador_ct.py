@@ -92,48 +92,67 @@ def mostrar_app():
         st.write(f"{nucleo}: {tipo}")
 
     # 5. DESCRIPCIÓN DE NÚCLEOS
-    st.markdown("### 📘 Descripción de núcleos")
+        st.markdown("### 📘 Descripción de núcleos")
+    
+        opciones_relacion_transformacion = [
+            "2500-1250-625/1",
+            "2500-1250-600-2"
+        ]
+    
+        clases_exactitud = ["1P", "2P", "3P", "4P", "5P"]
+        factores_precision = ["50", "60", "70"]
+    
+        for i in range(1, cantidad_nucleos + 1):
+            tipo = tipos_nucleo[f"Núcleo {i}"]
+            st.markdown(f"#### 🔹 Núcleo {i} ({tipo})")
+    
+            if tipo == "Medida":
+                relacion_asignada = st.selectbox(
+                    f"a) Relación de transformación asignada - Núcleo {i}",
+                    options=opciones_relacion_transformacion,
+                    key=f"relacion_asignada_{i}"
+                )
+    
+                relacion_exactitud = st.selectbox(
+                    f"b) Relación para la que debe cumplir la exactitud - Núcleo {i}",
+                    options=opciones_relacion_transformacion,
+                    key=f"relacion_exactitud_{i}"
+                )
+    
+                clase_exactitud = st.selectbox(
+                    f"c) Clase de exactitud - Núcleo {i}",
+                    options=clases_exactitud,
+                    key=f"clase_exactitud_{i}"
+                )
+    
+                if i == 6:
+                    factor_precision = st.selectbox(
+                        f"d) Factor límite de precisión - Núcleo {i}",
+                        options=factores_precision,
+                        key=f"factor_precision_{i}"
+                    )
+    
+                    st.markdown("e) Carga de exactitud - Núcleo 6:")
+                    st.write("• 625/1 (1S3-1S4): N.A")
+                    st.write("• 1250/1 (1S2-1S4): N.A")
+                    st.write("• 2500/1 (1S1-1S4): N.A")
+                    st.write("• 400/1 (1S3-1S4): N.A")
+                    st.write("• 800/1 (1S2-1S4): N.A")
+                    st.write("• 1600/1 (1S1-1S4): N.A")
+                else:
+                    carga_exactitud = st.text_input(
+                        f"e) Carga de exactitud (VA) - Núcleo {i}",
+                        key=f"carga_exactitud_{i}"
+                    )
+    
+            elif tipo == "Protección convencional":
+                st.markdown("*Este núcleo está clasificado como protección convencional. Puedes definir sus parámetros más adelante.*")
+    
 
-    relaciones_transformacion = [
-        "625/1 (1S3-1S4)",
-        "1250/1 (1S2-1S4)",
-        "2500/1 (1S1-1S4)",
-        "400/1 (1S3-1S4)",
-        "800/1 (1S2-1S4)",
-        "1600/1 (1S1-1S4)"
-    ]
 
-    for i in range(1, cantidad_nucleos + 1):
-        tipo = tipos_nucleo[f"Núcleo {i}"]
-        st.markdown(f"#### 🔹 Núcleo {i} ({tipo})")
 
-        if tipo == "Medida":
-            relacion_asignada = st.selectbox(
-                f"Relación de transformación asignada - Núcleo {i}",
-                options=relaciones_transformacion,
-                key=f"relacion_asignada_{i}"
-            )
 
-            relacion_exactitud = st.selectbox(
-                f"Relación para la que debe cumplir la exactitud - Núcleo {i}",
-                options=relaciones_transformacion,
-                key=f"relacion_exactitud_{i}"
-            )
-
-            clase_exactitud = st.selectbox(
-                f"Clase de exactitud - Núcleo {i}",
-                options=["0.2", "0.5", "1.0", "3.0"],
-                key=f"clase_exactitud_{i}"
-            )
-
-            carga_exactitud = st.text_input(
-                f"Carga de exactitud (VA) - Núcleo {i}",
-                key=f"carga_exactitud_{i}"
-            )
-
-        elif tipo == "Protección convencional":
-            st.markdown("*Este núcleo está clasificado como protección convencional. Puedes definir sus parámetros más adelante.*")
-
+    
 
     # BOTÓN PARA GENERAR FICHA
     if st.button("Generar ficha CTG"):

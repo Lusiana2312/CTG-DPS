@@ -125,45 +125,12 @@ def mostrar_app():
     for i in range(1, cantidad_nucleos + 1):
         if tipos_nucleo[f"Núcleo {i}"] == "Medida":
             st.markdown(f"#### Núcleo {i} - Medida")
-    
-            relacion_asignada = st.selectbox(
-                f"a) Relación de transformación asignada - Núcleo {i}",
-                options=relacion_opciones,
-                key=f"relacion_asignada_{i}"
-            )
-    
-            relacion_exactitud = st.selectbox(
-                f"b) Relación para la que debe cumplir la exactitud - Núcleo {i}",
-                options=relacion_opciones,
-                key=f"relacion_exactitud_{i}"
-            )
-    
-            clase_exactitud = st.selectbox(
-                f"c) Clase de exactitud - Núcleo {i}",
-                options=clase_opciones,
-                key=f"clase_exactitud_{i}"
-            )
-    
-            if i == 6:
-                factor_opciones = ["50", "60", "70"]
-                factor_precision = st.selectbox(
-                    f"d) Factor límite de precisión - Núcleo {i}",
-                    options=factor_opciones,
-                    key=f"factor_precision_{i}"
-                )
-    
-                st.markdown(f"e) Carga de exactitud - Núcleo {i}:")
-                st.write("• 625/1 (1S3-1S4): N.A")
-                st.write("• 1250/1 (1S2-1S4): N.A")
-                st.write("• 2500/1 (1S1-1S4): N.A")
-                st.write("• 400/1 (1S3-1S4): N.A")
-                st.write("• 800/1 (1S2-1S4): N.A")
-                st.write("• 1600/1 (1S1-1S4): N.A")
-            else:
-                carga_exactitud = st.text_input(
-                    f"d) Carga de exactitud (VA) - Núcleo {i}",
-                    key=f"carga_exactitud_{i}"
-                )
+            st.write("• 625/1 (1S3-1S4): N.A")
+            st.write("• 1250/1 (1S2-1S4): N.A")
+            st.write("• 2500/1 (1S1-1S4): N.A")
+            st.write("• 400/1 (1S3-1S4): N.A")
+            st.write("• 800/1 (1S2-1S4): N.A")
+            st.write("• 1600/1 (1S1-1S4): N.A")
     
     # Agrupación visual: Núcleos de Protección
     st.markdown("### 🔸 Núcleos de Protección convencional")

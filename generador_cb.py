@@ -526,29 +526,33 @@ def mostrar_app():
             ws.column_dimensions["D"].width = 15
             ws.column_dimensions["E"].width = 15
     
-            # 📋 Formato de filas con fuente personalizada
+            
+            
+            # 📋 Formato de filas con fuente personalizada y ajuste dinámico de altura
             for row in ws.iter_rows(min_row=7, max_row=ws.max_row, max_col=5):
+                max_lines = 1  # Mínimo una línea por celda
                 for cell in row:
                     cell.border = thin_border
                     cell.alignment = Alignment(vertical="center", wrap_text=True)
                     cell.font = Font(name=fuente, size=tamaño)
-                row[0].alignment = Alignment(horizontal="center", vertical="center")
-                row[2].alignment = Alignment(horizontal="center", vertical="center")
-                row[3].alignment = Alignment(horizontal="center", vertical="center")
-                row[4].alignment = Alignment(horizontal="center", vertical="center")
-                
-            # Ajuste dinámico de altura de filas según contenido
-            for row in ws.iter_rows(min_row=7, max_row=ws.max_row, max_col=5):
-                max_lines = 1  # Mínimo una línea
-                for cell in row:
+            
+                    # Estimar número de líneas necesarias si el contenido es texto
                     if cell.value and isinstance(cell.value, str):
-                        # Estimar número de líneas según ancho de columna (por ejemplo, 55 caracteres en columna B)
-                        wrapped = textwrap.wrap(cell.value, width=55)
-                        max_lines = max(max_lines, len(wrapped))
-                # Ajustar altura de la fila (aprox. 15 puntos por línea)
-                ws.row_dimensions[cell.row].height = max_lines * 15
-
-    
+                        # Ajusta el ancho según la columna (por ejemplo, columna B tiene 55 caracteres de ancho)
+                        if cell.column_letter == "B":
+                            wrapped = textwrap.wrap(cell.value, width=55)
+                            max_lines = max(max_lines, len(wrapped))
+            
+                # Ajustar altura de la fila según el contenido más largo
+                ws.row_dimensions[row[0].row].height = max_lines * 15  # 15 puntos por línea aprox.
+            
+                # Alineación horizontal para columnas específicas
+                row[0].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+                row[2].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+                row[3].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+                row[4].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+            
+                
         output.seek(0)
         return output
     

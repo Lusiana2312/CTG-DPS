@@ -126,7 +126,27 @@ def mostrar_app():
     # Mostrar la expresión seleccionada
     st.text(usn_seleccionada)
 
+    # 23. Distancia de arco
+    st.markdown("### 🧯 23. Distancia de arco")
+    distancia_arco = st.text_input("Distancia de arco (mm)", value="")
 
+    # 24. Distancia mínima de fuga
+    st.markdown("### 📏 26. Distancia mínima de fuga requerida")
+    
+    # Selección de clase SPS
+    sps_opciones = {"Bajo": 16, "Medio": 20, "Pesado": 25, "Muy Pesado": 31}
+    sps_seleccion = st.selectbox("Selecciona la clase SPS", list(sps_opciones.keys()))
+    valor_sps = sps_opciones[sps_seleccion]
+    
+    # Conversión de tensión Um a valor numérico
+    um_valores = {"123 kV": 123, "245 kV": 245, "550 kV": 550}
+    um_num = um_valores.get(tension_um, 0)
+    
+    # Cálculo de distancia mínima de fuga
+    distancia_fuga = um_num * valor_sps
+    
+    # Mostrar solo el resultado como texto
+    st.text(f"{distancia_fuga} mm")
 
 
     # BOTÓN PARA GENERAR FICHA
@@ -166,7 +186,10 @@ def mostrar_app():
         "Carga Simultánea (VA)": "45",
         "Potencia térmica límite": potencia_termica_limite,
         "Tensión primaria (Upn)": f"{upn_seleccionada} / √3",
-        "Tensión secundaria (Usn)": usn_seleccionada
+        "Tensión secundaria (Usn)": usn_seleccionada,
+        "Distancia de arco (mm)": distancia_arco,
+        "Distancia mínima de fuga (mm)": distancia_fuga
+
     }
 
     #Función exportar Excel con estilo personalizado
@@ -286,6 +309,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

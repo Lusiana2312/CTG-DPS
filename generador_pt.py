@@ -142,7 +142,7 @@ def mostrar_app():
         "Tensión primaria (Upn)": f"{upn_seleccionada} V / √3 ≈ {upn_calculada} V",
         "Tensión secundaria (Usn)": f"{usn_seleccionada} ≈ {usn_opciones[usn_seleccionada]} V"
     }
-    return ficha_ctg
+    
     def exportar_excel(datos, fuente="Calibri", tamaño=9):
         unidades = {
             "Altura de instalación (msnm)": "msnm",
@@ -260,6 +260,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

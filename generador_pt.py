@@ -30,17 +30,17 @@ def mostrar_app():
     altura_instalacion = st.number_input("7. Altura de instalación (msnm)", min_value=0, step=100)
     material_aislador = st.selectbox("8. Material del aislador", ["Compuesto siliconado", "Porcelana"])
     tipo_transformador = st.selectbox("8a. Tipo", ["Capacitivo", "Inductivo"])
-    tension_um = st.selectbox("9. Tensión más elevada para el material (Um)", ["145 kV", "245 kV", "550 kV"])
+    tension_um = st.selectbox("9. Tensión más elevada para el material (Um)", ["123 kV", "245 kV", "550 kV"])
 
     # 10. Ud
     st.markdown("### 🔌 10. Tensión asignada soportada a la frecuencia industrial (Ud)")
-    ud_interno = {"145 kV": "360 kV", "245 kV": "460 kV", "550 kV": "700 kV"}[tension_um]
+    ud_interno = {"123 kV": "360 kV", "245 kV": "460 kV", "550 kV": "700 kV"}[tension_um]
     st.text(f"Aislamiento Interno: {ud_interno}")
     st.text(f"Aislamiento Externo (*): {ud_interno} a {int(altura_instalacion)} msnm")
 
     # 11. Up
     st.markdown("### ⚡ 11. Tensión asignada soportada al impulso tipo rayo (Up)")
-    up_interno = {"145 kV": "750 kV", "245 kV": "1050 kV", "550 kV": "1550 kV"}[tension_um]
+    up_interno = {"123 kV": "750 kV", "245 kV": "1050 kV", "550 kV": "1550 kV"}[tension_um]
     st.text(f"Aislamiento Interno: {up_interno}")
     st.text(f"Aislamiento Externo (*): {up_interno} a {int(altura_instalacion)} msnm")
 
@@ -69,9 +69,21 @@ def mostrar_app():
     )
 
     # 15. Capacidad total
+    if tension_um == "123 kV":
+        capacidad_minima = 2000
+    elif tension_um == "245 kV":
+        capacidad_minima = 4000
+    elif tension_um == "550 kV":
+        capacidad_minima = 10000
+    else:
+        capacidad_minima = 0  # Fallback por si se añade otra opción
+    # Campo de entrada para capacidad total
     st.markdown("### ⚡ 15. Capacidad total")
-    capacidad_total = st.number_input("Capacidad total (≥ 4000 VA)", min_value=4000)
-
+    capacidad_total = st.number_input(
+        f"Capacidad total (≥ {capacidad_minima} pF)",
+        min_value=capacidad_minima
+    )
+    
     # 16 al 18
     st.markdown("### 🔧 16-18. Condensadores y tensión intermedia")
     c1 = st.text_input("16. Condensador de alta tensión (C1)")
@@ -271,6 +283,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

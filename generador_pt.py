@@ -253,13 +253,14 @@ def mostrar_app():
 
 
     if st.button("📊 Generar archivo CTG"):
-        archivo_excel = exportar_excel(ficha_ctg, fuente_fuente, tamaño=tamaño)
+        archivo_excel = exportar_excel(ficha_ctg, fuente=fuente, tamaño=tamaño)
         st.download_button(
             label="📥 Descargar archivo CTG en Excel",
             data=archivo_excel,
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

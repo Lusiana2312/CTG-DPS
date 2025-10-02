@@ -46,8 +46,8 @@ def mostrar_app():
 
     # 12. Us
     st.markdown("### ⚡ 12. Tensión asignada soportada al impulso tipo maniobra (Us)")
-    us_interno = st.text_input("Aislamiento Interno (dejar vacío por ahora)")
-    us_externo = st.text_input("Aislamiento Externo (*) (dejar vacío por ahora)")
+    us_interno = st.text_input("Aislamiento Interno", key="us_interno")
+    us_externo = st.text_input("Aislamiento Externo", key="us_externo")
 
     # 13. Frecuencia
     st.markdown("### 📶 13. Frecuencia asignada (fr)")
@@ -86,7 +86,7 @@ def mostrar_app():
     st.text("b) Devanado 2: 15 VA")
     st.text("c) Devanado 3: 15 VA")
     st.text("d) Simultánea: 45 VA")
-    potencia_termica_limite = st.text_input("e) Potencia térmica límite (dejar vacío por ahora)")
+    potencia_termica_limite = st.text_input("e) Potencia térmica límite",key="potencia_termica_limite")
 
     # 22. Tensión asignada
     st.markdown("### ⚡ 22. Tensión asignada")
@@ -260,6 +260,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

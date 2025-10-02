@@ -113,18 +113,20 @@ def mostrar_app():
 
     # 22. Tensión asignada
     st.markdown("### ⚡ 22. Tensión asignada")
-    # Opciones de tensión primaria
+    # a) Tensión primaria
     upn_opciones = [110, 230, 500]
     upn_seleccionada = st.selectbox("a) Tensión primaria (Upn)", upn_opciones)
-    # Mostrar la expresión sin calcular
+    
+    # Mostrar solo la expresión simbólica
     st.text(f"{upn_seleccionada} / √3")
-
-    # Opciones de tensión secundaria como texto
+    
+    # b) Tensión secundaria
     usn_opciones = ["115 / √3", "110 / √3"]
     usn_seleccionada = st.selectbox("b) Tensión secundaria (Usn)", usn_opciones)
     
     # Mostrar la expresión seleccionada
     st.text(usn_seleccionada)
+
 
 
     # BOTÓN PARA GENERAR FICHA
@@ -284,6 +286,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

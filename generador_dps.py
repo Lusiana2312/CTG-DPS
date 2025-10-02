@@ -15,11 +15,11 @@ def mostrar_app():
     # 1. Altura de instalación
     altura_instalacion = st.number_input("### 🧱 Altura sobre el nivel del mar (m.s.n.m)", min_value=0, value=1000, step=10)
     
-    # 2. Fabricante
-    fabricante = st.text_input("### 🏢 Fabricante")
+    # 2. Fabricante (editable con valor por defecto)
+    fabricante = st.text_input("### 🏢 Fabricante", value="Indicar")
     
     # 3. Referencia
-    referencia = st.text_input("### 🏷️ Referencia")
+    referencia = st.text_input("### 🏷️ Referencia", value="Indicar")
     
     # 4. Norma de fabricación (fijo)
     norma_fabricacion = "IEC 60099-4"
@@ -38,35 +38,35 @@ def mostrar_app():
     # 8. Material cubierta
     material_cubierta = st.selectbox("### 🧩 Material de la cubierta", ["Polimérico", "Porcelana"])
     
-    # 9. Número de columnas
-    numero_columnas = st.selectbox("### 🔢 Número de columnas", [1, 2])
+    # 9. Número de columnas (valor fijo)
+    numero_columnas = 1
+    st.text(f"### 🔢 Número de columnas: {numero_columnas}")
     
     # 10. Número de cuerpos
-    numero_cuerpos = st.text_input("### 🔢 Número de cuerpos")
+    numero_cuerpos = st.text_input("### 🔢 Número de cuerpos", value="Indicar")
     
     # 11. Tensión más elevada para el material (Um)
-    um = st.selectbox("### ⚡ Tensión más elevada para el material (Um)", ["145 kV", "245 kV", "550 kV"])
+    um = st.selectbox("### ⚡ Tensión más elevada para el material (Um)", ["123 kV", "245 kV", "550 kV"])
     
     # 12. Tensión asignada (Ur)
-    ur_por_um = {"145 kV": "110 kV", "245 kV": "198 kV", "550 kV": "210 kV"}
+    ur_por_um = {"123 kV": "110 kV", "245 kV": "198 kV", "550 kV": "444 kV"}
     ur = ur_por_um.get(um, "")
     st.text(f"### ⚡ Tensión asignada (Ur): {ur}")
     
     # 13. Tensión continua de operación (Uc)
-    uc = st.text_input("### ⚡ Tensión continua de operación (Uc)")
+    uc = st.text_input("### ⚡ Tensión continua de operación (Uc)", value="Indicar")
     
-    # 14. Corriente de descarga asignada (In)
-    in_por_um = {"145 kV": "10 kA", "245 kV": "20 kA", "550 kV": "30 kA"}
-    in_corriente = in_por_um.get(um, "")
+    # 14. Corriente de descarga asignada (In) - valor fijo
+    in_corriente = "20 kA"
     st.text(f"### ⚡ Corriente de descarga asignada (In): {in_corriente}")
     
-    # 15. Corriente asignada del dispositivo de alivio de presión (0.2 seg)
-    alivio_por_um = {"245 kV": "20 kA", "550 kV": "30 kA"}
-    corriente_alivio = alivio_por_um.get(um, "")
-    st.text(f"### ⚡ Corriente asignada del dispositivo de alivio de presión (0.2 seg): {corriente_alivio if corriente_alivio else 'No aplica'}")
+    # 15. Corriente asignada del dispositivo de alivio de presión (0.2 seg) - valor fijo
+    corriente_alivio = "40 kA"
+    st.text(f"### ⚡ Corriente asignada del dispositivo de alivio de presión (0.2 seg): {corriente_alivio}")
     
     # 16. Tensión residual al impulso de corriente de escalón (10 kA)
-    ures_escalon = st.text_input("### ⚡ Tensión residual al impulso de corriente de escalón (10 kA)")
+    ures_escalon = st.text_input("### ⚡ Tensión residual al impulso de corriente de escalón (10 kA)", value="Indicar")
+
     
     # 17. Tensión residual al impulso tipo maniobra (Ures)
     st.markdown("### ⚡ Tensión residual al impulso tipo maniobra (Ures)")
@@ -375,6 +375,7 @@ def mostrar_app():
     
     
     
+
 
 
 

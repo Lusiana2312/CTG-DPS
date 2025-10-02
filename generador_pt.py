@@ -248,7 +248,7 @@ def mostrar_app():
         return output
 
 
-    if st.button("📊 Generar archivo CTG"):
+if st.button("📊 Generar archivo CTG"):
     archivo_excel = exportar_excel(ficha_ctg, fuente="Calibri", tamaño=9)
     st.download_button(
         label="📥 Descargar archivo CTG en Excel",

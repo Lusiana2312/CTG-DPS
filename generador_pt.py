@@ -165,8 +165,8 @@ def mostrar_app():
         "Carga Devanado 3 (VA)": "15",
         "Carga Simultánea (VA)": "45",
         "Potencia térmica límite": potencia_termica_limite,
-        "Tensión primaria (Upn)": f"{upn_seleccionada} V / √3 ≈ {upn_calculada} V",
-        "Tensión secundaria (Usn)": f"{usn_seleccionada} ≈ {usn_opciones[usn_seleccionada]} V"
+        "Tensión primaria (Upn)": f"{upn_seleccionada} / √3",
+        "Tensión secundaria (Usn)": usn_seleccionada
     }
 
     #Función exportar Excel con estilo personalizado
@@ -286,6 +286,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

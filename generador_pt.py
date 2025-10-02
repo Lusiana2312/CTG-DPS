@@ -97,9 +97,9 @@ def mostrar_app():
     # 20. Clase de precisión
     st.markdown("### 🎯 20. Clase de precisión")
     st.markdown("**Entre el 25% y el 100% de la carga de precisión con factor de potencia 0,8 en atraso**")
-    clase_precision_a = st.selectbox("a) Entre el 5% y el 80% de la tensión asignada", ["1P", "2P", "3P", "4P", "5P"])
-    clase_precision_b = st.selectbox("b) Entre el 80% y el 120% de la tensión asignada", ["0.1", "0.2", "0.3"])
-    clase_precision_c = st.selectbox("c) Entre el 120% y el 150% de la tensión asignada", ["1P", "2P", "3P", "4P", "5P"])
+    clase_precision_a = st.selectbox("a) Entre el 5% y el 80% de la tensión asignada", ["3P", "6P", "10P"])
+    clase_precision_b = st.selectbox("b) Entre el 80% y el 120% de la tensión asignada", ["0.2", "0.5", "1"])
+    clase_precision_c = st.selectbox("c) Entre el 120% y el 150% de la tensión asignada", ["3P", "6P", "10P"])
 
     # 21. Carga de precisión
     st.markdown("### ⚙️ 21. Carga de precisión")
@@ -113,17 +113,21 @@ def mostrar_app():
 
     # 22. Tensión asignada
     st.markdown("### ⚡ 22. Tensión asignada")
+    # Opciones de tensión primaria
     upn_opciones = [110, 230, 500]
     upn_seleccionada = st.selectbox("a) Tensión primaria (Upn)", upn_opciones)
+    # Mostrar el formato textual con raíz de 3
+    upn_texto = f"{upn_seleccionada} / √3"
     upn_calculada = round(upn_seleccionada / math.sqrt(3), 2)
-    st.text(f"{upn_seleccionada} V dividido entre √3 ≈ {upn_calculada} V")
-
+    st.text(f"{upn_texto} ≈ {upn_calculada} V")
+    # Opciones de tensión secundaria
     usn_opciones = {
         "115 / √3": round(115 / math.sqrt(3), 2),
         "110 / √3": round(110 / math.sqrt(3), 2)
     }
     usn_seleccionada = st.selectbox("b) Tensión secundaria (Usn)", list(usn_opciones.keys()))
     st.text(f"{usn_seleccionada} ≈ {usn_opciones[usn_seleccionada]} V")
+
 
 
     # BOTÓN PARA GENERAR FICHA
@@ -283,6 +287,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

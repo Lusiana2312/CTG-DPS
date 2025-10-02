@@ -111,12 +111,11 @@ def mostrar_app():
     potencia_termica_limite = st.text_input("e) Potencia térmica límite (dejar vacío por ahora)")
 
 
-    # 22. Tensión asignada
+    # 22. Tensión asignada  
     st.markdown("### ⚡ 22. Tensión asignada")
     # a) Tensión primaria
     upn_opciones = [110, 230, 500]
     upn_seleccionada = st.selectbox("a) Tensión primaria (Upn)", upn_opciones)
-    
     # Mostrar solo la expresión simbólica
     st.text(f"{upn_seleccionada} / √3")
     
@@ -126,6 +125,7 @@ def mostrar_app():
     
     # Mostrar la expresión seleccionada
     st.text(usn_seleccionada)
+
 
 
 
@@ -286,6 +286,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

@@ -53,10 +53,20 @@ def mostrar_app():
     st.markdown("### 📶 13. Frecuencia asignada (fr)")
     st.text("60 Hz")
 
-    # 14. Factor de tensión
+    #factor de tensión asignado
     st.markdown("### ⚙️ 14. Factor de tensión asignado")
-    st.text("a) Permanente: 1,2")
-    st.text("b) Durante 30 s: 1,5")
+    # Opción a) Permanente
+    factor_permanente = st.selectbox(
+        "a) Permanente",
+        options=[1.0, 1.1, 1.2],
+        index=2  # Por defecto selecciona 1.2
+    )
+    # Opción b) Durante 30 s
+    factor_30s = st.selectbox(
+        "b) Durante 30 s",
+        options=[1.5, 1.6, 1.7, 1.8],
+        index=0  # Por defecto selecciona 1.5
+    )
 
     # 15. Capacidad total
     st.markdown("### ⚡ 15. Capacidad total")
@@ -124,8 +134,8 @@ def mostrar_app():
         "Tensión Us - Aislamiento Interno": us_interno,
         "Tensión Us - Aislamiento Externo": us_externo,
         "Frecuencia asignada (fr)": "60 Hz",
-        "Factor de tensión permanente": "1,2",
-        "Factor de tensión durante 30 s": "1,5",
+        "Factor de tensión permanente": str(factor_permanente),
+        "Factor de tensión durante 30 s": str(factor_30s),
         "Capacidad total (VA)": capacidad_total,
         "Condensador de alta tensión (C1)": c1,
         "Condensador de tensión intermedia (C2)": c2,
@@ -261,6 +271,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

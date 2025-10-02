@@ -16,10 +16,10 @@ def mostrar_app():
     altura_instalacion = st.number_input("### 🧱 Altura sobre el nivel del mar (m.s.n.m)", min_value=0, value=1000, step=10)
     
     # 2. Fabricante (editable con valor por defecto)
-    fabricante = st.text_input("### 🏢 Fabricante", value="Indicar")
+    fabricante = st.text("### 🏢 Fabricante", value="Indicar")
     
     # 3. Referencia
-    referencia = st.text_input("### 🏷️ Referencia", value="Indicar")
+    referencia = st.text("### 🏷️ Referencia", value="Indicar")
     
     # 4. Norma de fabricación (fijo)
     norma_fabricacion = "IEC 60099-4"
@@ -43,7 +43,7 @@ def mostrar_app():
     st.text(f"### 🔢 Número de columnas: {numero_columnas}")
     
     # 10. Número de cuerpos
-    numero_cuerpos = st.text_input("### 🔢 Número de cuerpos", value="Indicar")
+    numero_cuerpos = st.text("### 🔢 Número de cuerpos", value="Indicar")
     
     # 11. Tensión más elevada para el material (Um)
     um = st.selectbox("### ⚡ Tensión más elevada para el material (Um)", ["123 kV", "245 kV", "550 kV"])
@@ -54,7 +54,7 @@ def mostrar_app():
     st.text(f"### ⚡ Tensión asignada (Ur): {ur}")
     
     # 13. Tensión continua de operación (Uc)
-    uc = st.text_input("### ⚡ Tensión continua de operación (Uc)", value="Indicar")
+    uc = st.text("### ⚡ Tensión continua de operación (Uc)", value="Indicar")
     
     # 14. Corriente de descarga asignada (In) - valor fijo
     in_corriente = "20 kA"
@@ -65,21 +65,21 @@ def mostrar_app():
     st.text(f"### ⚡ Corriente asignada del dispositivo de alivio de presión (0.2 seg): {corriente_alivio}")
     
     # 16. Tensión residual al impulso de corriente de escalón (10 kA)
-    ures_escalon = st.text_input("### ⚡ Tensión residual al impulso de corriente de escalón (10 kA)", value="Indicar")
+    ures_escalon = st.text("### ⚡ Tensión residual al impulso de corriente de escalón (10 kA)", value="Indicar")
 
     
     # 17. Tensión residual al impulso tipo maniobra (Ures)
     st.markdown("### ⚡ Tensión residual al impulso tipo maniobra (Ures)")
-    ures_maniobra_250 = st.text_input("Ures - Para 250 A", value="Indicar")
-    ures_maniobra_500 = st.text_input("Ures - Para 500 A", value="Indicar")
-    ures_maniobra_1000 = st.text_input("Ures - Para 1000 A", value="Indicar")
-    ures_maniobra_2000 = st.text_input("Ures - Para 2000 A", value="Indicar")
+    ures_maniobra_250 = st.text("Ures - Para 250 A", value="Indicar")
+    ures_maniobra_500 = st.text("Ures - Para 500 A", value="Indicar")
+    ures_maniobra_1000 = st.text("Ures - Para 1000 A", value="Indicar")
+    ures_maniobra_2000 = st.text("Ures - Para 2000 A", value="Indicar")
     
     # 18. Tensión residual al impulso tipo rayo (Ures)
     st.markdown("### ⚡ Tensión residual al impulso tipo rayo (Ures)")
-    ures_rayo_5ka = st.text_input("Ures - 5 kA", value="Indicar")
-    ures_rayo_10ka = st.text_input("Ures - 10 kA", value="Indicar")
-    ures_rayo_20ka = st.text_input("Ures - 20 kA", value="Indicar")
+    ures_rayo_5ka = st.text("Ures - 5 kA", value="Indicar")
+    ures_rayo_10ka = st.text("Ures - 10 kA", value="Indicar")
+    ures_rayo_20ka = st.text("Ures - 20 kA", value="Indicar")
     
     # 19. Clase de descarga de línea (automática según Um)
     clase_por_um = {
@@ -101,14 +101,14 @@ def mostrar_app():
     
     # 22. Mínima sobretensión temporal soportada
     st.markdown("### ⚡ Mínima sobretensión temporal soportada luego de absorber la energía asignada")
-    sobretension_1s = st.text_input("Durante 1s", value="Indicar")
-    sobretension_10s = st.text_input("Durante 10s", value="Indicar")
+    sobretension_1s = st.text("Durante 1s", value="Indicar")
+    sobretension_10s = st.text("Durante 10s", value="Indicar")
     
     # 23. Capacitancia fase-tierra
-    capacitancia = st.text_input("### ⚡ Capacitancia fase-tierra", value="Indicar")
+    capacitancia = st.text("### ⚡ Capacitancia fase-tierra", value="Indicar")
     
     # 24. Distancia de arco
-    distancia_arco = st.text_input("### ⚡ Distancia de arco (con anillos anticorona si aplica)", value="Indicar")
+    distancia_arco = st.text("### ⚡ Distancia de arco (con anillos anticorona si aplica)", value="Indicar")
     
     # 25. Clase de severidad de contaminación del sitio (SPS)
     st.markdown("### 🌫️ Clase de severidad de contaminación del sitio (SPS)")
@@ -125,15 +125,15 @@ def mostrar_app():
     
     # 27. Aislamiento de la envolvente
     st.markdown("### 🧪 Aislamiento de la envolvente (con anillos anticorona si aplica)")
-    ud = st.text_input("Tensión asignada soportada a la frecuencia industrial (Ud)", value="Indicar")
-    up = st.text_input("Tensión asignada soportada al impulso tipo rayo (Up)", value="Indicar")
-    us = st.text_input("Tensión asignada soportada al impulso tipo maniobra (Us)", value="Indicar")
+    ud = st.text("Tensión asignada soportada a la frecuencia industrial (Ud)", value="Indicar")
+    up = st.text("Tensión asignada soportada al impulso tipo rayo (Up)", value="Indicar")
+    us = st.text("Tensión asignada soportada al impulso tipo maniobra (Us)", value="Indicar")
     
     # 28. Datos sísmicos
     st.markdown("### 🌍 Datos sísmicos según IEEE-693 vigente")
     desempeno_sismico = st.selectbox("Desempeño sísmico", ["Bajo", "Moderado (0.25g)", "Alto (0.5g)"])
-    frecuencia_natural = st.text_input("Frecuencia natural de vibración", value="Indicar")
-    amortiguamiento_critico = st.text_input("Coeficiente de amortiguamiento crítico", value="Indicar")
+    frecuencia_natural = st.text("Frecuencia natural de vibración", value="Indicar")
+    amortiguamiento_critico = st.text("Coeficiente de amortiguamiento crítico", value="Indicar")
     
     # 29. Cargas admisibles en bornes (automáticas según Um)
     st.markdown("### 🧱 Cargas admisibles en bornes")
@@ -149,22 +149,22 @@ def mostrar_app():
     st.text(f"Carga dinámica admisible: {carga_dinamica}")
     
     # 30. Altura total
-    altura_total = st.text_input("### 📏 Altura total", value="Indicar")
+    altura_total = st.text("### 📏 Altura total", value="Indicar")
     
     # 31. Dimensiones para transporte
-    dimensiones_transporte = st.text_input("### 📦 Dimensiones para transporte (Alto x Ancho x Largo)", value="Indicar")
+    dimensiones_transporte = st.text("### 📦 Dimensiones para transporte (Alto x Ancho x Largo)", value="Indicar")
     
     # 32. Masa neta para transporte
-    masa_transporte = st.text_input("### ⚖️ Masa neta para transporte", value="Indicar")
+    masa_transporte = st.text("### ⚖️ Masa neta para transporte", value="Indicar")
     
     # 33. Volumen total
-    volumen_total = st.text_input("### 📦 Volumen total", value="Indicar")
+    volumen_total = st.text("### 📦 Volumen total", value="Indicar")
     
     # 34. Anillo corona y de distribución de campo
-    anillo_corona = st.text_input("### 🧲 Anillo corona y de distribución de campo", value="Indicar")
+    anillo_corona = st.text("### 🧲 Anillo corona y de distribución de campo", value="Indicar")
 
     # 36. Accesorios
-    accesorios = st.text_input("### 🧰 Accesorios")
+    accesorios = st.text("### 🧰 Accesorios")
     # 35. Contador de descargas
     contador_descargas = st.selectbox("### 🔌 Contador de descargas", ["Sí", "No"])
 
@@ -390,6 +390,7 @@ def mostrar_app():
     
     
     
+
 
 
 

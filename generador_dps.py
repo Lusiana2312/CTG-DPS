@@ -138,8 +138,13 @@ def mostrar_app():
         "550 kV": {"estatica": "2000 N", "dinamica": "5000 N"}
     }
     cargas = cargas_por_um.get(um, {"estatica": "No definida", "dinamica": "No definida"})
-    st.text(f"Carga estática admisible: {cargas['estatica']}")
-    st.text(f"Carga dinámica admisible: {cargas['dinamica']}")
+    
+    # ✅ Definir las variables antes de mostrarlas
+    carga_estatica = cargas["estatica"]
+    carga_dinamica = cargas["dinamica"]
+    
+    st.text(f"Carga estática admisible: {carga_estatica}")
+    st.text(f"Carga dinámica admisible: {carga_dinamica}")
 
     # 30. Altura total
     altura_total = st.text_input("### 📏 Altura total", value="Indicar")
@@ -385,6 +390,7 @@ def mostrar_app():
     
     
     
+
 
 
 

@@ -116,18 +116,15 @@ def mostrar_app():
     # Opciones de tensión primaria
     upn_opciones = [110, 230, 500]
     upn_seleccionada = st.selectbox("a) Tensión primaria (Upn)", upn_opciones)
-    # Mostrar el formato textual con raíz de 3
-    upn_texto = f"{upn_seleccionada} / √3"
-    upn_calculada = round(upn_seleccionada / math.sqrt(3), 2)
-    st.text(f"{upn_texto} ≈ {upn_calculada} V")
-    # Opciones de tensión secundaria
-    usn_opciones = {
-        "115 / √3": round(115 / math.sqrt(3), 2),
-        "110 / √3": round(110 / math.sqrt(3), 2)
-    }
-    usn_seleccionada = st.selectbox("b) Tensión secundaria (Usn)", list(usn_opciones.keys()))
-    st.text(f"{usn_seleccionada} ≈ {usn_opciones[usn_seleccionada]} V")
+    # Mostrar la expresión sin calcular
+    st.text(f"{upn_seleccionada} / √3")
 
+    # Opciones de tensión secundaria como texto
+    usn_opciones = ["115 / √3", "110 / √3"]
+    usn_seleccionada = st.selectbox("b) Tensión secundaria (Usn)", usn_opciones)
+    
+    # Mostrar la expresión seleccionada
+    st.text(usn_seleccionada)
 
 
     # BOTÓN PARA GENERAR FICHA
@@ -287,6 +284,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

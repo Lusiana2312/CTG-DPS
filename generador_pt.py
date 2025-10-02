@@ -19,18 +19,18 @@ def mostrar_app():
     st.markdown("### ⚙️ Parámetros del transformador")
 
     # 1 al 5
-    fabricante = st.text_input("1. Fabricante", key="fabricante")
-    pais = st.text_input("2. País", key="pais")
-    referencia = st.text_input("3. Referencia", key="referencia")
-    norma_fabricacion = st.text_input("4. Norma de fabricación", value="IEC 61869-5", key="norma_fabricacion")
-    norma_calidad = st.text_input("5. Norma de calidad", value="ISO 9001", key="norma_calidad")
+    fabricante = st.text_input("1. Fabricante", key="param_01_fabricante")
+    pais = st.text_input("2. País", key="param_02_pais")
+    referencia = st.text_input("3. Referencia", key="param_03_referencia")
+    norma_fabricacion = st.text_input("4. Norma de fabricación", value="IEC 61869-5", key="param_04_norma_fabricacion")
+    norma_calidad = st.text_input("5. Norma de calidad", value="ISO 9001", key="param_05_norma_calidad")
 
     # 6 al 9
-    tipo_ejecucion = st.selectbox("6. Tipo de ejecución", ["Interior", "Exterior"], key="tipo_ejecucion")
-    altura_instalacion = st.number_input("7. Altura de instalación (msnm)", min_value=0, step=100, key="altura_instalacion")
-    material_aislador = st.selectbox("8. Material del aislador", ["Compuesto siliconado", "Porcelana"], key="material_aislador")
-    tipo_transformador = st.selectbox("8a. Tipo", ["Capacitivo", "Inductivo"], key="tipo_transformador")
-    tension_um = st.selectbox("9. Tensión más elevada para el material (Um)", ["145 kV", "245 kV", "550 kV"], key="tension_um")
+    tipo_ejecucion = st.selectbox("6. Tipo de ejecución", ["Interior", "Exterior"], key="param_06_tipo_ejecucion")
+    altura_instalacion = st.number_input("7. Altura de instalación (msnm)", min_value=0, step=100, key="param_07_altura")
+    material_aislador = st.selectbox("8. Material del aislador", ["Compuesto siliconado", "Porcelana"], key="param_08_material_aislador")
+    tipo_transformador = st.selectbox("8a. Tipo", ["Capacitivo", "Inductivo"], key="param_08a_tipo_transformador")
+    tension_um = st.selectbox("9. Tensión más elevada para el material (Um)", ["145 kV", "245 kV", "550 kV"], key="param_09_um")
 
     # 10. Ud
     st.markdown("### 🔌 10. Tensión asignada soportada a la frecuencia industrial (Ud)")
@@ -46,8 +46,8 @@ def mostrar_app():
 
     # 12. Us
     st.markdown("### ⚡ 12. Tensión asignada soportada al impulso tipo maniobra (Us)")
-    us_interno = st.text_input("Aislamiento Interno (dejar vacío por ahora)", key="us_interno")
-    us_externo = st.text_input("Aislamiento Externo (*) (dejar vacío por ahora)", key="us_externo")
+    us_interno = st.text_input("Aislamiento Interno (dejar vacío por ahora)", key="param_12_us_interno")
+    us_externo = st.text_input("Aislamiento Externo (*) (dejar vacío por ahora)", key="param_12_us_externo")
 
     # 13. Frecuencia
     st.markdown("### 📶 13. Frecuencia asignada (fr)")
@@ -60,33 +60,34 @@ def mostrar_app():
 
     # 15. Capacidad total
     st.markdown("### ⚡ 15. Capacidad total")
-    capacidad_total = st.number_input("Capacidad total (≥ 4000 VA)", min_value=4000, key="capacidad_total")
+    capacidad_total = st.number_input("Capacidad total (≥ 4000 VA)", min_value=4000, key="param_15_capacidad_total")
 
     # 16 al 18
     st.markdown("### 🔧 16-18. Condensadores y tensión intermedia")
-    c1 = st.text_input("16. Condensador de alta tensión (C1)", key="c1")
-    c2 = st.text_input("17. Condensador de tensión intermedia (C2)", key="c2")
-    tension_intermedia = st.text_input("18. Tensión intermedia asignada en circuito abierto", key="tension_intermedia")
+    c1 = st.text_input("16. Condensador de alta tensión (C1)", key="param_16_c1")
+    c2 = st.text_input("17. Condensador de tensión intermedia (C2)", key="param_17_c2")
+    tension_intermedia = st.text_input("18. Tensión intermedia asignada en circuito abierto", key="param_18_tension_intermedia")
 
     # 19. Número de devanados secundarios
     st.markdown("### 🔁 19. Número de devanados secundarios")
-    num_devanados = st.selectbox("Selecciona el número de devanados secundarios", [1, 2, 3], key="num_devanados")
+    num_devanados = st.selectbox("Selecciona el número de devanados secundarios", [1, 2, 3], key="param_19_num_devanados")
 
     # 20. Clase de precisión
     st.markdown("### 🎯 20. Clase de precisión")
     st.markdown("**Entre el 25% y el 100% de la carga de precisión con factor de potencia 0,8 en atraso**")
-    clase_precision_a = st.selectbox("a) Entre el 5% y el 80% de la tensión asignada", ["1P", "2P", "3P", "4P", "5P"], key="clase_precision_a")
-    clase_precision_b = st.selectbox("b) Entre el 80% y el 120% de la tensión asignada", ["0.1", "0.2", "0.3"], key="clase_precision_b")
-    clase_precision_c = st.selectbox("c) Entre el 120% y el 150% de la tensión asignada", ["1P", "2P", "3P", "4P", "5P"], key="clase_precision_c")
+    clase_precision_a = st.selectbox("a) Entre el 5% y el 80% de la tensión asignada", ["1P", "2P", "3P", "4P", "5P"], key="param_20a_clase_precision")
+    clase_precision_b = st.selectbox("b) Entre el 80% y el 120% de la tensión asignada", ["0.1", "0.2", "0.3"], key="param_20b_clase_precision")
+    clase_precision_c = st.selectbox("c) Entre el 120% y el 150% de la tensión asignada", ["1P", "2P", "3P", "4P", "5P"], key="param_20c_clase_precision")
 
     # 21. Carga de precisión
     st.markdown("### ⚙️ 21. Carga de precisión")
-    rango_burden = st.selectbox("Rango de burden acorde con IEC 61869-1/3/5", ["I", "II", "III", "IV"], key="rango_burden")
+    rango_burden = st.selectbox("Rango de burden acorde con IEC 61869-1/3/5", ["I", "II", "III", "IV"], key="param_21_rango_burden")
     st.text("a) Devanado 1: 15 VA")
     st.text("b) Devanado 2: 15 VA")
     st.text("c) Devanado 3: 15 VA")
     st.text("d) Simultánea: 45 VA")
-    potencia_termica_limite = st.text_input("e) Potencia térmica límite (dejar vacío por ahora)", key="potencia_termica_limite")
+    potencia_termica_limite = st.text_input("e) Potencia térmica límite (dejar vacío por ahora)", key="param_21_potencia_termica_limite")
+
 
     # 22. Tensión asignada
     st.markdown("### ⚡ 22. Tensión asignada")
@@ -260,6 +261,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

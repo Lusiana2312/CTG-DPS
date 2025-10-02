@@ -102,56 +102,159 @@ def mostrar_app():
 
 
     # BOTÓN PARA GENERAR FICHA
-    if st.button("Generar ficha CTG"):
-        ficha_ctg = {
-            # Datos manuales
-            "Responsable": responsable,
-            "Fecha de elaboración": fecha_elaboracion.strftime("%Y-%m-%d"),
-            "Área técnica": area_tecnica,
-            "Proyecto": proyecto,
+   # 📋 Diccionario con los datos del transformador
+    ficha_ctg = {
+        "Fabricante": fabricante,
+        "País": pais,
+        "Referencia": referencia,
+        "Norma de fabricación": norma_fabricacion,
+        "Norma de calidad": norma_calidad,
+        "Tipo de ejecución": tipo_ejecucion,
+        "Altura de instalación (msnm)": altura_instalacion,
+        "Material del aislador": material_aislador,
+        "Tipo de transformador": tipo_transformador,
+        "Tensión más elevada para el material (Um)": tension_um,
+        "Tensión Ud - Aislamiento Interno": ud_interno,
+        "Tensión Ud - Aislamiento Externo": f"{ud_interno} a {int(altura_instalacion)} msnm",
+        "Tensión Up - Aislamiento Interno": up_interno,
+        "Tensión Up - Aislamiento Externo": f"{up_interno} a {int(altura_instalacion)} msnm",
+        "Tensión Us - Aislamiento Interno": us_interno,
+        "Tensión Us - Aislamiento Externo": us_externo,
+        "Frecuencia asignada (fr)": "60 Hz",
+        "Factor de tensión permanente": "1,2",
+        "Factor de tensión durante 30 s": "1,5",
+        "Capacidad total (VA)": capacidad_total,
+        "Condensador de alta tensión (C1)": c1,
+        "Condensador de tensión intermedia (C2)": c2,
+        "Tensión intermedia en circuito abierto": tension_intermedia,
+        "Número de devanados secundarios": num_devanados,
+        "Clase de precisión (5%-80%)": clase_precision_a,
+        "Clase de precisión (80%-120%)": clase_precision_b,
+        "Clase de precisión (120%-150%)": clase_precision_c,
+        "Rango de burden (IEC 61869)": rango_burden,
+        "Carga Devanado 1 (VA)": "15",
+        "Carga Devanado 2 (VA)": "15",
+        "Carga Devanado 3 (VA)": "15",
+        "Carga Simultánea (VA)": "45",
+        "Potencia térmica límite": potencia_termica_limite,
+        "Tensión primaria (Upn)": f"{upn_seleccionada} V / √3 ≈ {upn_calculada} V",
+        "Tensión secundaria (Usn)": f"{usn_seleccionada} ≈ {usn_opciones[usn_seleccionada]} V"
+    }
 
-            # Datos fijos
-            "Tipo de equipo": "Transformador de Tensión",
-            "Frecuencia asignada (fr)": frecuencia,
-            "Estado": "Operativo",
-            "Fecha de registro": datetime.now().strftime("%Y-%m-%d"),
-
-            # Parámetros eléctricos
-            "Tensión primaria (kV)": tension_primaria,
-            "Tensión secundaria (V)": tension_secundaria,
-            "Tensión de aislamiento (kV)": tension_aislamiento,
-            "Tensión de impulso (kV)": tension_impulso,
-            "Factor de tensión asignado - Permanente": factor_permanente,
-            "Factor de tensión asignado - Durante 30s": factor_30s,
-            "Tipo de conexión": tipo_conexion,
-            "Tipo de aislamiento": tipo_aislamiento,
-
-            # Parámetros adicionales
-            "Capacidad total (pF)": capacidad_total,
-            "Condensador de alta tensión (C1) (pF)": c1,
-            "Condensador de tensión intermedia (C2) (pF)": c2,
-            "Tensión intermedia asignada en circuito abierto (kV)": tension_intermedia,
-            "Número de devanados secundarios": num_devanados
+    def exportar_excel(datos, fuente="Calibri", tamaño=9):
+        unidades = {
+            "Altura de instalación (msnm)": "msnm",
+            "Capacidad total (VA)": "VA",
+            "Tensión más elevada para el material (Um)": "kV",
+            "Tensión Ud - Aislamiento Interno": "kV",
+            "Tensión Ud - Aislamiento Externo": "kV",
+            "Tensión Up - Aislamiento Interno": "kV",
+            "Tensión Up - Aislamiento Externo": "kV",
+            "Tensión Us - Aislamiento Interno": "kV",
+            "Tensión Us - Aislamiento Externo": "kV",
+            "Frecuencia asignada (fr)": "Hz",
+            "Factor de tensión permanente": "",
+            "Factor de tensión durante 30 s": "",
+            "Carga Devanado 1 (VA)": "VA",
+            "Carga Devanado 2 (VA)": "VA",
+            "Carga Devanado 3 (VA)": "VA",
+            "Carga Simultánea (VA)": "VA",
+            "Tensión primaria (Upn)": "V",
+            "Tensión secundaria (Usn)": "V"
+            # Puedes añadir más unidades si lo deseas
         }
-
-        # Crear Excel en memoria
-        wb = Workbook()
-        ws = wb.active
-        ws.title = "Ficha CTG"
-        ws.append(["Parámetro", "Valor"])
-        for parametro, valor in ficha_ctg.items():
-            ws.append([parametro, valor])
-
+    
+        df = pd.DataFrame([
+            {
+                "ÍTEM": i + 1,
+                "DESCRIPCIÓN": campo,
+                "UNIDAD": unidades.get(campo, ""),
+                "REQUERIDO": valor,
+                "OFRECIDO": ""
+            }
+            for i, (campo, valor) in enumerate(datos.items())
+        ])
+    
         output = BytesIO()
-        wb.save(output)
+        with pd.ExcelWriter(output, engine='openpyxl') as writer:
+            df.to_excel(writer, index=False, sheet_name="CTG", startrow=6)
+            wb = writer.book
+            ws = writer.sheets["CTG"]
+    
+            # 🖼️ Logo (opcional)
+            logo_path = "siemens_logo.png"
+            try:
+                img = Image(logo_path)
+                img.width = 300
+                img.height = 100
+                ws.add_image(img, "C1")
+            except FileNotFoundError:
+                st.warning("⚠️ No se encontró el logo 'siemens_logo.png'. Asegúrate de subirlo al repositorio.")
+    
+            # 🟪 Título
+            ws.merge_cells("A2:E4")
+            cell = ws.cell(row=2, column=1)
+            cell.value = "FICHA TÉCNICA TRANSFORMADOR DE TENSIÓN"
+            cell.font = Font(name=fuente, bold=True, size=14, color="000000")
+            cell.alignment = Alignment(horizontal="center", vertical="center")
+    
+            # 🏷️ Subtítulo
+            ws.merge_cells("A5:D5")
+            ws["A5"] = "CARACTERÍSTICAS GARANTIZADAS"
+            ws["A5"].font = Font(name=fuente, bold=True, size=12)
+            ws["A5"].alignment = Alignment(horizontal="center")
+    
+            # 🎨 Encabezados
+            header_fill = PatternFill(start_color="003366", end_color="003366", fill_type="solid")
+            header_font = Font(name=fuente, size=tamaño, color="FFFFFF", bold=True)
+            thin_border = Border(
+                left=Side(style='thin'), right=Side(style='thin'),
+                top=Side(style='thin'), bottom=Side(style='thin')
+            )
+    
+            for col_num in range(1, 6):
+                cell = ws.cell(row=6, column=col_num)
+                cell.fill = header_fill
+                cell.font = header_font
+                cell.alignment = Alignment(horizontal="center")
+                cell.border = thin_border
+            # 📐 Ajuste de columnas
+            ws.column_dimensions["A"].width = 4
+            ws.column_dimensions["B"].width = 50
+            ws.column_dimensions["C"].width = 10
+            ws.column_dimensions["D"].width = 12
+            ws.column_dimensions["E"].width = 12
+    
+            # 📋 Formato de filas
+            for row in ws.iter_rows(min_row=7, max_row=ws.max_row, max_col=5):
+                max_lines = 1
+                for cell in row:
+                    cell.border = thin_border
+                    cell.alignment = Alignment(vertical="center", wrap_text=True)
+                    cell.font = Font(name=fuente, size=tamaño)
+    
+                    if cell.value and isinstance(cell.value, str):
+                        if cell.column_letter == "B":
+                            wrapped = textwrap.wrap(cell.value, width=55)
+                            max_lines = max(max_lines, len(wrapped))
+    
+                ws.row_dimensions[row[0].row].height = max_lines * 15
+                row[0].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+                row[2].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+                row[3].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+                row[4].alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+    
         output.seek(0)
+        return output
 
-        st.success("✅ Ficha CTG generada correctamente.")
-        st.download_button(
-            label="📥 Descargar Excel",
-            data=output,
-            file_name="CTG_TransformadorTension.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        )
+
+    if st.button("📊 Generar archivo CTG"):
+    archivo_excel = exportar_excel(ficha_ctg, fuente="Calibri", tamaño=9)
+    st.download_button(
+        label="📥 Descargar archivo CTG en Excel",
+        data=archivo_excel,
+        file_name="CTG_Transformador_Tension.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
 
 

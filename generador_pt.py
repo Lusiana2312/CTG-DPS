@@ -4,8 +4,10 @@ from openpyxl import Workbook
 from io import BytesIO
 from datetime import datetime
 import numpy as np
-
-import streamlit as st
+import pandas as pd
+from openpyxl.drawing.image import Image
+from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
+import textwrap
 import math
 
 def mostrar_app():
@@ -256,5 +258,6 @@ if st.button("📊 Generar archivo CTG"):
         file_name="CTG_Transformador_Tension.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 

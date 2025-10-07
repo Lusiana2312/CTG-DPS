@@ -231,7 +231,7 @@ def mostrar_app():
                 ("Tensión residual al impulso tipo maniobra (Ures) - 1000 A", "kV"),
                 ("Tensión residual al impulso tipo maniobra (Ures) - 2000 A", "kV"),
             ]
-
+    }
 
         # 18
         "Tensión residual al impulso tipo rayo (Ures) - 5 kA": ures_rayo_5ka,
@@ -439,6 +439,7 @@ def mostrar_app():
     
     
     
+
 
 
 

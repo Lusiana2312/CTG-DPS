@@ -223,6 +223,13 @@ def mostrar_app():
         "Tensión residual al impulso de corriente de escalón (10 kA)": ures_escalon,
 
         #17
+        datos = {}
+        
+        ures_maniobra_250 = "Indicar"
+        ures_maniobra_500 = "Indicar"
+        ures_maniobra_1000 = "Indicar"
+        ures_maniobra_2000 = "Indicar"
+        
         datos["Tensión residual al impulso tipo maniobra (Ures)"] = (
             f"250 A: {ures_maniobra_250}\n"
             f"500 A: {ures_maniobra_500}\n"
@@ -417,6 +424,7 @@ def mostrar_app():
     
     
     
+
 
 
 

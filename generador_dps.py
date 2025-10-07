@@ -133,14 +133,18 @@ def mostrar_app():
 
     # 27. Aislamiento de la envolvente
     st.markdown("### 🧪 Aislamiento de la envolvente (con anillos anticorona si aplica)")
-    ud = st.text_input("Tensión asignada soportada a la frecuencia industrial (Ud)", value="Indicar")
-    up = st.text_input("Tensión asignada soportada al impulso tipo rayo (Up)", value="Indicar")
-    us = st.text_input("Tensión asignada soportada al impulso tipo maniobra (Us)", value="Indicar")
+    ud = "Indicar"
+    st.text("Tensión asignada soportada a la frecuencia industrial (Ud): " + ud)
+    up = "Indicar"
+    st.text("Tensión asignada soportada al impulso tipo rayo (Up): " + up)
+    us = "Indicar"
+    st.text("Tensión asignada soportada al impulso tipo maniobra (Us): " + us)
 
     # 28. Datos sísmicos
     st.markdown("### 🌍 Datos sísmicos según IEEE-693 vigente")
     desempeno_sismico = st.selectbox("Desempeño sísmico", ["Bajo", "Moderado (0.25g)", "Alto (0.5g)"])
-    frecuencia_natural = st.text_input("Frecuencia natural de vibración", value="Indicar")
+    frecuencia_natural = "Indicar"
+    st.text("Frecuencia natural de vibración: "+frecuencia_natural)
     amortiguamiento_critico = st.text_input("Coeficiente de amortiguamiento crítico", value="Indicar")
 
     # 29. Cargas admisibles en bornes (automáticas según Um)
@@ -403,6 +407,7 @@ def mostrar_app():
     
     
     
+
 
 
 

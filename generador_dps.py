@@ -224,14 +224,12 @@ def mostrar_app():
 
         #17
 
-        items_con_sublíneas = {
-            "Tensión residual al impulso tipo maniobra (Ures)": [
-                ("Tensión residual al impulso tipo maniobra (Ures) - 250 A", "kV"),
-                ("Tensión residual al impulso tipo maniobra (Ures) - 500 A", "kV"),
-                ("Tensión residual al impulso tipo maniobra (Ures) - 1000 A", "kV"),
-                ("Tensión residual al impulso tipo maniobra (Ures) - 2000 A", "kV"),
-            ]
-    }
+        datos["Tensión residual al impulso tipo maniobra (Ures)"] = (
+            f"250 A\n": ures_maniobra_250,
+            f"Tensión residual al impulso tipo maniobra (Ures) - 500 A\n": ures_maniobra_500
+            f"Tensión residual al impulso tipo maniobra (Ures) - 1000 A\n": ures_maniobra_1000
+            f"Tensión residual al impulso tipo maniobra (Ures) - 2000 A": ures_maniobra_2000
+        )
 
         # 18
         "Tensión residual al impulso tipo rayo (Ures) - 5 kA": ures_rayo_5ka,
@@ -306,33 +304,16 @@ def mostrar_app():
             "Tensión soportada al impulso tipo maniobra (Us)": "kV"
         }
     
-        df_rows = []
-        item_counter = 1
-        
-        for campo, valor in datos.items():
-            if campo in items_con_sublíneas:
-                sublíneas = items_con_sublíneas[campo]
-                for j, (subdesc, unidad) in enumerate(sublíneas):
-                    requerido = datos.get(subdesc, "Indicar")
-                    df_rows.append({
-                        "ÍTEM": item_counter if j == 0 else "",
-                        "DESCRIPCIÓN": subdesc,
-                        "UNIDAD": unidad,
-                        "REQUERIDO": requerido,
-                        "OFRECIDO": ""
-                    })
-                item_counter += 1
-            else:
-                df_rows.append({
-                    "ÍTEM": item_counter,
-                    "DESCRIPCIÓN": campo,
-                    "UNIDAD": unidades.get(campo, ""),
-                    "REQUERIDO": valor,
-                    "OFRECIDO": ""
-                })
-                item_counter += 1
-        
-        df = pd.DataFrame(df_rows)
+        df = pd.DataFrame([
+            {
+                "ÍTEM": i + 1,
+                "DESCRIPCIÓN": campo,
+                "UNIDAD": unidades.get(campo, ""),
+                "REQUERIDO": valor,
+                "OFRECIDO": ""
+            }
+            for i, (campo, valor) in enumerate(datos.items())
+        ])
 
         
         output = BytesIO()
@@ -439,6 +420,7 @@ def mostrar_app():
     
     
     
+
 
 
 

@@ -223,19 +223,18 @@ def mostrar_app():
         "Tensión residual al impulso de corriente de escalón (10 kA)": ures_escalon,
 
         #17
-        datos = {}
-        
-        ures_maniobra_250 = "Indicar"
-        ures_maniobra_500 = "Indicar"
-        ures_maniobra_1000 = "Indicar"
-        ures_maniobra_2000 = "Indicar"
-        
-        datos["Tensión residual al impulso tipo maniobra (Ures)"] = (
+        # Construcción del texto multilínea para Ures
+        ures_texto = (
             f"250 A: {ures_maniobra_250}\n"
             f"500 A: {ures_maniobra_500}\n"
             f"1000 A: {ures_maniobra_1000}\n"
             f"2000 A: {ures_maniobra_2000}"
         )
+        
+        # Asignación al diccionario
+        datos["Tensión residual al impulso tipo maniobra (Ures)"] = ures_texto
+
+
         # 18
         "Tensión residual al impulso tipo rayo (Ures) - 5 kA": ures_rayo_5ka,
         "Tensión residual al impulso tipo rayo (Ures) - 10 kA": ures_rayo_10ka,
@@ -424,6 +423,7 @@ def mostrar_app():
     
     
     
+
 
 
 

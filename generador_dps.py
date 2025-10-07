@@ -273,8 +273,8 @@ def mostrar_app():
         "Anillo corona y de distribución de campo": anillo_corona,
     
         # 35–36
-        "Contador de descargas": contador_descargas,
-        "Accesorios": accesorios
+        "Accesorios": "",
+        "Contador de descargas": contador_descargas
     }
         
         
@@ -411,6 +411,7 @@ def mostrar_app():
     
     
     
+
 
 
 

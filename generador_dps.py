@@ -83,9 +83,12 @@ def mostrar_app():
 
     # 18. Tensión residual al impulso tipo rayo (Ures)
     st.markdown("### ⚡ Tensión residual al impulso tipo rayo (Ures)")
-    ures_rayo_5ka = st.text_input("Ures - 5 kA", value="Indicar")
-    ures_rayo_10ka = st.text_input("Ures - 10 kA", value="Indicar")
-    ures_rayo_20ka = st.text_input("Ures - 20 kA", value="Indicar")
+    ures_rayo_5ka = "Indicar"
+    st.text("Ures - 5 kA: " + ures_rayo_5ka)
+    ures_rayo_10ka = "Indicar"
+    st.text("Ures - 10 kA" + ures_rayo_10ka)
+    ures_rayo_20ka = "Indicar"
+    st.text("Ures - 20 kA" + ures_rayo_20ka)
 
     # 19. Clase de descarga de línea (automática según Um)
     clase_por_um = {"123 kV": 3, "245 kV": 4, "550 kV": 5}
@@ -396,6 +399,7 @@ def mostrar_app():
     
     
     
+
 
 
 

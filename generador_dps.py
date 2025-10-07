@@ -56,7 +56,7 @@ def mostrar_app():
 
     # 13. Tensión continua de operación (Uc)
     uc ="Indicar"
-    st.text("### ⚡ Tensión continua de operación (Uc): ", uc)
+    st.text("### ⚡ Tensión continua de operación (Uc): " + uc)
 
     # 14. Corriente de descarga asignada (In) - valor fijo
     in_corriente = "20 kA"
@@ -391,6 +391,7 @@ def mostrar_app():
     
     
     
+
 
 
 

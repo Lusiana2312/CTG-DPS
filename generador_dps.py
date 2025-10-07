@@ -224,7 +224,7 @@ def mostrar_app():
 
         #17
         # Construcción del texto multilínea para Ures
-        ures_texto = (
+        ures_texto : (
             f"250 A: {ures_maniobra_250}\n"
             f"500 A: {ures_maniobra_500}\n"
             f"1000 A: {ures_maniobra_1000}\n"
@@ -423,6 +423,7 @@ def mostrar_app():
     
     
     
+
 
 
 

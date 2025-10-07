@@ -224,10 +224,10 @@ def mostrar_app():
     
         # 17
         datos["Tensión residual al impulso tipo maniobra (Ures)"] = (
-            "250 A": ures_maniobra_250,
-            "Tensión residual al impulso tipo maniobra (Ures) - 500 A": ures_maniobra_500
-            "Tensión residual al impulso tipo maniobra (Ures) - 1000 A": ures_maniobra_1000
-            "Tensión residual al impulso tipo maniobra (Ures) - 2000 A": ures_maniobra_2000
+            f"250 A\n": ures_maniobra_250,
+            f"Tensión residual al impulso tipo maniobra (Ures) - 500 A\n": ures_maniobra_500
+            f"Tensión residual al impulso tipo maniobra (Ures) - 1000 A\n": ures_maniobra_1000
+            f"Tensión residual al impulso tipo maniobra (Ures) - 2000 A": ures_maniobra_2000
         )
         # 18
         "Tensión residual al impulso tipo rayo (Ures) - 5 kA": ures_rayo_5ka,
@@ -417,6 +417,7 @@ def mostrar_app():
     
     
     
+
 
 
 

@@ -223,16 +223,14 @@ def mostrar_app():
         "Tensión residual al impulso de corriente de escalón (10 kA)": ures_escalon,
 
         #17
-        # Construcción del texto multilínea para Ures
-        ures_texto : (
-            f"250 A: {ures_maniobra_250}\n"
-            f"500 A: {ures_maniobra_500}\n"
-            f"1000 A: {ures_maniobra_1000}\n"
-            f"2000 A: {ures_maniobra_2000}"
-        )
-        
-        # Asignación al diccionario
-        datos["Tensión residual al impulso tipo maniobra (Ures)"] = ures_texto
+
+        items_con_sublíneas = {
+            "Tensión residual al impulso tipo maniobra (Ures)": [
+                ("Tensión residual al impulso tipo maniobra (Ures) - 250 A", "kV"),
+                ("Tensión residual al impulso tipo maniobra (Ures) - 500 A", "kV"),
+                ("Tensión residual al impulso tipo maniobra (Ures) - 1000 A", "kV"),
+                ("Tensión residual al impulso tipo maniobra (Ures) - 2000 A", "kV"),
+            ]
 
 
         # 18
@@ -308,17 +306,35 @@ def mostrar_app():
             "Tensión soportada al impulso tipo maniobra (Us)": "kV"
         }
     
-        df = pd.DataFrame([
-            {
-                "ÍTEM": i + 1,
-                "DESCRIPCIÓN": campo,
-                "UNIDAD": unidades.get(campo, ""),
-                "REQUERIDO": valor,
-                "OFRECIDO": ""
-            }
-            for i, (campo, valor) in enumerate(datos.items())
-        ])
-    
+        df_rows = []
+        item_counter = 1
+        
+        for campo, valor in datos.items():
+            if campo in items_con_sublíneas:
+                sublíneas = items_con_sublíneas[campo]
+                for j, (subdesc, unidad) in enumerate(sublíneas):
+                    requerido = datos.get(subdesc, "Indicar")
+                    df_rows.append({
+                        "ÍTEM": item_counter if j == 0 else "",
+                        "DESCRIPCIÓN": subdesc,
+                        "UNIDAD": unidad,
+                        "REQUERIDO": requerido,
+                        "OFRECIDO": ""
+                    })
+                item_counter += 1
+            else:
+                df_rows.append({
+                    "ÍTEM": item_counter,
+                    "DESCRIPCIÓN": campo,
+                    "UNIDAD": unidades.get(campo, ""),
+                    "REQUERIDO": valor,
+                    "OFRECIDO": ""
+                })
+                item_counter += 1
+        
+        df = pd.DataFrame(df_rows)
+
+        
         output = BytesIO()
         with pd.ExcelWriter(output, engine='openpyxl') as writer:
             df.to_excel(writer, index=False, sheet_name="CTG", startrow=6)
@@ -423,6 +439,7 @@ def mostrar_app():
     
     
     
+
 
 
 

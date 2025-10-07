@@ -223,11 +223,12 @@ def mostrar_app():
         "Tensión residual al impulso de corriente de escalón (10 kA)": ures_escalon,
     
         # 17
-        "Tensión residual al impulso tipo maniobra (Ures) - 250 A": ures_maniobra_250,
-        "Tensión residual al impulso tipo maniobra (Ures) - 500 A": ures_maniobra_500,
-        "Tensión residual al impulso tipo maniobra (Ures) - 1000 A": ures_maniobra_1000,
-        "Tensión residual al impulso tipo maniobra (Ures) - 2000 A": ures_maniobra_2000,
-    
+        datos["Tensión residual al impulso tipo maniobra (Ures)] = (
+            "250 A": ures_maniobra_250,
+            "Tensión residual al impulso tipo maniobra (Ures) - 500 A": ures_maniobra_500,
+            "Tensión residual al impulso tipo maniobra (Ures) - 1000 A": ures_maniobra_1000,
+            "Tensión residual al impulso tipo maniobra (Ures) - 2000 A": ures_maniobra_2000,
+        )
         # 18
         "Tensión residual al impulso tipo rayo (Ures) - 5 kA": ures_rayo_5ka,
         "Tensión residual al impulso tipo rayo (Ures) - 10 kA": ures_rayo_10ka,
@@ -416,6 +417,7 @@ def mostrar_app():
     
     
     
+
 
 
 

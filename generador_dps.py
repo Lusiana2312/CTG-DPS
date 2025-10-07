@@ -169,22 +169,24 @@ def mostrar_app():
     st.text("### 📏 Altura total: " + altura_total)
 
     # 31. Dimensiones para transporte
-    dimensiones_transporte = st.text_input("### 📦 Dimensiones para transporte (Alto x Ancho x Largo)", value="Indicar")
+    dimensiones_transporte = "Indicar"
+    st.text("### 📦 Dimensiones para transporte (Alto x Ancho x Largo): " + dimensiones_transporte)
 
     # 32. Masa neta para transporte
-    masa_transporte = st.text_input("### ⚖️ Masa neta para transporte", value="Indicar")
+    masa_transporte = "Indicar"
+    st.text("### ⚖️ Masa neta para transporte: " + masa_transporte)
 
     # 33. Volumen total
-    volumen_total = st.text_input("### 📦 Volumen total", value="Indicar")
+    volumen_total = "Indicar"
+    st.text("### 📦 Volumen total" + volumen_total)
 
     # 34. Anillo corona y de distribución de campo
-    anillo_corona = st.text_input("### 🧲 Anillo corona y de distribución de campo", value="Indicar")
+    anillo_corona = "Indicar"
+    st.text("### 🧲 Anillo corona y de distribución de campo: " + anillo_corona)
 
+    st.markdown("### 🧰 Accesorios")
     # 35. Contador de descargas
     contador_descargas = st.selectbox("### 🔌 Contador de descargas", ["Sí", "No"])
-
-    # 36. Accesorios
-    accesorios = st.text_input("### 🧰 Accesorios", value="Indicar")
 
 
 
@@ -409,6 +411,7 @@ def mostrar_app():
     
     
     
+
 
 
 

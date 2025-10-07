@@ -67,7 +67,8 @@ def mostrar_app():
     st.text(f"### ⚡ Corriente asignada del dispositivo de alivio de presión (0.2 seg): {corriente_alivio}")
 
     # 16. Tensión residual al impulso de corriente de escalón (10 kA)
-    ures_escalon = st.text_input("### ⚡ Tensión residual al impulso de corriente de escalón (10 kA)", value="Indicar")
+    ures_escalon= "Indicar"
+    st.text("### ⚡ Tensión residual al impulso de corriente de escalón (10 kA): " +ures_escalon)
 
     # 17. Tensión residual al impulso tipo maniobra (Ures)
     st.markdown("### ⚡ Tensión residual al impulso tipo maniobra (Ures)")
@@ -391,6 +392,7 @@ def mostrar_app():
     
     
     
+
 
 
 

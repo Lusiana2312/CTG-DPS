@@ -115,7 +115,8 @@ def mostrar_app():
     st.text("### ⚡ Capacitancia fase-tierra: " + capacitancia)
 
     # 24. Distancia de arco
-    distancia_arco = st.text_input("### ⚡ Distancia de arco (con anillos anticorona si aplica)", value="Indicar")
+    distancia_arco = "Indicar"
+    st.text("### ⚡ Distancia de arco (con anillos anticorona si aplica): " + distancia_arco)
 
     # 25. Clase de severidad de contaminación del sitio (SPS)
     st.markdown("### 🌫️ Clase de severidad de contaminación del sitio (SPS)")
@@ -402,6 +403,7 @@ def mostrar_app():
     
     
     
+
 
 
 

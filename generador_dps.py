@@ -321,7 +321,7 @@ def mostrar_app():
             ws.print_title_rows = '1:5'
             
             # Definir el área de impresión completa desde A1 hasta la última fila de la tabla
-            ws.print_area = f"A1:E{ws.max_row}"
+            ws.print_area = f"A1:G{ws.max_row}"
     
             # Logo
             logo_path = "siemens_logo.png"
@@ -416,6 +416,7 @@ def mostrar_app():
     
     
     
+
 
 
 

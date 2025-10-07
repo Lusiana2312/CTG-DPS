@@ -318,10 +318,10 @@ def mostrar_app():
             wb = writer.book
             ws = writer.sheets["CTG"]
             # Repetir las filas de título (A1 a E5) en cada página impresa
-            ws.print_title_rows = '1:5'
+            ws.print_title_rows = '1:7'
             
             # Definir el área de impresión completa desde A1 hasta la última fila de la tabla
-            ws.print_area = f"A1:G{ws.max_row}"
+            ws.print_area = f"A1:E{ws.max_row}"
     
             # Logo
             logo_path = "siemens_logo.png"
@@ -416,6 +416,7 @@ def mostrar_app():
     
     
     
+
 
 
 

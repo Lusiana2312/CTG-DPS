@@ -72,10 +72,14 @@ def mostrar_app():
 
     # 17. Tensión residual al impulso tipo maniobra (Ures)
     st.markdown("### ⚡ Tensión residual al impulso tipo maniobra (Ures)")
-    ures_maniobra_250 = st.text_input("Ures - Para 250 A", value="Indicar")
-    ures_maniobra_500 = st.text_input("Ures - Para 500 A", value="Indicar")
-    ures_maniobra_1000 = st.text_input("Ures - Para 1000 A", value="Indicar")
-    ures_maniobra_2000 = st.text_input("Ures - Para 2000 A", value="Indicar")
+    ures_maniobra_250 = "Indicar"
+    st.text("Ures - Para 250 A: " + ures_maniobra_250)
+    ures_maniobra_500 = "Indicar"
+    st.text("Ures - Para 500 A: ", + ures_maniobra_500)
+    ures_maniobra_1000 = "Indicar"
+    st.text("Ures - Para 1000 A: ", + ures_maniobra_1000)
+    ures_maniobra_2000 = "Indicar"
+    st.text("Ures - Para 2000 A: ", + ures_maniobra_2000 )
 
     # 18. Tensión residual al impulso tipo rayo (Ures)
     st.markdown("### ⚡ Tensión residual al impulso tipo rayo (Ures)")
@@ -392,6 +396,7 @@ def mostrar_app():
     
     
     
+
 
 
 

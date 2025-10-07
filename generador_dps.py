@@ -105,11 +105,14 @@ def mostrar_app():
 
     # 22. Mínima sobretensión temporal soportada
     st.markdown("### ⚡ Mínima sobretensión temporal soportada luego de absorber la energía asignada")
-    sobretension_1s = st.text_input("Durante 1s", value="Indicar")
-    sobretension_10s = st.text_input("Durante 10s", value="Indicar")
+    sobretension_1s = "Indicar"
+    st.text("Durante 1s: " + sobretension_1s)
+    sobretension_10s = "Indicar"
+    st.text("Durante 10s: " + sobretension_10s)
 
     # 23. Capacitancia fase-tierra
-    capacitancia = st.text_input("### ⚡ Capacitancia fase-tierra", value="Indicar")
+    capacitancia = "Indicar"
+    st.text("### ⚡ Capacitancia fase-tierra: " + capacitancia)
 
     # 24. Distancia de arco
     distancia_arco = st.text_input("### ⚡ Distancia de arco (con anillos anticorona si aplica)", value="Indicar")
@@ -399,6 +402,7 @@ def mostrar_app():
     
     
     
+
 
 
 

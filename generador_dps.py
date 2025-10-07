@@ -144,8 +144,9 @@ def mostrar_app():
     st.markdown("### 🌍 Datos sísmicos según IEEE-693 vigente")
     desempeno_sismico = st.selectbox("Desempeño sísmico", ["Bajo", "Moderado (0.25g)", "Alto (0.5g)"])
     frecuencia_natural = "Indicar"
-    st.text("Frecuencia natural de vibración: "+frecuencia_natural)
-    amortiguamiento_critico = st.text_input("Coeficiente de amortiguamiento crítico", value="Indicar")
+    st.text("Frecuencia natural de vibración: " + frecuencia_natural)
+    amortiguamiento_critico = "Indicar"
+    st.text("Coeficiente de amortiguamiento crítico: " + amortiguamiento_critico)
 
     # 29. Cargas admisibles en bornes (automáticas según Um)
     st.markdown("### 🧱 Cargas admisibles en bornes")
@@ -164,7 +165,8 @@ def mostrar_app():
     st.text(f"Carga dinámica admisible: {carga_dinamica}")
 
     # 30. Altura total
-    altura_total = st.text_input("### 📏 Altura total", value="Indicar")
+    altura_total = "Indicar"
+    st.text("### 📏 Altura total: " + altura_total)
 
     # 31. Dimensiones para transporte
     dimensiones_transporte = st.text_input("### 📦 Dimensiones para transporte (Alto x Ancho x Largo)", value="Indicar")
@@ -407,6 +409,7 @@ def mostrar_app():
     
     
     
+
 
 
 

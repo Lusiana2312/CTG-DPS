@@ -346,24 +346,26 @@ def mostrar_app():
     st.markdown("**c)** A través del polo (mm): Indicar")
     distancia_entre_polos = distancia_a_tierra = distancia_a_traves_polo = "Indicar"
 
-    # 🧪 Clase de severidad de contaminación del sitio (SPS)
+    # 48. Clase de severidad de contaminación del sitio (SPS)
     st.markdown("### 🧪 Clase de severidad de contaminación del sitio (SPS)")
     sps_clase = st.selectbox(
         "Clase de severidad de contaminación del sitio (SPS)",
         ["Ligera", "Media", "Pesada", "Muy pesada"]
     )
 
-    # 🧪 Distancia mínima de fuga
+    # 49. Distancia mínima de fuga
     st.markdown("### 🧪 Distancia mínima de fuga")
     distancia_minima_fuga = st.text_input("Distancia mínima de fuga (mm)")
 
-    # 🧪 Datos sísmicos
+    # 50. Datos sísmicos
     st.markdown("### 🧪 Datos sísmicos")
-    desempeno_sismico_ieee = st.text_input("Desempeño sísmico según IEEE-693-Vigente (**)")
-    frecuencia_natural_vibracion = st.text_input("a) Frecuencia natural de vibración (Hz)")
-    coef_amortiguamiento_critico = st.text_input("b) Coeficiente de amortiguamiento crítico (%)")
+    st.markdown("**Desempeño sísmico según IEEE-693-Vigente:** Alto (0,5g)")
+    st.markdown("**a)** Frecuencia natural de vibración (Hz): Indicar")
+    st.markdown("**b)** Coeficiente de amortiguamiento crítico (%): Indicar")
+    desempeno_sismico_ieee = "Alto (0,5g)"
+    frecuencia_natural_vibracion = coef_amortiguamiento_critico = "Indicar"
 
-    # 🧪 Cargas admisibles en bornes
+    # 51. Cargas admisibles en bornes
     st.markdown("### 🧪 Cargas admisibles en bornes")
     carga_estatica_admisible = st.text_input("a) Carga estática admisible (N)")
     carga_dinamica_admisible = st.text_input("b) Carga dinámica admisible (N)")

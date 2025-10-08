@@ -155,28 +155,32 @@ def mostrar_app():
     u1 = t1 = uc = t2 = td = u_prima = t_prima = vel_crecimiento = "Indicar"
 
     
-    # Características asignadas para fallas próximas en líneas
+    # 25. Características asignadas para fallas próximas en líneas
     st.markdown("### ⚡ Características asignadas para fallas próximas en líneas")
 
     # a) Características asignadas del circuito de alimentación
     st.markdown("#### a) Características asignadas del circuito de alimentación")
-    u1_alimentacion = st.text_input("• Primera tensión de referencia (u1) [alimentación]")
-    t1_alimentacion = st.text_input("• Tiempo t1 [alimentación]")
-    uc_alimentacion = st.text_input("• Valor cresta del TTR (uc) [alimentación]")
-    t2_alimentacion = st.text_input("• Tiempo t2 [alimentación]")
-    td_alimentacion = st.text_input("• Retardo td [alimentación]")
-    u_prima_alimentacion = st.text_input("• Tensión u’ [alimentación]")
-    t_prima_alimentacion = st.text_input("• Tiempo t’ [alimentación]")
-    vel_crecimiento_alimentacion = st.text_input("• Velocidad de crecimiento (u1 / t1) [alimentación]")
+    st.markdown("**•)** Primera tensión de referencia (u1) kV: Indicar")
+    st.markdown("**•)** Tiempo t1 ms: Indicar")
+    st.markdown("**•)** Valor cresta del TTR (uc) kV: Indicar")
+    st.markdown("**•)** Tiempo t2 ms: Indicar")
+    st.markdown("**•)** Retardo td ms: Indicar")
+    st.markdown("**•)** Tensión u’ kV: Indicar")
+    st.markdown("**•)** Tiempo t’ ms: Indicar")
+    st.markdown("**•)** Velocidad de crecimiento (u1 / t1) kV/ms: Indicar")
+    u1_alimentacion = t1_alimentacion = uc_alimentacion = t2_alimentacion = td_alimentacion = u_prima_alimentacion = t_prima_alimentacion = vel_crecimiento_alimentacion = "Indicar"
 
     # b) Características asignadas de la línea
     st.markdown("#### b) Características asignadas de la línea")
-    z_linea = st.text_input("• Impedancia de onda asignada (Z)")
-    k_linea = st.text_input("• Factor de cresta asignada (k)")
-    s_linea = st.text_input("• Factor de TCTR (s)")
-    tdl_linea = st.text_input("• Retardo (tdl)")
+    st.markdown("• Impedancia de onda asignada (Z)")
+    st.markdown("• Factor de cresta asignada (k)")
+    st.markdown("• Factor de TCTR (s)")
+    st.markdown("• Retardo (tdl)")
+    z_linea = k_linea = s_linea = tdl_linea = "Indicar"
+
+
     
-    # Característica de TRV de pequeñas corrientes inductivas según IEC 62271-110
+    # 26. Característica de TRV de pequeñas corrientes inductivas según IEC 62271-110
     st.markdown("### ⚡ Característica de TRV de pequeñas corrientes inductivas según IEC 62271-110")
     # Rangos de referencia según Ur
     rangos_trv = {

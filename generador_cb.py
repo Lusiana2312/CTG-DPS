@@ -185,17 +185,17 @@ def mostrar_app():
     # Rangos de referencia según Ur
     rangos_trv = {
         "123 kV": {
-            "Uc": "# kV",
+            "Uc_trv": "# kV",
             "t3_1": "# µs",
             "t3_2": "# µs"
         },
         "245 kV": {
-            "Uc": "380 kV",
+            "Uc_trv": "380 kV",
             "t3_1": "167 µs",
             "t3_2": "297 µs"
         },
         "550 kV": {
-            "Uc": "1240 kV",
+            "Uc_trv": "1240 kV",
             "t3_1": "300 µs",
             "t3_2": "536 µs"
         }
@@ -203,10 +203,10 @@ def mostrar_app():
 
 
     # Obtener los valores fijos
-    valores_trv = rangos_trv.get(ur, {"Uc": "Indicar", "t3_1": "Indicar", "t3_2": "Indicar"})
+    valores_trv = rangos_trv.get(ur, {"uc_trv": "Indicar", "t3_1": "Indicar", "t3_2": "Indicar"}
     
     # Mostrar los resultados como texto
-    st.markdown(f"**a)** Valor mínimo pico de TRV Uc: {valores_trv['Uc']}")
+    st.markdown(f"**a)** Valor mínimo pico de TRV Uc: {valores_trv['uc_trv']}")
     st.markdown(f"**b)** Tiempo máximo t₃ Load circuit 1: {valores_trv['t3_1']}")
     st.markdown(f"**c)** Tiempo máximo t₃ Load circuit 2: {valores_trv['t3_2']}")
     
@@ -436,7 +436,7 @@ def mostrar_app():
         "Fallas próximas - factor de cresta (k)": k_linea,
         "Fallas próximas - factor de TCTR (s)": s_linea,
         "Fallas próximas - retardo (tdl)": tdl_linea,
-        "TRV - Valor mínimo pico de TRV Uc": uc,
+        "TRV - Valor mínimo pico de TRV Uc": uc_trv,
         "TRV - Tiempo máximo t₃ Load circuit 1": t3_1,
         "TRV - Tiempo máximo t₃ Load circuit 2": t3_2,
         "Tiempo de arco mínimo (Minimum Arcing Time)": tiempo_arco_minimo,

@@ -8,33 +8,45 @@ from openpyxl.drawing.image import Image
 from openpyxl.styles import Font, Alignment, Border, Side, PatternFill
 import textwrap
 
+
+################## CTG CIRCUIT BREAKER// INTERRUPTOR DE POTENCIA
 def mostrar_app():
     st.set_page_config(page_title="Generador CTG - Interruptor de Potencia", layout="wide")
 
     st.title("📄 Generador de Ficha CTG")
     st.subheader("Interruptor de Potencia")
 
-    # 1. DATOS GENERALES
-    st.markdown("### 🖊️ Datos generales")
-    fabricante = st.text_input("Fabricante")
-    pais = st.text_input("País")
-    referencia = st.text_input("Referencia")
+    # 1. Fabricante
+    fabricante = "Indicar"
+    st.text("### 🏢 Fabricante: " + fabricante)
+    # 2. País
+    pais = "Indicar"
+    st.text("### País: " + pais)
+    # 3. Referencia
+    referencia = "Indicar"
+    st.text("### Referencia: " + referencia)
+    # 4. Norma de fabricación
     norma_fabricacion = "IEC 62271-100 / IEC 62271-110"
     st.markdown(f"**Norma de fabricación:** {norma_fabricacion}")
+    # 5. Norma de calidad
     norma_calidad = "ISO 9001"
     st.markdown(f"**Norma de calidad:** {norma_calidad}")
-
-    # 2. CARACTERÍSTICAS TÉCNICAS
-    st.markdown("### ⚙️ Características técnicas")
+    # 6. Medio de extinción
     medio_extincion = st.selectbox("Medio de extinción", ["Vacío", "SF6", "Aceite", "Aire comprimido"])
+    # 7. Número de polos
     num_polos = st.selectbox("Número de polos", [1, 2, 3, 4])
-    camaras_por_polo = st.text_input("Número de cámaras por polo")
+    # 8. Número de cámaras por polo
+    camaras_por_polo = 3
+    st.text(f"### 🔢 Número de cámaras polo: {camaras_por_polo}")
+    # 9. Tipo de ejecución
     tipo_ejecucion = st.selectbox("Tipo de ejecución", ["Exterior", "Interior"])
+    # 10. Altura 
     altura_instalacion = st.number_input("Altura de instalación (m.s.n.m)", min_value=0, value=1000)
 
-    # 3. TEMPERATURA DE OPERACIÓN
+    # 11. Temperatura de operación
     st.markdown("### 🌡️ Temperatura de operación")
-    temp_min = st.number_input("a) Temperatura mínima anual (°C)", value=-5)
+    temp_min = -5
+    st.text(f"### Temperatura mínima anual (°C): {temp_min}")
     temp_max = st.number_input("b) Temperatura máxima anual (°C)", value=40)
     temp_media = st.number_input("c) Temperatura media (24 h) (°C)", value=25)
     

@@ -75,7 +75,7 @@ def mostrar_app():
     st.markdown("#### Tensión asignada soportada a frecuencia industrial (Ud)")
     st.markdown(f"a) Fase-Tierra: **{ud_valores['fase_tierra_ud']}**")
     st.markdown(f"b) Entre fases: **{ud_valores['entre_fases_ud']}**")
-    st.markdown(f"c) A través de interruptor abierto: **{us_valores['interruptor_abierto_ud']}**")
+    st.markdown(f"c) A través de interruptor abierto: **{ud_valores['interruptor_abierto_ud']}**")
     
     # 16. Tensión asignada a impulso maniobra
     # Asignación automática de Us por componente según Ur

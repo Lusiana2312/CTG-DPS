@@ -185,17 +185,17 @@ def mostrar_app():
     # Rangos de referencia según Ur
     rangos_trv = {
         "123 kV": {
-            "Uc_trv": "# kV",
+            "uc_trv": "# kV",
             "t3_1": "# µs",
             "t3_2": "# µs"
         },
         "245 kV": {
-            "Uc_trv": "380 kV",
+            "uc_trv": "380 kV",
             "t3_1": "167 µs",
             "t3_2": "297 µs"
         },
         "550 kV": {
-            "Uc_trv": "1240 kV",
+            "uc_trv": "1240 kV",
             "t3_1": "300 µs",
             "t3_2": "536 µs"
         }

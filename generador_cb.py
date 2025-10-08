@@ -563,7 +563,10 @@ def mostrar_app():
             df.to_excel(writer, index=False, sheet_name="CTG", startrow=6)
             wb = writer.book
             ws = writer.sheets["CTG"]
-    
+            ws.print.title_rows = '1:7'
+            ws.print_area = f"A1:E{ws.max_row}"
+
+            
             # 🖼️ Insertar imagen del logo (opcional)
             logo_path = "siemens_logo.png"
             try:

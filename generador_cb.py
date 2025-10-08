@@ -49,7 +49,7 @@ def mostrar_app():
     temp_min = -5
     st.text(f"### Temperatura mínima anual (°C): {temp_min}")
     temp_max = +40
-    st.text(f"### Temperatura máxima anual (°C): {temp-max}")
+    st.text(f"### Temperatura máxima anual (°C): {temp_max}")
     temp_media = +35
     st.text(f"### Temperatura media (24 h) (°C): {temp_media}")
     

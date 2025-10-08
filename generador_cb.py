@@ -63,28 +63,36 @@ def mostrar_app():
     st.text(f"### Frecuencia asignada (fr): " + frecuencia_asignada)
     # 14. Tensión asignada Ur
     ur = st.selectbox("Tensión asignada (Ur)", options=["123 kV", "245 kV", "550 kV"])
+    
     # 15. Tensión asignada a frecuencia industrial
     # Asignación automática de Ud según Ur
     ud_por_ur = {
-        "123 kV": "275 kV",
-        "245 kV": "640 kV",
-        "550 kV": "830 kV"
+        "123 kV": {"fase_tierra_ud": "#", "entre_fases_ud": "#", "interruptor_abierto_ud": "#"},
+        "245 kV": {"fase_tierra_ud": "460", "entre_fases_ud": "460", "interruptor_abierto_ud": "#"},
+        "550 kV": {"fase_tierra_ud": 830 kV", "entre_fases_ud": "830 kV", "interruptor_abierto_ud": "1150 kV"}
     }
-    ud_frecuencia = ud_por_ur.get(ur, "")
-    st.markdown(f"**Tensión asignada soportada a frecuencia industrial (Ud):** {ud_frecuencia}")
+    ud_valores = ud_por_ur.get(ur,{"fase_tierra_ud": "", "entre_fases_ud": "", "interruptor_abierto_ud": ""})
+    st.markdown("#### Tensión asignada soportada a frecuencia industrial (Ud)")
+    st.markdown(f"a) Fase-Tierra: **{ud_valores['fase_tierra_ud']}**")
+    st.markdown(f"b) Entre fases: **{ud_valores['entre_fases_ud']}**")
+    st.markdown(f"c) A través de interruptor abierto: **{us_valores['interruptor_abierto_ud']}**")
     
     # 16. Tensión asignada a impulso maniobra
     # Asignación automática de Us por componente según Ur
     us_por_ur = {
-        "123 kV": {"fase_tierra": "N.A.", "entre_fases": "N.A.", "interruptor_abierto": "N.A."},
-        "245 kV": {"fase_tierra": "N.A.", "entre_fases": "N.A.", "interruptor_abierto": "N.A."},
-        "550 kV": {"fase_tierra": "1300 kV", "entre_fases": "2210 kV", "interruptor_abierto": "1300 kV"}
+        "123 kV": {"fase_tierra_us": "N.A.", "entre_fases_us": "N.A.", "interruptor_abierto_us": "N.A."},
+        "245 kV": {"fase_tierra_us": "N.A.", "entre_fases_us": "N.A.", "interruptor_abierto_us": "N.A."},
+        "550 kV": {"fase_tierra_us": "1300 kV", "entre_fases_us": "2210 kV", "interruptor_abierto_us": "1300 kV"}
     }
-    us_valores = us_por_ur.get(ur, {"fase_tierra": "", "entre_fases": "", "interruptor_abierto": ""})
+    us_valores = us_por_ur.get(ur, {"fase_tierra_us": "", "entre_fases_us": "", "interruptor_abierto_us": ""})
     st.markdown("#### Tensión asignada soportada a impulso de maniobra (Us)")
-    st.markdown(f"a) Fase-Tierra: **{us_valores['fase_tierra']}**")
-    st.markdown(f"b) Entre fases: **{us_valores['entre_fases']}**")
-    st.markdown(f"c) A través de interruptor abierto: **{us_valores['interruptor_abierto']}**")
+    st.markdown(f"a) Fase-Tierra: **{us_valores['fase_tierra_us']}**")
+    st.markdown(f"b) Entre fases: **{us_valores['entre_fases_us']}**")
+    st.markdown(f"c) A través de interruptor abierto: **{us_valores['interruptor_abierto_us']}**")
+
+
+
+    
     # 17. Tensión asignada a impulso tipo rayo
     # Asignación automática de Up según Ur
     up_por_ur = {
@@ -368,10 +376,12 @@ def mostrar_app():
         "Categoría de corrosión del ambiente": categoria_corrosion,
         "Frecuencia asignada (fr)": frecuencia_asignada,
         "Tensión asignada (Ur) [kV]": ur,
-        "Tensión asignada soportada a frecuencia industrial (Ud)": ud_frecuencia,
-        "Us - Fase-Tierra [kV]": us_valores["fase_tierra"],
-        "Us - Entre fases [kV]": us_valores["entre_fases"],
-        "Us - A través de interruptor abierto [kV]": us_valores["interruptor_abierto"],
+        "Ud - Fase-Tierra [kV]": ud_valores["fase_tierra_ud"],
+        "Ud - Entre fases [kV]": ud_valores["entre_fases_ud"],
+        "Ud - A través de interruptor abierto [kV]": ud_valores["interruptor_abierto_ud"],
+        "Us - Fase-Tierra [kV]": us_valores["fase_tierra_us"],
+        "Us - Entre fases [kV]": us_valores["entre_fases_us"],
+        "Us - A través de interruptor abierto [kV]": us_valores["interruptor_abierto_us"],
         "Tensión asignada soportada al impulso tipo rayo (Up)": up_rayo,
         "Corriente asignada en servicio continuo (Ir)": ir,
         "Poder de corte asignado en cortocircuito (Ics)": ics,

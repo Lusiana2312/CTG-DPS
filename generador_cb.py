@@ -203,7 +203,7 @@ def mostrar_app():
 
 
     # Obtener los valores fijos
-    valores_trv = rangos_trv.get(ur, {"uc_trv": "Indicar", "t3_1": "Indicar", "t3_2": "Indicar"}
+    valores_trv = rangos_trv.get(ur, {"uc_trv": "Indicar", "t3_1": "Indicar", "t3_2": "Indicar"})
     
     # Mostrar los resultados como texto
     st.markdown(f"**a)** Valor mínimo pico de TRV Uc: {valores_trv['uc_trv']}")

@@ -231,29 +231,37 @@ def mostrar_app():
     secuencia_maniobras = "O-0,3s-CO-3min-CO"
     st.text("Secuencia de maniobras asignada: " + secuencia_maniobras)
 
-    # Poder de corte en discordancia de fases (Id)
+    # 30. Poder de corte en discordancia de fases (Id)
     st.markdown("### ⚡ Poder de corte en discordancia de fases (Id)")
-
-    id_u1 = st.text_input("a) Primera tensión de referencia (u1) [Id]")
-    id_t1 = st.text_input("b) Tiempo t1 [Id]")
-    id_uc = st.text_input("c) Valor cresta del TTR (uc) [Id]")
-    id_t2 = st.text_input("d) Tiempo t2 [Id]")
-    id_vel_crecimiento = st.text_input("e) Velocidad de crecimiento (u1 / t1) [Id]")
-
-    # Apertura de líneas en vacío
+    
+    st.markdown("**a)** Primera tensión de referencia (u1) [Id]: Indicar")
+    st.markdown("**b)** Tiempo t1 [Id]: Indicar")
+    st.markdown("**c)** Valor cresta del TTR (uc) [Id]: Indicar")
+    st.markdown("**d)** Tiempo t2 [Id]: Indicar")
+    st.markdown("**e)** Velocidad de crecimiento (u1 / t1) [Id]: Indicar")
+    
+    # Asignación fija de valores
+    id_u1 = id_t1 = id_uc = id_t2 = id_vel_crecimiento = "Indicar"
+    
+    # 31. Apertura de líneas en vacío
     st.markdown("### ⚡ Apertura de líneas en vacío")
+    st.markdown("**a)** Poder de corte asignado (Ir) [Apertura de líneas en vacío]: Indicar")
+    st.markdown("**b)** Sobretensión de maniobra presente: Indicar")
+    # Asignación fija de valores
+    ir_apertura_linea = sobretension_maniobra = "Indicar"
 
-    ir_apertura_linea = st.text_input("a) Poder de corte asignado (Ir) [Apertura de líneas en vacío]")
-    sobretension_maniobra = st.text_input("b) Sobretensión de maniobra presente")
-
-    # Apertura de corrientes inductivas pequeñas
+    # 32. Apertura de corrientes inductivas pequeñas
     st.markdown("### ⚡ Apertura de corrientes inductivas pequeñas")
-
+    
+    # Campo editable (se mantiene igual)
     apertura_inductiva = st.selectbox("¿Aplica apertura de corrientes inductivas pequeñas?", ["Sí", "No"])
-    ir_inductiva = st.text_input("a) Poder de corte asignado [corrientes inductivas pequeñas]")
-    sobretension_inductiva = st.text_input("b) Sobretensión de maniobra máxima")
-
-    # Número de operaciones mecánicas
+    # Campos fijos con valor "Indicar"
+    st.markdown("**a)** Poder de corte asignado [corrientes inductivas pequeñas]: Indicar")
+    st.markdown("**b)** Sobretensión de maniobra máxima: Indicar")
+    # Asignación fija de valores
+    ir_inductiva = sobretension_inductiva = "Indicar"
+    
+    # 33. Número de operaciones mecánicas
     st.markdown("### ⚙️ Número de operaciones mecánicas")
     num_operaciones_mecanicas = st.selectbox("Número de operaciones mecánicas", ["M1", "M2", "M3"])
 

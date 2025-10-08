@@ -309,41 +309,42 @@ def mostrar_app():
     volumen_sf6 = "Indicar"
 
     # 41. Pérdida máxima de SF6 por año (valor fijo)
-    st.markdown("### 🧪 Pérdida máxima de SF₆ por año")
+    st.markdown("### Pérdida máxima de SF₆ por año")
     perdida_sf6 = "≤ 0.5%"
     st.markdown(f"**Pérdida máxima de SF₆ por año:** {perdida_sf6}")
     
     # 42. Resistencia máxima entre terminales
-    st.markdown("### 🧪 Resistencia máxima entre terminales")
+    st.markdown("### Resistencia máxima entre terminales")
     st.markdown("**Resistencia máxima entre terminales (μΩ):** Indicar")
     resistencia_max_terminales = "Indicar"
 
-    # 🧪 Capacitancia
-    st.markdown("### 🧪 Capacitancia")
-
+    ################### PREGUNTAR
+    #  43. Capacitancia
+    st.markdown("### Capacitancia")
     cap_entre_contactos_con_resistencia = st.text_input("a) Entre contactos abiertos - Con resistencia de preinserción (pF)")
     cap_entre_contactos_sin_resistencia = st.text_input("a) Entre contactos abiertos - Sin resistencia de preinserción (pF)")
     cap_entre_contactos_tierra = st.text_input("b) Entre contactos y tierra (pF)")
     cap_condensador_gradiente = st.text_input("c) Condensador de gradiente (***) (pF)")
 
-    # 🧪 Material de los empaques
+    # 44. Material de los empaques
     st.markdown("### 🧪 Material de los empaques")
-    material_empaques = st.text_input("Material de los empaques")
+    st.markdown("**Material de los empaques:** Indicar")
+    material_empaques = "Indicar"
 
-    # 🧪 Operación con mando sincronizado
+    # 45. Operación con mando sincronizado
     st.markdown("### 🧪 Operación con mando sincronizado")
     mando_sincronizado = st.radio("¿Operación con mando sincronizado?", ["Sí", "No"])
 
-    # 🧪 Resistencia de preinserción
+    # 46. Resistencia de preinserción
     st.markdown("### 🧪 Resistencia de preinserción")
     resistencia_preinsercion = st.radio("¿Resistencia de preinserción?", ["Sí", "No"])
 
-    # 🧪 Distancia mínima en aire
+    # 47. Distancia mínima en aire
     st.markdown("### 🧪 Distancia mínima en aire")
-
-    distancia_entre_polos = st.text_input("a) Entre polos (mm)")
-    distancia_a_tierra = st.text_input("b) A tierra (mm)")
-    distancia_a_traves_polo = st.text_input("c) A través del polo (mm)")
+    st.markdown("**a)** Entre polos (mm): Indicar")
+    st.markdown("**b)** A tierra (mm): Indicar")
+    st.markdown("**c)** A través del polo (mm): Indicar")
+    distancia_entre_polos = distancia_a_tierra = distancia_a_traves_polo = "Indicar"
 
     # 🧪 Clase de severidad de contaminación del sitio (SPS)
     st.markdown("### 🧪 Clase de severidad de contaminación del sitio (SPS)")

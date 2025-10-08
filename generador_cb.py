@@ -212,16 +212,18 @@ def mostrar_app():
     
 
 
-    
     # 27. Tiempo de arco mínimo ante pequeñas corrientes inductivas
     st.markdown("### ⏱️ Tiempo de arco mínimo ante pequeñas corrientes inductivas")
-    tiempo_arco_minimo = st.text_input("Tiempo de arco mínimo (Minimum Arcing Time)")
+    tiempo_arco_minimo = "<=5 ms"
+    st.text("### Tiempo de arco mínimo (Minimum Arcing Time): " + tiempo_arco_minimo)
 
+    ################################################
 
-    # Número de corte λ ("Chopping Number λ")
+    # 28. Número de corte λ ("Chopping Number λ")
     st.markdown("### 🔢 Número de corte λ (Chopping Number λ)")
     numero_corte_lambda = st.text_input("Número de corte λ (Chopping Number λ)")
 
+    
     # Secuencia de maniobras asignada
     st.markdown("### 🔁 Secuencia de maniobras asignada")
     secuencia_maniobras = st.text_input("Secuencia de maniobras asignada")

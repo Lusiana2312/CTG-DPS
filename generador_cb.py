@@ -221,7 +221,17 @@ def mostrar_app():
 
     # 28. Número de corte λ ("Chopping Number λ")
     st.markdown("### 🔢 Número de corte λ (Chopping Number λ)")
-    numero_corte_lambda = st.text_input("Número de corte λ (Chopping Number λ)")
+    if ur == "123 kV":
+        numero_corte_lambda = "<=3x10^4"
+    elif ur == "245 kV":
+        numero_corte_lambda = "<=5x10^4"
+    elif ur == "550 kV":
+        numero_corte_lambda = "<=7x10^4"
+    else:
+        numero_corte_lambda = "Indicar"
+    
+    # Mostrar el resultado como texto
+    st.markdown(f"**Número de corte λ:** {numero_corte_lambda}")
 
     
     # Secuencia de maniobras asignada

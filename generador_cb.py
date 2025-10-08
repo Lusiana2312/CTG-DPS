@@ -327,38 +327,38 @@ def mostrar_app():
     cap_condensador_gradiente = st.text_input("c) Condensador de gradiente (***) (pF)")
 
     # 44. Material de los empaques
-    st.markdown("### 🧪 Material de los empaques")
+    st.markdown("### Material de los empaques")
     st.markdown("**Material de los empaques:** Indicar")
     material_empaques = "Indicar"
 
     # 45. Operación con mando sincronizado
-    st.markdown("### 🧪 Operación con mando sincronizado")
+    st.markdown("### Operación con mando sincronizado")
     mando_sincronizado = st.radio("¿Operación con mando sincronizado?", ["Sí", "No"])
 
     # 46. Resistencia de preinserción
-    st.markdown("### 🧪 Resistencia de preinserción")
+    st.markdown("### Resistencia de preinserción")
     resistencia_preinsercion = st.radio("¿Resistencia de preinserción?", ["Sí", "No"])
 
     # 47. Distancia mínima en aire
-    st.markdown("### 🧪 Distancia mínima en aire")
+    st.markdown("### Distancia mínima en aire")
     st.markdown("**a)** Entre polos (mm): Indicar")
     st.markdown("**b)** A tierra (mm): Indicar")
     st.markdown("**c)** A través del polo (mm): Indicar")
     distancia_entre_polos = distancia_a_tierra = distancia_a_traves_polo = "Indicar"
 
     # 48. Clase de severidad de contaminación del sitio (SPS)
-    st.markdown("### 🧪 Clase de severidad de contaminación del sitio (SPS)")
+    st.markdown("### Clase de severidad de contaminación del sitio (SPS)")
     sps_clase = st.selectbox(
         "Clase de severidad de contaminación del sitio (SPS)",
         ["Ligera", "Media", "Pesada", "Muy pesada"]
     )
 
     # 49. Distancia mínima de fuga
-    st.markdown("### 🧪 Distancia mínima de fuga")
+    st.markdown("### Distancia mínima de fuga")
     distancia_minima_fuga = st.text_input("Distancia mínima de fuga (mm)")
 
     # 50. Datos sísmicos
-    st.markdown("### 🧪 Datos sísmicos")
+    st.markdown("### Datos sísmicos")
     st.markdown("**Desempeño sísmico según IEEE-693-Vigente:** Alto (0,5g)")
     st.markdown("**a)** Frecuencia natural de vibración (Hz): Indicar")
     st.markdown("**b)** Coeficiente de amortiguamiento crítico (%): Indicar")
@@ -366,25 +366,37 @@ def mostrar_app():
     frecuencia_natural_vibracion = coef_amortiguamiento_critico = "Indicar"
 
     # 51. Cargas admisibles en bornes
-    st.markdown("### 🧪 Cargas admisibles en bornes")
-    carga_estatica_admisible = st.text_input("a) Carga estática admisible (N)")
-    carga_dinamica_admisible = st.text_input("b) Carga dinámica admisible (N)")
-    
-    # 🧪 Fuerzas asociadas a la operación del equipo
-    st.markdown("### 🧪 Fuerzas asociadas a la operación del equipo")
+    st.markdown("### Cargas admisibles en bornes")
+    if ur == "123 kV":
+        carga_estatica_admisible = "1000 N"
+        carga_dinamica_admisible = "2000 N"
+    elif ur == "245 kV":
+        carga_estatica_admisible = "1500 N"
+        carga_dinamica_admisible = "4000 N"
+    elif ur == "550 kV":
+        carga_estatica_admisible = "2000 N"
+        carga_dinamica_admisible = "5500 N"
+    else:
+        carga_estatica_admisible = carga_dinamica_admisible = "Indicar"
+    st.markdown(f"**a)** Carga estática admisible (N): {carga_estatica_admisible}")
+    st.markdown(f"**b)** Carga dinámica admisible (N): {carga_dinamica_admisible}")
 
-    fuerza_vertical = st.text_input("a) Fuerza vertical (N)")
-    fuerza_horizontal = st.text_input("b) Fuerza horizontal (N)")
+    # 52. Fuerzas asociadas a la operación del equipo
+    st.markdown("### Fuerzas asociadas a la operación del equipo")
+    st.markdown("**a)** Fuerza vertical (N): Indicar")
+    st.markdown("**b)** Fuerza horizontal (N): Indicar")
+    fuerza_vertical = fuerza_horizontal = "Indicar"
 
-    # 🧪 Masa neta de un polo completo con estructura
-    st.markdown("### 🧪 Masa neta de un polo completo con estructura")
-    masa_neta_polo = st.text_input("Masa neta de un polo completo con estructura (kg)")
+    # 53. Masa neta de un polo completo con estructura
+    st.markdown("### Masa neta de un polo completo con estructura")
+    st.markdown("** Masa neta de un polo completo con estructura (kg): Indicar")
+    masa_neta_polo = "Indicar"
 
-    # 🧪 Dimensiones para transporte
+    # 54. Dimensiones para transporte
     st.markdown("### 🧪 Dimensiones para transporte")
     dimensiones_transporte = st.text_input("Dimensiones para transporte (Alto x Ancho x Largo) [mm]")
 
-    # 🧪 Datos adicionales para transporte y campo eléctrico
+    # 55. Datos adicionales para transporte y campo eléctrico
     st.markdown("### 🧪 Datos adicionales")
 
     masa_neta_transporte = st.text_input("Masa neta para transporte (kg)")

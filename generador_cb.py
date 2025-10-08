@@ -390,7 +390,6 @@ def mostrar_app():
         "Up - Fase-Tierra [kV]": up_valores["fase_tierra_up"],
         "Up - Entre fases [kV]": up_valores["entre_fases_up"],
         "Up - A través de interruptor abierto [kV]": up_valores["interruptor_abierto_up"],
-        "Tensión asignada soportada al impulso tipo rayo (Up)": up_rayo,
         "Corriente asignada en servicio continuo (Ir)": ir,
         "Poder de corte asignado en cortocircuito (Ics)": ics,
         "Duración del cortocircuito asignado (Ics)": duracion_ics,

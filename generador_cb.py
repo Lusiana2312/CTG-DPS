@@ -90,18 +90,20 @@ def mostrar_app():
     st.markdown(f"b) Entre fases: **{us_valores['entre_fases_us']}**")
     st.markdown(f"c) A través de interruptor abierto: **{us_valores['interruptor_abierto_us']}**")
 
-
-
     
     # 17. Tensión asignada a impulso tipo rayo
     # Asignación automática de Up según Ur
     up_por_ur = {
-        "123 kV": "650 kV",
-        "245 kV": "1050 kV",
-        "550 kV": "1800 kV"
+        "123 kV": {"fase_tierra_up": "#", "entre_fases_up": "#", "interruptor_abierto_up": "#"},
+        "245 kV": {"fase_tierra_up": "1050 kV", "entre_fases_up": "1050 kV", "interruptor_abierto_up": "#"},
+        "550 kV": {"fase_tierra_up": "1800 kV", "entre_fases_up": "1800 kV", "interruptor_abierto_up": "1800 (+455) kV"}
     }
-    up_rayo = up_por_ur.get(ur, "")
-    st.markdown(f"**Tensión asignada soportada al impulso tipo rayo (Up):** {up_rayo}")
+    up_valores = up_por_ur.get(ur, {"fase_tierra_up": "", "entre_fases_up": "", "interruptor_abierto_up": ""})
+    st.markdown("#### Tensión asignada soportada a impulso tipo rayo (Up)")
+    st.markdown(f"a) Fase-Tierra: **{up_valores['fase_tierra_up']}**")
+    st.markdown(f"b) Entre fases: **{up_valores['entre_fases_up']}**")
+    st.markdown(f"c) A través de interruptor abierto: **{up_valores['interruptor_abierto_up']}**")
+
     # 18. Corriente asignada
     ir_por_ur = {
         "123 kV": ["1200 A"],

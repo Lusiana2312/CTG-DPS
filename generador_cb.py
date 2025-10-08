@@ -132,17 +132,12 @@ def mostrar_app():
     porcentaje_ap = "Indicar"
     st.text("### Porcentaje de corriente aperiódica (%): " +  porcentaje_ap)
 
-    # Poder de cierre asignado en cortocircuito (Ip)
+    # 22.Poder de cierre asignado en cortocircuito (Ip)
     st.markdown("**Poder de cierre asignado en cortocircuito (Ip):** 2.6 × Ics")
 
-    # Factor de primer polo según Ur
-    factor_primer_polo_por_ur = {
-        "123 kV": "1.3",
-        "245 kV": "1.5",
-        "550 kV": "1.5"
-    }
-    factor_primer_polo = factor_primer_polo_por_ur.get(ur, "")
-    st.markdown(f"**Factor de primer polo:** {factor_primer_polo}")
+    # 23. Factor de primer polo según Ur
+    factor_primer_polo = 1,5
+    st.text(f"**Factor de primer polo:** {factor_primer_polo}")
 
     # Tensión transitoria de restablecimiento asignada para fallas en bornes
     st.markdown("### ⚡ Tensión transitoria de restablecimiento asignada para fallas en bornes")
@@ -384,6 +379,9 @@ def mostrar_app():
         "Us - Fase-Tierra [kV]": us_valores["fase_tierra_us"],
         "Us - Entre fases [kV]": us_valores["entre_fases_us"],
         "Us - A través de interruptor abierto [kV]": us_valores["interruptor_abierto_us"],
+        "Up - Fase-Tierra [kV]": up_valores["fase_tierra_up"],
+        "Up - Entre fases [kV]": up_valores["entre_fases_up"],
+        "Up - A través de interruptor abierto [kV]": up_valores["interruptor_abierto_up"],
         "Tensión asignada soportada al impulso tipo rayo (Up)": up_rayo,
         "Corriente asignada en servicio continuo (Ir)": ir,
         "Poder de corte asignado en cortocircuito (Ics)": ics,

@@ -284,36 +284,39 @@ def mostrar_app():
     tiempo_arco = "Indicar"
     tiempo_max_corte = "40 ms"
     
-    # Tiempo muerto
+    # 37. Tiempo muerto
     st.markdown("### ⏳ Tiempo muerto")
-    tiempo_muerto = st.text_input("Tiempo muerto")
-
-    # Maniobra de cierre
+    st.markdown("**Tiempo muerto:** Indicar")
+    tiempo_muerto = "Indicar"
+    
+    # 38. Maniobra de cierre
     st.markdown("### 🔧 Maniobra de cierre")
+    
+    st.markdown("**a)** Tiempo de establecimiento: Indicar")
+    st.markdown("**b)** Tiempo de prearco: Indicar")
+    st.markdown("**c)** Tiempo de cierre: Indicar")
+    tiempo_establecimiento = tiempo_prearco = tiempo_cierre = "Indicar"
 
-    tiempo_establecimiento = st.text_input("a) Tiempo de establecimiento")
-    tiempo_prearco = st.text_input("b) Tiempo de prearco")
-    tiempo_cierre = st.text_input("c) Tiempo de cierre")
-
-    # Gas SF6 - Interruptor
+    # 39. Gas SF6 - Interruptor
     st.markdown("### 🧪 Gas SF₆ – Interruptor")
+    st.markdown("**a)** Presión de gas asignada para maniobra (Pob): Indicar")
+    st.markdown("**b)** Presión de gas asignada para el corte (Pcb): Indicar")
+    presion_maniobra = presion_corte = "Indicar"
 
-    presion_maniobra = st.text_input("a) Presión de gas asignada para maniobra (Pob)")
-    presion_corte = st.text_input("b) Presión de gas asignada para el corte (Pcb)")
-
-    # Volumen total de SF6 por polo a 0,1 MPa
+    # 40. Volumen total de SF6 por polo a 0,1 MPa
     st.markdown("### 🧪 Volumen total de SF₆ por polo a 0,1 MPa")
-    volumen_sf6 = st.text_input("Volumen total de SF₆ por polo a 0,1 MPa")
+    st.markdown("**Volumen total de SF₆ por polo a 0,1 MPa:** Indicar")
+    volumen_sf6 = "Indicar"
 
-    # Pérdida máxima de SF6 por año (valor fijo)
+    # 41. Pérdida máxima de SF6 por año (valor fijo)
     st.markdown("### 🧪 Pérdida máxima de SF₆ por año")
     perdida_sf6 = "≤ 0.5%"
     st.markdown(f"**Pérdida máxima de SF₆ por año:** {perdida_sf6}")
-
     
-    # 🧪 Resistencia máxima entre terminales
+    # 42. Resistencia máxima entre terminales
     st.markdown("### 🧪 Resistencia máxima entre terminales")
-    resistencia_max_terminales = st.text_input("Resistencia máxima entre terminales (μΩ)")
+    st.markdown("**Resistencia máxima entre terminales (μΩ):** Indicar")
+    resistencia_max_terminales = "Indicar"
 
     # 🧪 Capacitancia
     st.markdown("### 🧪 Capacitancia")

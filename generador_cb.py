@@ -34,10 +34,11 @@ def mostrar_app():
     # 6. Medio de extinción
     medio_extincion = st.selectbox("Medio de extinción", ["Vacío", "SF6", "Aceite", "Aire comprimido"])
     # 7. Número de polos
-    num_polos = st.selectbox("Número de polos", [1, 2, 3, 4])
+    num_polos = 3
+    st.text("Número de polos: {num_polos}")
     # 8. Número de cámaras por polo
-    camaras_por_polo = 3
-    st.text(f"### 🔢 Número de cámaras polo: {camaras_por_polo}")
+    camaras_por_polo = "Indicar"
+    st.text(f"### 🔢 Número de cámaras polo: " + camaras_por_polo)
     # 9. Tipo de ejecución
     tipo_ejecucion = st.selectbox("Tipo de ejecución", ["Exterior", "Interior"])
     # 10. Altura 
@@ -47,54 +48,57 @@ def mostrar_app():
     st.markdown("### 🌡️ Temperatura de operación")
     temp_min = -5
     st.text(f"### Temperatura mínima anual (°C): {temp_min}")
-    temp_max = st.number_input("b) Temperatura máxima anual (°C)", value=40)
-    temp_media = st.number_input("c) Temperatura media (24 h) (°C)", value=25)
+    temp_max = +40
+    st.text(f"### Temperatura máxima anual (°C): {temp-max}")
+    temp_media = +35
+    st.text(f"### Temperatura media (24 h) (°C): {temp_media}")
     
-    # 4. PARÁMETROS AMBIENTALES Y ELÉCTRICOS ADICIONALES
-    st.markdown("### 🌍 Parámetros ambientales y eléctricos adicionales")
-
+    # 12. Categoría de corrosión del ambiente
     categoria_corrosion = st.selectbox(
         "Categoría de corrosión del ambiente (ISO 12944-2 / ISO 9223)",
-        options=["C1 - Muy baja", "C2 - Baja", "C3 - Media", "C4 - Alta", "C5 - Muy alta", "CX - Extrema"]
+        options=["C1 - Muy baja", "C2 - Baja", "C3 - Media", "C4 - Alta", "C5 - Muy alta"]
     )
-
-    frecuencia_asignada = st.selectbox("Frecuencia asignada (fr)", options=["50 Hz", "60 Hz"])
-    ur = st.selectbox("Tensión asignada (Ur)", options=["145 kV", "245 kV", "550 kV"])
-    
+    # 13. Frecuencia
+    frecuencia_asignada = "60 Hz"
+    st.text(f"### Frecuencia asignada (fr): " + frecuencia_asignada)
+    # 14. Tensión asignada Ur
+    ur = st.selectbox("Tensión asignada (Ur)", options=["123 kV", "245 kV", "550 kV"])
+    # 15. Tensión asignada a frecuencia industrial
     # Asignación automática de Ud según Ur
     ud_por_ur = {
-        "145 kV": "275 kV",
+        "123 kV": "275 kV",
         "245 kV": "640 kV",
         "550 kV": "830 kV"
     }
     ud_frecuencia = ud_por_ur.get(ur, "")
     st.markdown(f"**Tensión asignada soportada a frecuencia industrial (Ud):** {ud_frecuencia}")
-
+    
+    # 16. Tensión asignada a impulso maniobra
     # Asignación automática de Us por componente según Ur
     us_por_ur = {
-        "145 kV": {"fase_tierra": "N.A.", "entre_fases": "N.A.", "interruptor_abierto": "N.A."},
+        "123 kV": {"fase_tierra": "N.A.", "entre_fases": "N.A.", "interruptor_abierto": "N.A."},
         "245 kV": {"fase_tierra": "N.A.", "entre_fases": "N.A.", "interruptor_abierto": "N.A."},
-        "550 kV": {"fase_tierra": "1175 kV", "entre_fases": "1175 kV", "interruptor_abierto": "1175 kV"}
+        "550 kV": {"fase_tierra": "1300 kV", "entre_fases": "2210 kV", "interruptor_abierto": "1300 kV"}
     }
     us_valores = us_por_ur.get(ur, {"fase_tierra": "", "entre_fases": "", "interruptor_abierto": ""})
     st.markdown("#### Tensión asignada soportada a impulso de maniobra (Us)")
     st.markdown(f"a) Fase-Tierra: **{us_valores['fase_tierra']}**")
     st.markdown(f"b) Entre fases: **{us_valores['entre_fases']}**")
     st.markdown(f"c) A través de interruptor abierto: **{us_valores['interruptor_abierto']}**")
-
+    # 17. Tensión asignada a impulso tipo rayo
     # Asignación automática de Up según Ur
     up_por_ur = {
-        "145 kV": "650 kV",
+        "123 kV": "650 kV",
         "245 kV": "1050 kV",
         "550 kV": "1800 kV"
     }
     up_rayo = up_por_ur.get(ur, "")
     st.markdown(f"**Tensión asignada soportada al impulso tipo rayo (Up):** {up_rayo}")
-    # Opciones de corriente asignada según Ur
+    # 18. Corriente asignada
     ir_por_ur = {
-        "145 kV": ["1200 A", "2000 A", "3150 A"],
-        "245 kV": ["1200 A", "2000 A", "2500 A", "3000 A", "4000 A"],
-        "550 kV": ["3000 A", "4000 A", "5000 A", "6300 A"]
+        "123 kV": ["1200 A"],
+        "245 kV": ["4000 A"],
+        "550 kV": ["2500 A"]
     }
     # Mostrar opciones de Ir según Ur
     opciones_ir = ir_por_ur.get(ur, [])
@@ -102,7 +106,7 @@ def mostrar_app():
     
     # Opciones de poder de corte asignado (Ics) según Ur
     ics_por_ur = {
-        "145 kV": ["25 kA", "31.5 kA", "40 kA"],
+        "123 kV": ["25 kA", "31.5 kA", "40 kA"],
         "245 kV": ["40 kA", "50 kA", "63 kA"],
         "550 kV": ["50 kA", "63 kA"]
     }
@@ -121,7 +125,7 @@ def mostrar_app():
 
     # Factor de primer polo según Ur
     factor_primer_polo_por_ur = {
-        "145 kV": "1.3",
+        "123 kV": "1.3",
         "245 kV": "1.5",
         "550 kV": "1.5"
     }
@@ -165,7 +169,7 @@ def mostrar_app():
     st.markdown("### ⚡ Característica de TRV de pequeñas corrientes inductivas según IEC 62271-110")
     # Rangos de referencia según Ur
     rangos_trv = {
-        "145 kV": {
+        "123 kV": {
             "Uc": "250–300 kV",
             "t3_1": "100–150 µs",
             "t3_2": "200–250 µs"

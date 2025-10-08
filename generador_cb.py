@@ -229,7 +229,7 @@ def mostrar_app():
     # 29. Secuencia de maniobras asignada
     st.markdown("### 🔁 Secuencia de maniobras asignada")
     secuencia_maniobras = "O-0,3s-CO-3min-CO"
-    st.text_input("Secuencia de maniobras asignada: " + secuencia_maniobras)
+    st.text("Secuencia de maniobras asignada: " + secuencia_maniobras)
 
     # Poder de corte en discordancia de fases (Id)
     st.markdown("### ⚡ Poder de corte en discordancia de fases (Id)")

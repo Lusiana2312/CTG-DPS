@@ -104,21 +104,23 @@ def mostrar_app():
     opciones_ir = ir_por_ur.get(ur, [])
     ir = st.selectbox("Corriente asignada en servicio continuo (Ir)", opciones_ir)
     
-    # Opciones de poder de corte asignado (Ics) según Ur
+    # 19. Poder de corte asignado (Ics) según Ur
     ics_por_ur = {
         "123 kV": ["25 kA", "31.5 kA", "40 kA"],
-        "245 kV": ["40 kA", "50 kA", "63 kA"],
-        "550 kV": ["50 kA", "63 kA"]
+        "245 kV": ["40 kA"],
+        "550 kV": ["50 kA"]
     }
     # Mostrar opciones de Ics según Ur
     opciones_ics = ics_por_ur.get(ur, [])
     ics = st.selectbox("Poder de corte asignado en cortocircuito (Ics)", opciones_ics)
 
-    # Duración del cortocircuito asignado (Ics)
-    duracion_ics = st.selectbox("Duración del cortocircuito asignado (Ics)", ["1 s", "2 s", "3 s"])
-
-    # Porcentaje de corriente aperiódica (%)
-    porcentaje_ap = st.text_input("Porcentaje de corriente aperiódica (%)")
+    # 20. Duración del cortocircuito asignado (Ics)
+    duracion_ics = "1 s"
+    st.text("### Duración del cortocircuito asignado (Ics): " + duracion_ics)
+    
+    # 21. Porcentaje de corriente aperiódica (%)
+    porcentaje_ap = "Indicar"
+    st.text("### Porcentaje de corriente aperiódica (%): " +  porcentaje_ap)
 
     # Poder de cierre asignado en cortocircuito (Ip)
     st.markdown("**Poder de cierre asignado en cortocircuito (Ip):** 2.6 × Ics")

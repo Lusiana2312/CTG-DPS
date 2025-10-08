@@ -141,18 +141,20 @@ def mostrar_app():
 
     # 24. Tensión transitoria de restablecimiento asignada para fallas en bornes
     st.markdown("### ⚡ Tensión transitoria de restablecimiento asignada para fallas en bornes")
-    # Mostrar los campos al usuario (aunque no se usará su entrada)
-    st.text_input("a) Primera tensión de referencia (u1) kV", value="Indicar")
-    st.text_input("b) Tiempo t1 ms", value="Indicar")
-    st.text_input("c) Valor cresta del TTR (uc) kV", value="Indicar")
-    st.text_input("d) Tiempo t2 ms", value="Indicar")
-    st.text_input("e) Retardo td ms", value="Indicar")
-    st.text_input("f) Tensión u’ kV", value="Indicar")
-    st.text_input("g) Tiempo t’ ms", value="Indicar")
-    st.text_input("h) Velocidad de crecimiento (u1 / t1) kV/ms", value="Indicar")
-    # Asignar directamente el valor "Indicar" a todas las variables
+    # Mostrar los textos fijos
+    st.markdown("**a)** Primera tensión de referencia (u1) kV: Indicar")
+    st.markdown("**b)** Tiempo t1 ms: Indicar")
+    st.markdown("**c)** Valor cresta del TTR (uc) kV: Indicar")
+    st.markdown("**d)** Tiempo t2 ms: Indicar")
+    st.markdown("**e)** Retardo td ms: Indicar")
+    st.markdown("**f)** Tensión u’ kV: Indicar")
+    st.markdown("**g)** Tiempo t’ ms: Indicar")
+    st.markdown("**h)** Velocidad de crecimiento (u1 / t1) kV/ms: Indicar")
+    
+    # Asignar valores a las variables
     u1 = t1 = uc = t2 = td = u_prima = t_prima = vel_crecimiento = "Indicar"
 
+    
     # Características asignadas para fallas próximas en líneas
     st.markdown("### ⚡ Características asignadas para fallas próximas en líneas")
 

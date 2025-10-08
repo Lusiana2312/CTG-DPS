@@ -321,10 +321,11 @@ def mostrar_app():
     ################### PREGUNTAR
     #  43. Capacitancia
     st.markdown("### Capacitancia")
-    cap_entre_contactos_con_resistencia = st.text_input("a) Entre contactos abiertos - Con resistencia de preinserción (pF)")
-    cap_entre_contactos_sin_resistencia = st.text_input("a) Entre contactos abiertos - Sin resistencia de preinserción (pF)")
-    cap_entre_contactos_tierra = st.text_input("b) Entre contactos y tierra (pF)")
-    cap_condensador_gradiente = st.text_input("c) Condensador de gradiente (***) (pF)")
+    cap_entre_contactos_con_resistencia = st.markdown("a) Entre contactos abiertos - Con resistencia de preinserción (pF): Indicar")
+    cap_entre_contactos_sin_resistencia = st.markdown("a) Entre contactos abiertos - Sin resistencia de preinserción (pF): Indicar")
+    cap_entre_contactos_tierra = st.markdown("b) Entre contactos y tierra (pF): Indicar")
+    cap_condensador_gradiente = st.markdown("c) Condensador de gradiente (***) (pF): Indicar")
+    cap_entre_contactos_con_resistencia = cap_entre_contactos_sin_resistencia = cap_entre_contactos_tierra = cap_condensador_gradiente = cap_entre_contactos_con_resistencia = "Indicar"
 
     # 44. Material de los empaques
     st.markdown("### Material de los empaques")

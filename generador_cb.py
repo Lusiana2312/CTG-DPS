@@ -185,27 +185,35 @@ def mostrar_app():
     # Rangos de referencia según Ur
     rangos_trv = {
         "123 kV": {
-            "Uc": "250–300 kV",
-            "t3_1": "100–150 µs",
-            "t3_2": "200–250 µs"
+            "Uc": "# kV",
+            "t3_1": "# µs",
+            "t3_2": "# µs"
         },
         "245 kV": {
-            "Uc": "350–400 kV",
-            "t3_1": "150–200 µs",
-            "t3_2": "250–300 µs"
+            "Uc": "380 kV",
+            "t3_1": "167 µs",
+            "t3_2": "297 µs"
         },
         "550 kV": {
-            "Uc": "600–700 kV",
-            "t3_1": "200–300 µs",
-            "t3_2": "300–400 µs"
+            "Uc": "1240 kV",
+            "t3_1": "300 µs",
+            "t3_2": "536 µs"
         }
     }
-    valores_trv = rangos_trv.get(ur, {"Uc": "", "t3_1": "", "t3_2": ""})
-    trv_uc_min = st.text_input(f"a) Valor mínimo pico de TRV Uc (Ej: {valores_trv['Uc']})")
-    trv_t3_circuito1 = st.text_input(f"b) Tiempo máximo t₃ Load circuit 1 (Ej: {valores_trv['t3_1']})")
-    trv_t3_circuito2 = st.text_input(f"c) Tiempo máximo t₃ Load circuit 2 (Ej: {valores_trv['t3_2']})")
 
-    # Tiempo de arco mínimo ante pequeñas corrientes inductivas
+
+    # Obtener los valores fijos
+    valores_trv = rangos_trv.get(ur, {"Uc": "Indicar", "t3_1": "Indicar", "t3_2": "Indicar"})
+    
+    # Mostrar los resultados como texto
+    st.markdown(f"**a)** Valor mínimo pico de TRV Uc: {valores_trv['Uc']}")
+    st.markdown(f"**b)** Tiempo máximo t₃ Load circuit 1: {valores_trv['t3_1']}")
+    st.markdown(f"**c)** Tiempo máximo t₃ Load circuit 2: {valores_trv['t3_2']}")
+    
+
+
+    
+    # 27. Tiempo de arco mínimo ante pequeñas corrientes inductivas
     st.markdown("### ⏱️ Tiempo de arco mínimo ante pequeñas corrientes inductivas")
     tiempo_arco_minimo = st.text_input("Tiempo de arco mínimo (Minimum Arcing Time)")
 

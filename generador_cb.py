@@ -393,16 +393,22 @@ def mostrar_app():
     masa_neta_polo = "Indicar"
 
     # 54. Dimensiones para transporte
-    st.markdown("### 🧪 Dimensiones para transporte")
-    dimensiones_transporte = st.text_input("Dimensiones para transporte (Alto x Ancho x Largo) [mm]")
-
-    # 55. Datos adicionales para transporte y campo eléctrico
-    st.markdown("### 🧪 Datos adicionales")
-
-    masa_neta_transporte = st.text_input("Masa neta para transporte (kg)")
-    volumen_total_transporte = st.text_input("Volumen total para transporte (m³)")
-    campo_electrico_1m = st.text_input("Campo eléctrico a 1 metro de separación del piso (kV/m)")
-
+    st.markdown("### Dimensiones para transporte")
+    st.markdown("Dimensiones para transporte (Alto x Ancho x Largo) [mm]: Indicar")
+    dimensiones_transporte = "Indicar"
+    
+    # 55. Datos adicionales para transporte
+    st.markdown("Masa neta para transporte (kg): Indicar")
+    masa_neta_transporte = "Indicar"
+    
+    # 56. Volumen
+    st.markdown("Volumen total para transporte (m³): Indicar")
+    volumen_total_transporte = "Indicar"
+    
+    # 57. Campo eléctrico
+    campo_electrico_1m = "<= 8,33"
+    st.markdown("Campo eléctrico a 1 metro de separación del piso (kV/m)" + campo_electrico_1m)
+    
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {
         "Fabricante": fabricante,

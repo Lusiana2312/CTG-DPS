@@ -265,23 +265,25 @@ def mostrar_app():
     st.markdown("### ⚙️ Número de operaciones mecánicas")
     num_operaciones_mecanicas = st.selectbox("Número de operaciones mecánicas", ["M1", "M2", "M3"])
 
-    # Probabilidad de reencendido
+    # 34. Probabilidad de reencendido
     st.markdown("### 🔄 Probabilidad de reencendido")
     probabilidad_reencendido = st.selectbox("Probabilidad de reencendido", ["C1", "C2"])
 
-    # Máxima diferencia de tiempo entre contactos de diferente polo
+    # 35. Máxima diferencia de tiempo entre contactos de diferente polo
     st.markdown("### ⏱️ Máxima diferencia de tiempo entre contactos de diferente polo")
-    diferencia_tiempo_contactos = st.text_input(
-        "Máxima diferencia de tiempo entre contactos de diferente polo al tocarse durante un cierre o al separarse durante una apertura"
-    )
+    st.markdown("**Máxima diferencia de tiempo entre contactos de diferente polo al tocarse durante un cierre o al separarse durante una apertura:** Indicar")
+    # Asignación fija
+    diferencia_tiempo_contactos = "Indicar"
     
-    # Maniobra de apertura
+    # 36. Maniobra de apertura
     st.markdown("### 🔧 Maniobra de apertura")
-
-    tiempo_apertura = st.text_input("a) Tiempo de apertura")
-    tiempo_arco = st.text_input("b) Tiempo de arco")
-    tiempo_max_corte = st.text_input("c) Tiempo máximo de corte asignado")
-
+    st.markdown("**a)** Tiempo de apertura: Indicar")
+    st.markdown("**b)** Tiempo de arco: Indicar")
+    st.markdown("**c)** Tiempo máximo de corte asignado: 40 ms")
+    tiempo_apertura = "Indicar"
+    tiempo_arco = "Indicar"
+    tiempo_max_corte = "40 ms"
+    
     # Tiempo muerto
     st.markdown("### ⏳ Tiempo muerto")
     tiempo_muerto = st.text_input("Tiempo muerto")

@@ -25,7 +25,7 @@ def mostrar_app():
     norma_fabricacion = "IEC 61869-5"
     st.text("4. Norma de fabricación: " + norma_fabricacion)
     norma_calidad = "ISO 9001"
-    st.text("5. Norma de calidad: " ´norma_calidad)
+    st.text("5. Norma de calidad: " + norma_calidad)
     fabricante = pais = referencia = "Indicar"
 
     # 6 al 9
@@ -312,6 +312,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

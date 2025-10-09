@@ -149,7 +149,15 @@ def mostrar_app():
 
     # 24. Dispositivos de Protección: (Todos los modelos contarán con accesorios carrier)
     disp_prot = st.selectbox(f"Dispositivos de Protección: (Todos los modelos contarán con accesorios carrier): ", ["Sí", "No"])
-    
+
+    # Cuchilla externa
+    cuchilla_ext = st.selectbox(f"a)Cuchilla externa para cortocircuitar la parte inductiva del equipo del lado del divisor capacitivo (Ground Potencial Switch): ", ["Sí", "No"])
+
+    # Dispositivo amortiguador
+    disp_amort = st.selectbox(f"b) Dispositivo amortiguador de ferrorresonancia: ", ["Sí", "No"])
+
+    # Interruptores miniatura
+    int_mini = st.selectbox(f"c) Interruptores miniatura adecuados para protección de los circuitos secundarios de tensión, con contactos auxiliares para indicación de apertura y disparo. La curva de operación de los interruptores miniatura debe ser del Tipo Z: ", ["Sí", "No"])
 
     # BOTÓN PARA GENERAR FICHA
    # 📋 Diccionario con los datos del transformador
@@ -191,7 +199,10 @@ def mostrar_app():
         "Tensión secundaria (Usn)": usn_seleccionada,
         "Distancia de arco (mm)": distancia_arco,
         "Distancia mínima de fuga (mm)": distancia_fuga,
-        "Dispositivos de Protección: (Todos los modelos contarán con accesorios carrier)": disp_prot
+        "Dispositivos de Protección: (Todos los modelos contarán con accesorios carrier)": disp_prot,
+        "a)Cuchilla externa para cortocircuitar la parte inductiva del equipo del lado del divisor capacitivo (Ground Potencial Switch)": cuchilla_ext,
+        "b) Dispositivo amortiguador de ferrorresonancia": disp_amort,
+        "c) Interruptores miniatura adecuados para protección de los circuitos secundarios de tensión, con contactos auxiliares para indicación de apertura y disparo. La curva de operación de los interruptores miniatura debe ser del Tipo Z":int_mini
     }
 
     #Función exportar Excel con estilo personalizado
@@ -311,6 +322,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

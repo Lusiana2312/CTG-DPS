@@ -59,11 +59,11 @@ def mostrar_app():
     # 14. factor de tensión asignado
     st.markdown("### ⚙️ 14. Factor de tensión asignado")
     # Opción a) Permanente
-    factor_permanente = 1,2
-    st.text("a Permanente: " + factor_permanente)
+    factor_permanente = "1,2"
+    st.text("a) Permanente: " + factor_permanente)
     # Opción b) Durante 30 s
-    factor_30s = 1,5
-    st.text("b Durante 30 s: " + factor_30s)
+    factor_30s = "1,5"
+    st.text("b) Durante 30 s: " + factor_30s)
 
     # 15. Capacidad total
     if tension_um == "123 kV":
@@ -306,6 +306,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

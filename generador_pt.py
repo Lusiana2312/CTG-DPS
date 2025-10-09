@@ -131,7 +131,7 @@ def mostrar_app():
     st.markdown("### 🧯 23. Distancia de arco")
     distancia_arco = st.text_input("Distancia de arco (mm)", value="")
 
-    # 24. Distancia mínima de fuga
+    # Distancia mínima de fuga
     st.markdown("### 📏 26. Distancia mínima de fuga requerida")
     
     # Selección de clase SPS
@@ -146,6 +146,9 @@ def mostrar_app():
     distancia_fuga = um_num * valor_sps
     st.text(f"Distancia mínima de fuga: {distancia_fuga} mm")
 
+    # 24. Dispositivos de Protección: (Todos los modelos contarán con accesorios carrier)
+    st.selectbox(f"Dispositivos de Protección: (Todos los modelos contarán con accesorios carrier): " [Sí, No])
+    
 
     # BOTÓN PARA GENERAR FICHA
    # 📋 Diccionario con los datos del transformador
@@ -307,6 +310,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

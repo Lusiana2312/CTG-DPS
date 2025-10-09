@@ -19,11 +19,14 @@ def mostrar_app():
     st.markdown("### ⚙️ Parámetros del transformador")
 
     # 1 al 5
-    fabricante = st.text_input("1. Fabricante")
-    pais = st.text_input("2. País")
-    referencia = st.text_input("3. Referencia")
-    norma_fabricacion = st.text_input("4. Norma de fabricación", value="IEC 61869-5")
-    norma_calidad = st.text_input("5. Norma de calidad", value="ISO 9001")
+    st.text("1. Fabricante: " + fabricante)
+    st.text("2. País: " +  pais)
+    st.text("3. Referencia: " + referencia)
+    norma_fabricacion = "IEC 61869-5"
+    st.text("4. Norma de fabricación: " + norma_fabricacion)
+    norma_calidad = "ISO 9001"
+    st.text("5. Norma de calidad: " ´norma_calidad)
+    fabricante = pais = referencia = "Indicar"
 
     # 6 al 9
     tipo_ejecucion = st.selectbox("6. Tipo de ejecución", ["Interior", "Exterior"])
@@ -309,6 +312,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

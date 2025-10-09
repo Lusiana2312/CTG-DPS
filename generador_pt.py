@@ -159,8 +159,12 @@ def mostrar_app():
     # Interruptores miniatura
     int_mini = st.selectbox(f"c) Interruptores miniatura adecuados para protección de los circuitos secundarios de tensión, con contactos auxiliares para indicación de apertura y disparo. La curva de operación de los interruptores miniatura debe ser del Tipo Z: ", ["Sí", "No"])
 
+    # 25. Accesorios
+    #placa de características
+    placa = st.selectbox(f"a) Placa de características de acuerdo con lo estipulado en las Publicaciones IEC 61869-3 e IEC 61869-5. Dentro de la placa se deberá indicar que el aceite es libre de PCB y azufre corrosivo.", ["Sí", "No"])
+    
     # BOTÓN PARA GENERAR FICHA
-   # 📋 Diccionario con los datos del transformador
+    # 📋 Diccionario con los datos del transformador
     ficha_ctg = {
         "Fabricante": fabricante,
         "País": pais,
@@ -202,7 +206,9 @@ def mostrar_app():
         "Dispositivos de Protección: (Todos los modelos contarán con accesorios carrier)": disp_prot,
         "a)Cuchilla externa para cortocircuitar la parte inductiva del equipo del lado del divisor capacitivo (Ground Potencial Switch)": cuchilla_ext,
         "b) Dispositivo amortiguador de ferrorresonancia": disp_amort,
-        "c) Interruptores miniatura adecuados para protección de los circuitos secundarios de tensión, con contactos auxiliares para indicación de apertura y disparo. La curva de operación de los interruptores miniatura debe ser del Tipo Z":int_mini
+        "c) Interruptores miniatura adecuados para protección de los circuitos secundarios de tensión, con contactos auxiliares para indicación de apertura y disparo. La curva de operación de los interruptores miniatura debe ser del Tipo Z":int_mini,
+        "Accesorios":"",
+        "a) Placa de características de acuerdo con lo estipulado en las Publicaciones IEC 61869-3 e IEC 61869-5. Dentro de la placa se deberá indicar que el aceite es libre de PCB y azufre corrosivo.":placa    
     }
 
     #Función exportar Excel con estilo personalizado
@@ -322,6 +328,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

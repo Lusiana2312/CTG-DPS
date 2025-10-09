@@ -83,9 +83,10 @@ def mostrar_app():
     
     # 16 al 18
     st.markdown("### 🔧 16-18. Condensadores y tensión intermedia")
-    c1 = st.text_input("16. Condensador de alta tensión (C1)")
-    c2 = st.text_input("17. Condensador de tensión intermedia (C2)")
-    tension_intermedia = st.text_input("18. Tensión intermedia asignada en circuito abierto")
+    c1 = c2 = tension_intermedia = "Indicar"
+    st.text("16. Condensador de alta tensión (C1): " + c1)
+    st.text("17. Condensador de tensión intermedia (C2): " + c2)
+    st.text("18. Tensión intermedia asignada en circuito abierto: " + tension_intermedia)
 
     # 19. Número de devanados secundarios
     st.markdown("### 🔁 19. Número de devanados secundarios")
@@ -306,6 +307,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

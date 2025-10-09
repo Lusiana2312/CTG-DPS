@@ -38,38 +38,32 @@ def mostrar_app():
     # 10. Ud
     st.markdown("### 🔌 10. Tensión asignada soportada a la frecuencia industrial (Ud)")
     ud_interno = {"123 kV": "360 kV", "245 kV": "460 kV", "550 kV": "700 kV"}[tension_um]
-    st.text(f"Aislamiento Interno: {ud_interno}")
-    st.text(f"Aislamiento Externo (*): {ud_interno} a {int(altura_instalacion)} msnm")
+    st.text(f"Tensión asignada soportada a la frecuencia industrial (Ud)-Aislamiento Interno a condiciones normales de prueba: {ud_interno}")
+    st.text(f"Tensión asignada soportada a la frecuencia industrial (Ud)-Aislamiento Externo a condiciones normales de prueba (*): {ud_interno} a {int(altura_instalacion)} msnm")
 
     # 11. Up
     st.markdown("### ⚡ 11. Tensión asignada soportada al impulso tipo rayo (Up)")
     up_interno = {"123 kV": "750 kV", "245 kV": "1050 kV", "550 kV": "1550 kV"}[tension_um]
-    st.text(f"Aislamiento Interno: {up_interno}")
-    st.text(f"Aislamiento Externo (*): {up_interno} a {int(altura_instalacion)} msnm")
+    st.text(f"Tensión asignada soportada al impulso tipo rayo (Up)-Aislamiento Interno a condiciones normales de prueba: {up_interno}")
+    st.text(f"Tensión asignada soportada al impulso tipo rayo (Up)-Aislamiento Externo a condiciones normales de prueba (*): {up_interno} a {int(altura_instalacion)} msnm")
 
     # 12. Us
     st.markdown("### ⚡ 12. Tensión asignada soportada al impulso tipo maniobra (Us)")
-    us_interno = st.text_input("Aislamiento Interno (dejar vacío por ahora)")
-    us_externo = st.text_input("Aislamiento Externo (*) (dejar vacío por ahora)")
+    us_interno = st.text_input("Tensión asignada soportada al impulso tipo maniobra (Us)-Aislamiento Interno a condiciones normales de prueba (dejar vacío por ahora)")
+    us_externo = st.text_input("Tensión asignada soportada al impulso tipo maniobra (Us)-Aislamiento Externo a condiciones normales de prueba (*) (dejar vacío por ahora)")
 
     # 13. Frecuencia
     st.markdown("### 📶 13. Frecuencia asignada (fr)")
     st.text("60 Hz")
 
-    #factor de tensión asignado
+    # 14. factor de tensión asignado
     st.markdown("### ⚙️ 14. Factor de tensión asignado")
     # Opción a) Permanente
-    factor_permanente = st.selectbox(
-        "a) Permanente",
-        options=[1.0, 1.1, 1.2],
-        index=2  # Por defecto selecciona 1.2
-    )
+    factor_permanente = 1,2
+    st.text("a) Permanente: " + factor_permanente)
     # Opción b) Durante 30 s
-    factor_30s = st.selectbox(
-        "b) Durante 30 s",
-        options=[1.5, 1.6, 1.7, 1.8],
-        index=0  # Por defecto selecciona 1.5
-    )
+    factor_30s = 1,5
+    st.text("b) Durante 30 s: " + factor_30s)
 
     # 15. Capacidad total
     if tension_um == "123 kV":
@@ -165,12 +159,12 @@ def mostrar_app():
         "Material del aislador": material_aislador,
         "Tipo de transformador": tipo_transformador,
         "Tensión más elevada para el material (Um)": tension_um,
-        "Tensión Ud - Aislamiento Interno": ud_interno,
-        "Tensión Ud - Aislamiento Externo": f"{ud_interno} a {int(altura_instalacion)} msnm",
-        "Tensión Up - Aislamiento Interno": up_interno,
-        "Tensión Up - Aislamiento Externo": f"{up_interno} a {int(altura_instalacion)} msnm",
-        "Tensión Us - Aislamiento Interno": us_interno,
-        "Tensión Us - Aislamiento Externo": us_externo,
+        "Tensión asignada soportada a la frecuencia industrial (Ud)-Aislamiento Interno a condiciones normales de prueba": ud_interno,
+        "Tensión asignada soportada a la frecuencia industrial (Ud)-Aislamiento Externo a condiciones normales de prueba (*)": f"{ud_interno} a {int(altura_instalacion)} msnm",
+        "Tensión asignada soportada al impulso tipo rayo (Up)-Aislamiento Interno a condiciones normales de prueba": up_interno,
+        "Tensión asignada soportada al impulso tipo rayo (Up)-Aislamiento Externo a condiciones normales de prueba (*)": f"{up_interno} a {int(altura_instalacion)} msnm",
+        "Tensión asignada soportada al impulso tipo maniobra (Us)-Aislamiento Interno a condiciones normales de prueba": us_interno,
+        "Tensión asignada soportada al impulso tipo maniobra (Us)-Aislamiento Externo a condiciones normales de prueba (*)": us_externo,
         "Frecuencia asignada (fr)": "60 Hz",
         "Factor de tensión permanente": str(factor_permanente),
         "Factor de tensión durante 30 s": str(factor_30s),
@@ -312,6 +306,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

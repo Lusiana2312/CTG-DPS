@@ -129,7 +129,8 @@ def mostrar_app():
 
     # 23. Distancia de arco
     st.markdown("### 🧯 23. Distancia de arco")
-    distancia_arco = st.text_input("Distancia de arco (mm)", value="")
+    distancia_arco = "Indicar"
+    st.text("Distancia de arco (mm): " + distancia_arco)
 
     # Distancia mínima de fuga
     st.markdown("### 📏 26. Distancia mínima de fuga requerida")
@@ -189,8 +190,8 @@ def mostrar_app():
         "Tensión primaria (Upn)": f"{upn_seleccionada} / √3",
         "Tensión secundaria (Usn)": usn_seleccionada,
         "Distancia de arco (mm)": distancia_arco,
-        "Distancia mínima de fuga (mm)": distancia_fuga
-
+        "Distancia mínima de fuga (mm)": distancia_fuga,
+        "Dispositivos de Protección: (Todos los modelos contarán con accesorios carrier)": disp_prot
     }
 
     #Función exportar Excel con estilo personalizado
@@ -310,6 +311,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

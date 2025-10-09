@@ -95,9 +95,11 @@ def mostrar_app():
     # 20. Clase de precisión
     st.markdown("### 🎯 20. Clase de precisión")
     st.markdown("**Entre el 25% y el 100% de la carga de precisión con factor de potencia 0,8 en atraso**")
-    clase_precision_a = st.selectbox("a) Entre el 5% y el 80% de la tensión asignada", ["3P", "6P", "10P"])
-    clase_precision_b = st.selectbox("b) Entre el 80% y el 120% de la tensión asignada", ["0.2", "0.5", "1"])
-    clase_precision_c = st.selectbox("c) Entre el 120% y el 150% de la tensión asignada", ["3P", "6P", "10P"])
+    clase_precision_a = clase_precision_c = "05-3P"
+    st.text("a) Entre el 5% y el 80% de la tensión asignada: " + clase_precision_a)
+    clase_precision_b = "0,2"
+    st.text("b) Entre el 80% y el 120% de la tensión asignada: " + clase_precision_b)
+    st.text("c) Entre el 120% y el 150% de la tensión asignada: " + clase_precision_c)
 
     # 21. Carga de precisión
     st.markdown("### ⚙️ 21. Carga de precisión")
@@ -307,6 +309,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

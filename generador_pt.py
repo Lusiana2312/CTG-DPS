@@ -147,7 +147,7 @@ def mostrar_app():
     st.text(f"Distancia mínima de fuga: {distancia_fuga} mm")
 
     # 24. Dispositivos de Protección: (Todos los modelos contarán con accesorios carrier)
-    disp_prot = st.selectbox(f"Dispositivos de Protección: (Todos los modelos contarán con accesorios carrier): ", [Sí, No])
+    disp_prot = st.selectbox(f"Dispositivos de Protección: (Todos los modelos contarán con accesorios carrier): ", ["Sí", "No"])
     
 
     # BOTÓN PARA GENERAR FICHA
@@ -310,6 +310,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

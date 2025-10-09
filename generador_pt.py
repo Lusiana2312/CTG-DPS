@@ -142,12 +142,9 @@ def mostrar_app():
     # Conversión de tensión Um a valor numérico
     um_valores = {"123 kV": 123, "245 kV": 245, "550 kV": 550}
     um_num = um_valores.get(tension_um, 0)
-    
-    # Cálculo de distancia mínima de fuga
+
     distancia_fuga = um_num * valor_sps
-    
-    # Mostrar solo el resultado como texto
-    st.text(f"{distancia_fuga} mm")
+    st.text(f"Distancia mínima de fuga: {distancia_fuga} mm")
 
 
     # BOTÓN PARA GENERAR FICHA
@@ -310,6 +307,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

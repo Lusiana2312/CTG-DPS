@@ -108,7 +108,8 @@ def mostrar_app():
     st.text("b) Devanado 2: 15 VA")
     st.text("c) Devanado 3: 15 VA")
     st.text("d) Simultánea: 45 VA")
-    potencia_termica_limite = st.text_input("e) Potencia térmica límite (dejar vacío por ahora)")
+    potencia_termica_limite = "Indicar"
+    st.text("e) Potencia térmica límite: " + potencia_termica_limite)
 
 
     # 22. Tensión asignada  
@@ -309,6 +310,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

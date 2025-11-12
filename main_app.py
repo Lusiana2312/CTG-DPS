@@ -40,7 +40,7 @@ try:
         generador_cb.mostrar_app()
         
     elif equipo == "Seccionador":
-        import generador_cb
+        import generador_ds
         generador_ds.mostrar_app()
 
 except ModuleNotFoundError as e:
@@ -49,6 +49,7 @@ except AttributeError:
     st.error("⚠️ El módulo existe pero no tiene la función 'mostrar_app()'. Verifica que esté correctamente definida.")
 except Exception as e:
     st.error(f"⚠️ Ocurrió un error inesperado: {e}")
+
 
 
 

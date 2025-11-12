@@ -100,7 +100,7 @@ def mostrar_app():
     up_por_ur = {
         "145 kV": {"fase_tierra_up": "650", "distancia_seccionamiento_up": "750"},
         "245 kV": {"fase_tierra_up": "1050 kV", "distancia_seccionamiento_up": "1200 kV"},
-        "550 kV": {"fase_tierra_up": "1500 kV", "distancia_seccionamiento_up": "1500(+315) kV}
+        "550 kV": {"fase_tierra_up": "1500 kV", "distancia_seccionamiento_up": "1500(+315) kV"}
     }
     up_valores = up_por_ur.get(ur, {"fase_tierra_up": "", "distancia_seccionamiento_up": ""})
     st.markdown("#### Tensión asignada soportada a impulso tipo rayo (Up)")

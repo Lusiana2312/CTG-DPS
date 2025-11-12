@@ -115,7 +115,7 @@ def mostrar_app():
         "Nivel de polución sitio de instalación según IEC 60815": polucion,
         "Tensión asignada (Ur)": ur,
         "Ud - A tierra y entre polos [kV]": ud_valores["fase_tierra_ud"],
-        "Ud - A través de la distancia de seccionamiento [kV]": ud_valores["distancia_seccionamiento"]
+        "Ud - A través de la distancia de seccionamiento [kV]": ud_valores["distancia_seccionamiento"],
         "Us - A tierra [kV]": us_valores["fase_tierra_us"],
         "Us - Entre polos [kV]": us_valores["entre_polos_us"],
         "Us - A través de la distancia de seccionamiento [kV]": us_valores["distancia_seccionamiento_us"]

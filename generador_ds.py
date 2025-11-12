@@ -94,7 +94,19 @@ def mostrar_app():
     st.markdown(f"a) A tierra: **{us_valores['fase_tierra_us']}**")
     st.markdown(f"b) Entre polos: **{us_valores['entre_polos_us']}**")
     st.markdown(f"c) A través de la distancia de seccionamiento: **{us_valores['distancia_seccionamiento_us']}**")
-    
+
+     # 18. Tensión asignada a impulso tipo rayo
+    # Asignación automática de Up según Ur
+    up_por_ur = {
+        "145 kV": {"fase_tierra_up": "650", "distancia_seccionamiento_up": "750"},
+        "245 kV": {"fase_tierra_up": "1050 kV", "distancia_seccionamiento_up": "1200 kV"},
+        "550 kV": {"fase_tierra_up": "1500 kV", "distancia_seccionamiento_up": "1500(+315) kV}
+    }
+    up_valores = up_por_ur.get(ur, {"fase_tierra_up": "", "distancia_seccionamiento_up": ""})
+    st.markdown("#### Tensión asignada soportada a impulso tipo rayo (Up)")
+    st.markdown(f"a) A tierra y entre polos: **{up_valores['fase_tierra_up']}**")
+    st.markdown(f"b) A través de la distancia de seccionamiento: **{up_valores['distancia_seccionamiento_up']}**")
+
 
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {
@@ -118,7 +130,9 @@ def mostrar_app():
         "Ud - A través de la distancia de seccionamiento [kV]": ud_valores["distancia_seccionamiento"],
         "Us - A tierra [kV]": us_valores["fase_tierra_us"],
         "Us - Entre polos [kV]": us_valores["entre_polos_us"],
-        "Us - A través de la distancia de seccionamiento [kV]": us_valores["distancia_seccionamiento_us"]
+        "Us - A través de la distancia de seccionamiento [kV]": us_valores["distancia_seccionamiento_us"],
+        "Up - A tierra y entre polos [kV]": up_valores["fase_tierra_up"],
+        "Up - A través de la distancia de seccionamiento [kV]": up_valores["distancia_seccionamiento_up"]
         
     }
 

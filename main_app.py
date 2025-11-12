@@ -19,7 +19,7 @@ if usuario not in usuarios_autorizados or usuarios_autorizados[usuario] != clave
 st.success("✅ Acceso concedido")
 
 # 🧭 Selector de equipo
-equipo = st.selectbox("Selecciona el tipo de equipo", ["Descargador de sobretensiones", "Transformador de corriente", "Transformador de tensión", "Interruptor"])
+equipo = st.selectbox("Selecciona el tipo de equipo", ["Descargador de sobretensiones", "Transformador de corriente", "Transformador de tensión", "Interruptor", "Seccionador"])
 
 # ▶️ Ejecutar solo la función correspondiente
 try:
@@ -38,6 +38,10 @@ try:
     elif equipo == "Interruptor":
         import generador_cb
         generador_cb.mostrar_app()
+        
+    elif equipo == "Seccionador":
+        import generador_cb
+        generador_ds.mostrar_app()
 
 except ModuleNotFoundError as e:
     st.error(f"❌ No se encontró el módulo: {e.name}")
@@ -45,6 +49,7 @@ except AttributeError:
     st.error("⚠️ El módulo existe pero no tiene la función 'mostrar_app()'. Verifica que esté correctamente definida.")
 except Exception as e:
     st.error(f"⚠️ Ocurrió un error inesperado: {e}")
+
 
 
 

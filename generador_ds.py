@@ -99,7 +99,9 @@ def mostrar_app():
         "Frecuencia asignada": frecuencia_asignada,
         "Clafisicación ambiente sitio de instalación para corrosión según ISO 12944": corrosion,
         "Nivel de polución sitio de instalación según IEC 60815": polucion,
-        "Tensión asignada (Ur)": ur
+        "Tensión asignada (Ur)": ur,
+        "Ud - A tierra y entre polos [kV]": ud_valores["fase_tierra_ud"],
+        "Ud - A través de la distancia de seccionamiento [kV]": ud_valores["distancia_seccionamiento"]
         
     }
 

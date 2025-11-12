@@ -127,6 +127,20 @@ def mostrar_app():
     opciones_ics = ics_por_ur.get(ur, [])
     ics = st.selectbox("Poder de corte asignado en cortocircuito (Ics)", opciones_ics)
 
+    # 20. Duración del cortocircuito asignado (Ics)
+    duracion_ics = "1 s"
+    st.text("Duración del cortocircuito asignado (Ics): " + duracion_ics)
+
+    #21. Corriente de soportabilidad pico asignada (lp)
+    corriente_lp_ur = {
+        "145 kV": ["82 kA"],
+        "245 kV": ["104 kA"],
+        "550 kV": ["104 kA"]
+    }
+    # Mostrar opciones de Ics según Ur
+    opciones_lp = corriente_lp_ur.get(ur, [])
+    corriente_lp = st.selectbox("Corriente de soportabilidad pico asignada (lp)", opciones_lp)
+
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {
         "Fabricante": fabricante,
@@ -154,6 +168,8 @@ def mostrar_app():
         "Up - A través de la distancia de seccionamiento [kV]": up_valores["distancia_seccionamiento_up"],
         "Corriente asignada en servicio continuo (Ir)": ir,
         "Corriente de corta duración admisible asignada (Ics)": ics,
+        "Duración del cortocircuito asignado (Ics)": duracion_ics,
+        "Corriente de soportabilidad pico asignada (lp)": corriente_lp
         
     }
 

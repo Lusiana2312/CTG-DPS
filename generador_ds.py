@@ -70,6 +70,18 @@ def mostrar_app():
     # 15. Tensión asignada Ur
     ur = st.selectbox("Tensión asignada (Ur)", options=["145 kV", "245 kV", "550 kV"])
 
+     # 16. Tensión asignada a frecuencia industrial
+    # Asignación automática de Ud según Ur
+    ud_por_ur = {
+        "145 kV": {"fase_tierra_ud": "275", "distancia_seccionamiento": "315"},
+        "245 kV": {"fase_tierra_ud": "460", "distancia_seccionamiento": "530"},
+        "550 kV": {"fase_tierra_ud": "620 kV", "distancia_seccionamiento": "800 kV"}
+    }
+    ud_valores = ud_por_ur.get(ur,{"fase_tierra_ud": "", "distancia_seccionamiento": ""})
+    st.markdown("#### Tensión asignada soportada a frecuencia industrial (Ud)")
+    st.markdown(f"a) A tierra y entre polos: **{ud_valores['fase_tierra_ud']}**")
+    st.markdown(f"b) A través de la distancia de seccionamiento: **{ud_valores['distancia_seccionamiento']}**")
+
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {
         "Fabricante": fabricante,

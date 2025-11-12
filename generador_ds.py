@@ -37,7 +37,10 @@ def mostrar_app():
     # 7. Instalación
     instalacion = st.selectbox("Tipo de ejecución", ["Exterior", "Interior"])
 
-    # 8. Tipo de construcción para seccionador de conexión
+    # 8. Tipo de accionamiento
+    accionamiento = st.selectbox("Tipo de accionamiento", ["Monopolar", "Tripolar"])
+
+    # 9. Tipo de construcción para seccionador de conexión
     conexion = st.selectbox("Tipo de construcción para seccionador de conexión", ["Pantógrafo", "Semi-pantógrafo", "Rotación Central"])
     
     # 10. Altura 
@@ -52,6 +55,15 @@ def mostrar_app():
     temp_media = +35
     st.text(f"### Temperatura media (24 h) (°C): {temp_media}")
 
+    # 12. Frecuencia
+    frecuencia_asignada = "60 Hz"
+    st.text(f"### Frecuencia asignada (fr): " + frecuencia_asignada)
+
+    #13. Clafisicación ambiente sitio de instalación para corrosión según ISO 12944
+    corrosion ="Indicar"
+    st.text("### Clafisicación ambiente sitio de instalación para corrosión según ISO 12944: " + corrosion)
+    
+
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {
         "Fabricante": fabricante,
@@ -61,7 +73,13 @@ def mostrar_app():
         "Norma de calidad": norma_calidad,
         "Número de polos": num_polos,
         "Instalación": instalacion,
-        "Tipo de construcción para seccionador de conexión": conexion
+        "Tipo de construcción para seccionador de conexión": conexion,
+        "Tipo de accionamiento": accionamiento,
+        "Temperatura mínima anual (°C)": temp_min,
+        "Temperatura máxima anual (°C)": temp_max,
+        "Temperatura media (24 h) (°C)": temp_media,
+        "Frecuencia asignada": frecuencia_asignada,
+        "Clafisicación ambiente sitio de instalación para corrosión según ISO 12944": corrosion
         
     }
 

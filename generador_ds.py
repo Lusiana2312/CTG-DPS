@@ -82,6 +82,20 @@ def mostrar_app():
     st.markdown(f"a) A tierra y entre polos: **{ud_valores['fase_tierra_ud']}**")
     st.markdown(f"b) A través de la distancia de seccionamiento: **{ud_valores['distancia_seccionamiento']}**")
 
+    # 17. Tensión asignada a impulso maniobra
+    # Asignación automática de Us por componente según Ur
+    us_por_ur = {
+        "145 kV": {"fase_tierra_us": "N.A.", "entre_polos_us": "N.A.", "distancia_seccionamiento_us": "N.A."},
+        "245 kV": {"fase_tierra_us": "N.A.", "entre_polos_us": "N.A.", "distancia_seccionamiento_us": "N.A."},
+        "550 kV": {"fase_tierra_us": "1175 kV", "entre_polos_us": "1760 kV", "distancia_seccionamiento_us": "900(+450) kV"}
+    }
+    us_valores = us_por_ur.get(ur, {"fase_tierra_us": "", "entre_polos_us": "", "distancia_seccionamiento_us": ""})
+    st.markdown("#### Tensión asignada soportada a impulso de maniobra (Us)")
+    st.markdown(f"a) A tierra: **{us_valores['fase_tierra_us']}**")
+    st.markdown(f"b) Entre polos: **{us_valores['entre_polos_us']}**")
+    st.markdown(f"c) A través de la distancia de seccionamiento: **{us_valores['distancia_seccionamiento_us']}**")
+    
+
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {
         "Fabricante": fabricante,
@@ -102,6 +116,9 @@ def mostrar_app():
         "Tensión asignada (Ur)": ur,
         "Ud - A tierra y entre polos [kV]": ud_valores["fase_tierra_ud"],
         "Ud - A través de la distancia de seccionamiento [kV]": ud_valores["distancia_seccionamiento"]
+        "Us - A tierra [kV]": us_valores["fase_tierra_us"],
+        "Us - Entre polos [kV]": us_valores["entre_polos_us"],
+        "Us - A través de la distancia de seccionamiento [kV]": us_valores["distancia_seccionamiento_us"]
         
     }
 

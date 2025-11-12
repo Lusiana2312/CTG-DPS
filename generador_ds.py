@@ -62,7 +62,13 @@ def mostrar_app():
     #13. Clafisicación ambiente sitio de instalación para corrosión según ISO 12944
     corrosion ="Indicar"
     st.text("### Clafisicación ambiente sitio de instalación para corrosión según ISO 12944: " + corrosion)
-    
+
+    #14. Nivel de polución sitio de instalación según IEC 60815
+    polucion = "Indicar"
+    st.text("### Nivel de polución sitio de instalación según IEC 60815: " + polucion)
+
+    # 15. Tensión asignada Ur
+    ur = st.selectbox("Tensión asignada (Ur)", options=["145 kV", "245 kV", "550 kV"])
 
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {
@@ -79,7 +85,9 @@ def mostrar_app():
         "Temperatura máxima anual (°C)": temp_max,
         "Temperatura media (24 h) (°C)": temp_media,
         "Frecuencia asignada": frecuencia_asignada,
-        "Clafisicación ambiente sitio de instalación para corrosión según ISO 12944": corrosion
+        "Clafisicación ambiente sitio de instalación para corrosión según ISO 12944": corrosion,
+        "Nivel de polución sitio de instalación según IEC 60815": polucion,
+        "Tensión asignada (Ur)": ur
         
     }
 

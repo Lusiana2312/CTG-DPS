@@ -107,6 +107,25 @@ def mostrar_app():
     st.markdown(f"a) A tierra y entre polos: **{up_valores['fase_tierra_up']}**")
     st.markdown(f"b) A través de la distancia de seccionamiento: **{up_valores['distancia_seccionamiento_up']}**")
 
+    # 19. Corriente asignada
+    ir_por_ur = {
+        "145 kV": ["1250 A"],
+        "245 kV": ["2500 A"],
+        "550 kV": ["2500 A"]
+    }
+    # Mostrar opciones de Ir según Ur
+    opciones_ir = ir_por_ur.get(ur, [])
+    ir = st.selectbox("Corriente asignada en servicio continuo (Ir)", opciones_ir)
+
+    # 20. Corriente de corta duración admisible asignada (Ics) según Ur
+    ics_por_ur = {
+        "145 kV": ["25 kA", "31.5 kA", "40 kA"],
+        "245 kV": ["40 kA"],
+        "550 kV": ["50 kA"]
+    }
+    # Mostrar opciones de Ics según Ur
+    opciones_ics = ics_por_ur.get(ur, [])
+    ics = st.selectbox("Poder de corte asignado en cortocircuito (Ics)", opciones_ics)
 
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {
@@ -132,7 +151,9 @@ def mostrar_app():
         "Us - Entre polos [kV]": us_valores["entre_polos_us"],
         "Us - A través de la distancia de seccionamiento [kV]": us_valores["distancia_seccionamiento_us"],
         "Up - A tierra y entre polos [kV]": up_valores["fase_tierra_up"],
-        "Up - A través de la distancia de seccionamiento [kV]": up_valores["distancia_seccionamiento_up"]
+        "Up - A través de la distancia de seccionamiento [kV]": up_valores["distancia_seccionamiento_up"],
+        "Corriente asignada en servicio continuo (Ir)": ir,
+        "Corriente de corta duración admisible asignada (Ics)": ics,
         
     }
 

@@ -34,7 +34,23 @@ def mostrar_app():
     num_polos = "3"
     st.text("### Número de polos: " + num_polos)
 
+    # 7. Instalación
+    instalacion = st.selectbox("Tipo de ejecución", ["Exterior", "Interior"])
 
+    # 8. Tipo de construcción para seccionador de conexión
+    conexion = st.selectbox("Tipo de construcción para seccionador de conexión", ["Pantógrafo", "Semi-pantógrafo", "Rotación Central"])
+    
+    # 10. Altura 
+    altura_instalacion = st.number_input("Altura de instalación (m.s.n.m)", min_value=0, value=1000)
+
+    # 11. Temperatura de operación
+    st.markdown("### 🌡️ Temperatura de operación")
+    temp_min = -5
+    st.text(f"### Temperatura mínima anual (°C): {temp_min}")
+    temp_max = +40
+    st.text(f"### Temperatura máxima anual (°C): {temp_max}")
+    temp_media = +35
+    st.text(f"### Temperatura media (24 h) (°C): {temp_media}")
 
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {
@@ -43,7 +59,10 @@ def mostrar_app():
         "Referencia": referencia,
         "Norma de fabricación": norma_fabricacion,
         "Norma de calidad": norma_calidad,
-        "Número de polos": num_polos
+        "Número de polos": num_polos,
+        "Instalación": instalacion,
+        "Tipo de construcción para seccionador de conexión": conexion
+        
     }
 
 

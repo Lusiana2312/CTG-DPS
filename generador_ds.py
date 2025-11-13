@@ -118,7 +118,7 @@ def mostrar_app():
     ir = ir_por_ur.get(ur, "Indicar")
     
     # Mostrar como texto fijo en la interfaz
-    st.markdown(f"### Corriente asignada en servicio continuo (Ir): **{ir}**")
+    st.markdown(f"# Corriente asignada en servicio continuo (Ir): **{ir}**")
 
 
     # 20. Corriente de corta duración admisible asignada (Ics) según Ur

@@ -57,7 +57,7 @@ def mostrar_app():
 
     # 12. Frecuencia
     frecuencia_asignada = "60"
-    st.markdown(f"Frecuencia asignada (fr) [Hz]: **{frecuencia_asignada}**)
+    st.markdown(f"Frecuencia asignada (fr) [Hz]: **{frecuencia_asignada}**")
 
     #13. Clafisicación ambiente sitio de instalación para corrosión según ISO 12944
     corrosion ="Indicar"

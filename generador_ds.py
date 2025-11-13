@@ -61,7 +61,7 @@ def mostrar_app():
 
     #13. Clafisicación ambiente sitio de instalación para corrosión según ISO 12944
     corrosion ="Indicar"
-    st.markdown("Clafisicación ambiente sitio de instalación para corrosión según ISO 12944: **{corrosion}**)
+    st.markdown("Clafisicación ambiente sitio de instalación para corrosión según ISO 12944: **{corrosion}**")
 
     #14. Nivel de polución sitio de instalación según IEC 60815
     polucion = "Indicar"

@@ -68,14 +68,14 @@ def mostrar_app():
     st.text("### Nivel de polución sitio de instalación según IEC 60815: " + polucion)
 
     # 15. Tensión asignada Ur
-    ur = st.selectbox("Tensión asignada (Ur)", options=["145 kV", "245 kV", "550 kV"])
+    ur = st.selectbox("Tensión asignada (Ur)", options=["145", "245", "550"])
 
      # 16. Tensión asignada a frecuencia industrial
     # Asignación automática de Ud según Ur
     ud_por_ur = {
-        "145 kV": {"fase_tierra_ud": "275", "distancia_seccionamiento": "315"},
-        "245 kV": {"fase_tierra_ud": "460", "distancia_seccionamiento": "530"},
-        "550 kV": {"fase_tierra_ud": "620 kV", "distancia_seccionamiento": "800 kV"}
+        "145": {"fase_tierra_ud": "275", "distancia_seccionamiento": "315"},
+        "245": {"fase_tierra_ud": "460", "distancia_seccionamiento": "530"},
+        "550": {"fase_tierra_ud": "620", "distancia_seccionamiento": "800"}
     }
     ud_valores = ud_por_ur.get(ur,{"fase_tierra_ud": "", "distancia_seccionamiento": ""})
     st.markdown("#### Tensión asignada soportada a frecuencia industrial (Ud)")
@@ -85,9 +85,9 @@ def mostrar_app():
     # 17. Tensión asignada a impulso maniobra
     # Asignación automática de Us por componente según Ur
     us_por_ur = {
-        "145 kV": {"fase_tierra_us": "N.A.", "entre_polos_us": "N.A.", "distancia_seccionamiento_us": "N.A."},
-        "245 kV": {"fase_tierra_us": "N.A.", "entre_polos_us": "N.A.", "distancia_seccionamiento_us": "N.A."},
-        "550 kV": {"fase_tierra_us": "1175 kV", "entre_polos_us": "1760 kV", "distancia_seccionamiento_us": "900(+450) kV"}
+        "145": {"fase_tierra_us": "N.A.", "entre_polos_us": "N.A.", "distancia_seccionamiento_us": "N.A."},
+        "245": {"fase_tierra_us": "N.A.", "entre_polos_us": "N.A.", "distancia_seccionamiento_us": "N.A."},
+        "550": {"fase_tierra_us": "1175", "entre_polos_us": "1760", "distancia_seccionamiento_us": "900(+450)"}
     }
     us_valores = us_por_ur.get(ur, {"fase_tierra_us": "", "entre_polos_us": "", "distancia_seccionamiento_us": ""})
     st.markdown("#### Tensión asignada soportada a impulso de maniobra (Us)")
@@ -98,9 +98,9 @@ def mostrar_app():
      # 18. Tensión asignada a impulso tipo rayo
     # Asignación automática de Up según Ur
     up_por_ur = {
-        "145 kV": {"fase_tierra_up": "650", "distancia_seccionamiento_up": "750"},
-        "245 kV": {"fase_tierra_up": "1050 kV", "distancia_seccionamiento_up": "1200 kV"},
-        "550 kV": {"fase_tierra_up": "1500 kV", "distancia_seccionamiento_up": "1500(+315) kV"}
+        "145": {"fase_tierra_up": "650", "distancia_seccionamiento_up": "750"},
+        "245": {"fase_tierra_up": "1050", "distancia_seccionamiento_up": "1200"},
+        "550 kV": {"fase_tierra_up": "1500", "distancia_seccionamiento_up": "1500(+315)"}
     }
     up_valores = up_por_ur.get(ur, {"fase_tierra_up": "", "distancia_seccionamiento_up": ""})
     st.markdown("#### Tensión asignada soportada a impulso tipo rayo (Up)")
@@ -109,9 +109,9 @@ def mostrar_app():
 
     # 19. Corriente asignada (Ir) - Mostrar como texto fijo
     ir_por_ur = {
-        "145 kV": "1250 A",
-        "245 kV": "2500 A",
-        "550 kV": "2500 A"
+        "145": "1250",
+        "245 kV": "2500",
+        "550 kV": "2500"
     }
     # Obtener el valor según la tensión asignada (Ur)
     ir = ir_por_ur.get(ur, "Indicar")
@@ -121,15 +121,15 @@ def mostrar_app():
 
     # 20. Corriente de corta duración admisible asignada (Ics)
     ics_por_ur = {
-        "145 kV": ["25 kA", "31.5 kA", "40 kA"],
-        "245 kV": ["40 kA"],
-        "550 kV": ["50 kA"]
+        "145": ["25", "31.5", "40"],
+        "245": ["40"],
+        "550": ["50"]
     }
     
     opciones_ics = ics_por_ur.get(ur, [])
     
     if ur == "145 kV":
-        ics = st.selectbox("Poder de corte asignado en cortocircuito (Ics)", opciones_ics)
+        ics = st.selectbox("Poder de corte asignado en cortocircuito (Ics) [kA]", opciones_ics)
     else:
         # Mostrar como texto fijo para 245 kV y 550 kV
         ics = opciones_ics[0] if opciones_ics else "Indicar"
@@ -144,28 +144,28 @@ def mostrar_app():
 
     # 21. Corriente de soportabilidad pico asignada (lp) 
     corriente_lp_ur = {
-        "145 kV": "82 kA",
-        "245 kV": "104 kA",
-        "550 kV": "104 kA"
+        "145": "82",
+        "245": "104",
+        "550": "104"
     }
     # Obtener el valor según la tensión asignada (Ur)
     corriente_lp = corriente_lp_ur.get(ur, "Indicar")
-    st.markdown(f" Corriente de soportabilidad pico asignada (lp): **{corriente_lp}**")
+    st.markdown(f" Corriente de soportabilidad pico asignada (lp) [kA]: **{corriente_lp}**")
 
     # 22. Corrientes de transferencia de barras
     st.markdown("### 🔁 Corrientes de transferencia de barras")
     
     # Definición de valores según Ur
     transferencia_por_ur = {
-        "145 kV": {"corriente_transferencia": "≥ 0.8 In", "tension_transferencia": "100 V"},
-        "245 kV": {"corriente_transferencia": "≥ 0.6 In", "tension_transferencia": "220 V"},
-        "550 kV": {"corriente_transferencia": "≥ 0.6 In", "tension_transferencia": "220 V"}
+        "145": {"corriente_transferencia": "≥ 0.8 In", "tension_transferencia": "100"},
+        "245": {"corriente_transferencia": "≥ 0.6 In", "tension_transferencia": "220"},
+        "550": {"corriente_transferencia": "≥ 0.6 In", "tension_transferencia": "220"}
     }
     # Obtener valores según Ur seleccionada
     transferencia_valores = transferencia_por_ur.get(ur, {"corriente_transferencia": "", "tension_transferencia": ""})
     # Mostrar en pantalla
-    st.markdown(f"a) Corriente de transferencia en barras asignada: **{transferencia_valores['corriente_transferencia']}**")
-    st.markdown(f"b) Tensión de transferencia en barras asignada: **{transferencia_valores['tension_transferencia']}**")
+    st.markdown(f"a) Corriente de transferencia en barras asignada [A]: **{transferencia_valores['corriente_transferencia']}**")
+    st.markdown(f"b) Tensión de transferencia en barras asignada [V]: **{transferencia_valores['tension_transferencia']}**")
 
     # 23. Desempeño mecánico mínimo
     desempeno_mecanico = "M2"
@@ -201,7 +201,7 @@ def mostrar_app():
     
     # c) Distancia mínima de fuga requerida
     st.markdown("### 📏 Distancia mínima de fuga requerida")
-    um_valores = {"145 kV": 145, "245 kV": 245, "550 kV": 550}
+    um_valores = {"145": 145, "245": 245, "550": 550}
     um_num = um_valores.get(ur, 0)
     distancia_fuga = um_num * valor_sps
     st.text(f"Distancia mínima de fuga: {distancia_fuga} mm")
@@ -237,17 +237,17 @@ def mostrar_app():
 
     # 29. Cargas admisibles en bornes
     cargas_por_ur = {
-        "145 kV": {"estatica": "1000 N", "dinamica": "3000 N"},
-        "245 kV": {"estatica": "1500 N", "dinamica": "4000 N"},
-        "550 kV": {"estatica": "2000 N", "dinamica": "5500 N"}
+        "145": {"estatica": "1000", "dinamica": "3000"},
+        "245": {"estatica": "1500", "dinamica": "4000"},
+        "550": {"estatica": "2000", "dinamica": "5500"}
     }
     cargas_valores = cargas_por_ur.get(ur, {"estatica": "Indicar", "dinamica": "Indicar"})
     carga_estatica = cargas_valores["estatica"]
     carga_dinamica = cargas_valores["dinamica"]
 
     st.markdown("### 🧱 Cargas admisibles en bornes")
-    st.markdown(f"a) Carga estática admisible: **{carga_estatica}**")
-    st.markdown(f"b) Carga dinámica admisible: **{carga_dinamica}**")
+    st.markdown(f"a) Carga estática admisible [N]: **{carga_estatica}**")
+    st.markdown(f"b) Carga dinámica admisible [N]: **{carga_dinamica}**")
 
 
     # 30. Cuchilla de puesta a tierra

@@ -132,12 +132,12 @@ def mostrar_app():
     else:
         # Mostrar como texto fijo para 245 kV y 550 kV
         ics = opciones_ics[0] if opciones_ics else "Indicar"
-        st.markdown(f"#### ⚡ Poder de corte asignado en cortocircuito (Ics): **{ics}**")
+        st.markdown(f"###### ⚡ Poder de corte asignado en cortocircuito (Ics): **{ics}**")
 
     
     # 20. Duración del cortocircuito asignado (Ics)
     duracion_ics = "1"
-    st.text("Duración del cortocircuito asignado (Ics) [s]: " + duracion_ics)
+    st.text("Duración del cortocircuito asignado (Ics) [s]: **{duracion_ics}**")
 
 
     # 21. Corriente de soportabilidad pico asignada (lp) 

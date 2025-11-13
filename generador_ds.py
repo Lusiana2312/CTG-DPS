@@ -137,7 +137,7 @@ def mostrar_app():
     
     # 20. Duración del cortocircuito asignado (Ics)
     duracion_ics = "1"
-    st.text("Duración del cortocircuito asignado (Ics) [s]: **{duracion_ics}**")
+    st.markdown(f"Duración del cortocircuito asignado (Ics) [s]: **{duracion_ics}**")
 
 
     # 21. Corriente de soportabilidad pico asignada (lp) 

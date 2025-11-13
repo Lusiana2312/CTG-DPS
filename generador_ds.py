@@ -32,7 +32,7 @@ def mostrar_app():
     st.markdown(f"Norma de calidad: **{norma_calidad}**")
     #6. Número de polos
     num_polos = "3"
-    st.markdown("Número de polos: **{num_polos}**)
+    st.markdown("Número de polos: **{num_polos}**")
 
     # 7. Instalación
     instalacion = st.selectbox("Tipo de ejecución", ["Exterior", "Interior"])

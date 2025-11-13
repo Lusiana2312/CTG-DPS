@@ -23,16 +23,16 @@ def mostrar_app():
     st.markdown(f" País: **{pais}**")
     # 3. Referencia
     referencia = "Indicar"
-    st.text("### Referencia: " + referencia)
+    st.markdown(f" Referencia: **{referencia}**")
     # 4. Norma de fabricación
     norma_fabricacion = "IEC 62271-102"
-    st.markdown(f"**Norma de fabricación:** {norma_fabricacion}")
+    st.markdown(f"Norma de fabricación: **{norma_fabricacion}**")
     # 5. Norma de calidad
     norma_calidad = "ISO 9001"
-    st.markdown(f"**Norma de calidad:** {norma_calidad}")
+    st.markdown(f"Norma de calidad: **{norma_calidad}**")
     #6. Número de polos
     num_polos = "3"
-    st.text("### Número de polos: " + num_polos)
+    st.markdown("Número de polos: **{num_polos}**)
 
     # 7. Instalación
     instalacion = st.selectbox("Tipo de ejecución", ["Exterior", "Interior"])
@@ -49,23 +49,23 @@ def mostrar_app():
     # 11. Temperatura de operación
     st.markdown("### 🌡️ Temperatura de operación")
     temp_min = -5
-    st.text(f"### Temperatura mínima anual (°C): {temp_min}")
+    st.markdown(f"Temperatura mínima anual (°C): **{temp_min}**")
     temp_max = +40
-    st.text(f"### Temperatura máxima anual (°C): {temp_max}")
+    st.markdown(f"Temperatura máxima anual (°C): **{temp_max}**")
     temp_media = +35
-    st.text(f"### Temperatura media (24 h) (°C): {temp_media}")
+    st.markdown(f"Temperatura media (24 h) (°C): **{temp_media}**")
 
     # 12. Frecuencia
     frecuencia_asignada = "60"
-    st.text(f"### Frecuencia asignada (fr) [Hz]: " + frecuencia_asignada)
+    st.markdown(f"Frecuencia asignada (fr) [Hz]: **{frecuencia_asignada}**)
 
     #13. Clafisicación ambiente sitio de instalación para corrosión según ISO 12944
     corrosion ="Indicar"
-    st.text("### Clafisicación ambiente sitio de instalación para corrosión según ISO 12944: " + corrosion)
+    st.markdown("Clafisicación ambiente sitio de instalación para corrosión según ISO 12944: **{corrosion}**)
 
     #14. Nivel de polución sitio de instalación según IEC 60815
     polucion = "Indicar"
-    st.text("### Nivel de polución sitio de instalación según IEC 60815: " + polucion)
+    st.markdown("Nivel de polución sitio de instalación según IEC 60815: **{polucion}**)
 
     # 15. Tensión asignada Ur
     ur = st.selectbox("Tensión asignada (Ur) [kV]", options=["145", "245", "550"])
@@ -78,7 +78,7 @@ def mostrar_app():
         "550": {"fase_tierra_ud": "620", "distancia_seccionamiento": "800"}
     }
     ud_valores = ud_por_ur.get(ur,{"fase_tierra_ud": "", "distancia_seccionamiento": ""})
-    st.markdown("#### Tensión asignada soportada a frecuencia industrial (Ud)")
+    st.markdown("### Tensión asignada soportada a frecuencia industrial (Ud)")
     st.markdown(f"a) A tierra y entre polos: **{ud_valores['fase_tierra_ud']}**")
     st.markdown(f"b) A través de la distancia de seccionamiento: **{ud_valores['distancia_seccionamiento']}**")
 

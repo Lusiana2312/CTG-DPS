@@ -56,8 +56,8 @@ def mostrar_app():
     st.text(f"### Temperatura media (24 h) (°C): {temp_media}")
 
     # 12. Frecuencia
-    frecuencia_asignada = "60 Hz"
-    st.text(f"### Frecuencia asignada (fr): " + frecuencia_asignada)
+    frecuencia_asignada = "60"
+    st.text(f"### Frecuencia asignada (fr) [Hz]: " + frecuencia_asignada)
 
     #13. Clafisicación ambiente sitio de instalación para corrosión según ISO 12944
     corrosion ="Indicar"
@@ -68,7 +68,7 @@ def mostrar_app():
     st.text("### Nivel de polución sitio de instalación según IEC 60815: " + polucion)
 
     # 15. Tensión asignada Ur
-    ur = st.selectbox("Tensión asignada (Ur)", options=["145", "245", "550"])
+    ur = st.selectbox("Tensión asignada (Ur) [kV]", options=["145", "245", "550"])
 
      # 16. Tensión asignada a frecuencia industrial
     # Asignación automática de Ud según Ur
@@ -125,7 +125,6 @@ def mostrar_app():
         "245": ["40"],
         "550": ["50"]
     }
-    
     opciones_ics = ics_por_ur.get(ur, [])
     
     if ur == "145 kV":
@@ -138,8 +137,8 @@ def mostrar_app():
 
     
     # 20. Duración del cortocircuito asignado (Ics)
-    duracion_ics = "1 s"
-    st.text("Duración del cortocircuito asignado (Ics): " + duracion_ics)
+    duracion_ics = "1"
+    st.text("Duración del cortocircuito asignado (Ics) [s]: " + duracion_ics)
 
 
     # 21. Corriente de soportabilidad pico asignada (lp) 

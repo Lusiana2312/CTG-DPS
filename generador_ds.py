@@ -65,7 +65,7 @@ def mostrar_app():
 
     #14. Nivel de polución sitio de instalación según IEC 60815
     polucion = "Indicar"
-    st.markdown("Nivel de polución sitio de instalación según IEC 60815: **{polucion}**)
+    st.markdown("Nivel de polución sitio de instalación según IEC 60815: **{polucion}**")
 
     # 15. Tensión asignada Ur
     ur = st.selectbox("Tensión asignada (Ur) [kV]", options=["145", "245", "550"])

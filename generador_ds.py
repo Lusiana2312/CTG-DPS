@@ -159,7 +159,44 @@ def mostrar_app():
     st.markdown(f"a) Corriente de transferencia en barras asignada: **{transferencia_valores['corriente_transferencia']}**")
     st.markdown(f"b) Tensión de transferencia en barras asignada: **{transferencia_valores['tension_transferencia']}**")
 
+    # 23. Desempeño mecánico mínimo
+    desempeno_mecanico = "M2"
+    st.markdown(f"### Desempeño mecánico mínimo: **{desempeno_mecanico}**")
+
+    # 24. Distancia mínima en aire
+    distancia_entre_polos = "Indicar"
+    distancia_a_tierra = "Indicar"
+    distancia_seccionamiento = "Indicar"
     
+    st.markdown("### Distancia mínima en aire")
+    st.markdown(f"a) Entre polos: **{distancia_entre_polos}**")
+    st.markdown(f"b) A tierra: **{distancia_a_tierra}**")
+    st.markdown(f"c) A través de la distancia de seccionamiento: **{distancia_seccionamiento}**")
+
+
+    # 25. Aisladores de soporte
+
+    # a) Tipo IEC 60273
+    tipo_iec = "Indicar"
+    st.markdown(f"### Tipo de aislador según IEC 60273: **{tipo_iec}**")
+    
+    # b) Clase de severidad de contaminación del sitio (SPS)
+    st.markdown("### Clase de severidad de contaminación del sitio (SPS) según IEC 60815")
+    sps_opciones = {
+        "Bajo": 16,
+        "Medio": 20,
+        "Pesado": 25,
+        "Muy Pesado": 31
+    }
+    sps_seleccion = st.selectbox("Selecciona la clase SPS", list(sps_opciones.keys()))
+    valor_sps = sps_opciones[sps_seleccion]
+    
+    # c) Distancia mínima de fuga requerida
+    st.markdown("### 📏 Distancia mínima de fuga requerida")
+    um_valores = {"145 kV": 145, "245 kV": 245, "550 kV": 550}
+    um_num = um_valores.get(ur, 0)
+    distancia_fuga = um_num * valor_sps
+    st.text(f"Distancia mínima de fuga: {distancia_fuga} mm")
 
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {
@@ -191,7 +228,12 @@ def mostrar_app():
         "Duración del cortocircuito asignado (Ics)": duracion_ics,
         "Corriente de soportabilidad pico asignada (lp)": corriente_lp,
         "Corriente de transferencia en barras asignada": transferencia_valores["corriente_transferencia"],
-        "Tensión de transferencia en barras asignada": transferencia_valores["tension_transferencia"]
+        "Tensión de transferencia en barras asignada": transferencia_valores["tension_transferencia"],
+        "Desempeño mecánico mínimo": desempeno_mecanico,
+        "Distancia mínima en aire - Entre polos": distancia_entre_polos,
+        "Distancia mínima en aire - A tierra": distancia_a_tierra,
+        "Distancia mínima en aire - A través de la distancia de seccionamiento": distancia_seccionamiento,
+
         
     }
 

@@ -11,7 +11,7 @@ import textwrap
 
 ################## CTG DISCONNECTOW SWITCH// SECCIONADOR
 def mostrar_app():
-    st.set_page_config(page_title="Generador CTG - Interruptor de Potencia", layout="wide")
+    st.set_page_config(page_title="Generador CTG - Seccionador", layout="wide")
 
     st.title("📄 Generador de Ficha CTG")
     st.subheader("Seccionador")

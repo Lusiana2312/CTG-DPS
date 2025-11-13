@@ -206,6 +206,77 @@ def mostrar_app():
     distancia_fuga = um_num * valor_sps
     st.text(f"Distancia mínima de fuga: {distancia_fuga} mm")
 
+    # 26. Capacitancia
+    capacitancia_contactos_abiertos = "Indicar"
+    capacitancia_contactos_tierra = "Indicar"
+    
+    st.markdown("### ⚡ Capacitancia")
+    st.markdown(f"a) Entre contactos abiertos: **{capacitancia_contactos_abiertos}**")
+    st.markdown(f"b) Entre contactos y tierra: **{capacitancia_contactos_tierra}**")
+    
+    # 27. Datos sísmicos
+    desempeno_sismico = st.selectbox("Desempeño sísmico según IEEE-693-Vigente", ["Moderado", "Alto"])
+    
+    # Valores fijos para frecuencia y amortiguamiento
+    frecuencia_vibracion = "Indicar"
+    coef_amortiguamiento = "Indicar"
+
+    st.markdown("### 🌍 Datos sísmicos")
+    st.markdown(f"- Desempeño sísmico según IEEE-693-Vigente: **{desempeno_sismico}**")
+    st.markdown(f"a) Frecuencia natural de vibración: **{frecuencia_vibracion}**")
+    st.markdown(f"b) Coeficiente de amortiguamiento crítico: **{coef_amortiguamiento}**")
+
+
+    # 28. Valor asignado de esfuerzo máximo exigido por la maniobra manual
+    esfuerzo_seccionador_conexion = "Indicar"
+    esfuerzo_seccionador_tierra = "Indicar"
+    
+    st.markdown("### 🛠️ Valor asignado de esfuerzo máximo exigido por la maniobra manual")
+    st.markdown(f"a) Seccionador de conexión: **{esfuerzo_seccionador_conexion}**")
+    st.markdown(f"b) Seccionador de puesta a tierra: **{esfuerzo_seccionador_tierra}**")
+
+    # 29. Cargas admisibles en bornes
+    cargas_por_ur = {
+        "145 kV": {"estatica": "1000 N", "dinamica": "3000 N"},
+        "245 kV": {"estatica": "1500 N", "dinamica": "4000 N"},
+        "550 kV": {"estatica": "2000 N", "dinamica": "5500 N"}
+    }
+    cargas_valores = cargas_por_ur.get(ur, {"estatica": "Indicar", "dinamica": "Indicar"})
+    carga_estatica = cargas_valores["estatica"]
+    carga_dinamica = cargas_valores["dinamica"]
+
+    st.markdown("### 🧱 Cargas admisibles en bornes")
+    st.markdown(f"a) Carga estática admisible: **{carga_estatica}**")
+    st.markdown(f"b) Carga dinámica admisible: **{carga_dinamica}**")
+
+
+    # 30. Cuchilla de puesta a tierra
+    st.markdown("### ⚙️ Cuchilla de puesta a tierra")
+    cuchilla_tierra = st.selectbox("¿Incluye cuchilla de puesta a tierra?", ["Sí", "No"])
+    
+    if cuchilla_tierra == "Sí":
+        # a) Suicheo de corrientes inducidas
+        st.markdown("#### a) Suicheo de corrientes inducidas en seccionadores de puesta a tierra")
+        clase_suicheo = st.selectbox("Clase de suicheo", ["B", "N.A."])
+        corriente_inductiva = "Indicar"
+        corriente_capacitiva = "Indicar"
+        st.markdown(f"- Corriente inductiva asignada: **{corriente_inductiva}**")
+        st.markdown(f"- Corriente capacitiva asignada: **{corriente_capacitiva}**")
+    
+        # b) Desempeño eléctrico
+        st.markdown("#### b) Desempeño eléctrico de seccionadores de puesta a tierra")
+        desempeno_electrico = st.selectbox("Desempeño eléctrico", ["E0", "N.A."])
+    
+        # c) Desempeño mecánico mínimo
+        st.markdown("#### c) Desempeño mecánico mínimo")
+        desempeno_mecanico_tierra = st.selectbox("Desempeño mecánico mínimo", ["M1", "N.A."])
+    else:
+        clase_suicheo = "N.A."
+        corriente_inductiva = "N.A."
+        corriente_capacitiva = "N.A."
+        desempeno_electrico = "N.A."
+        desempeno_mecanico_tierra = "N.A."
+    
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {
         "Fabricante": fabricante,
@@ -244,7 +315,22 @@ def mostrar_app():
         "Aislador - Tipo IEC 60273": tipo_iec,
         "Aislador - Clase SPS": sps_seleccion,
         "Aislador - Valor SPS (mm/kV)": valor_sps,
-        "Aislador - Distancia mínima de fuga (mm)": distancia_fuga
+        "Aislador - Distancia mínima de fuga (mm)": distancia_fuga,
+        "Capacitancia - Entre contactos abiertos": capacitancia_contactos_abiertos,
+        "Capacitancia - Entre contactos y tierra": capacitancia_contactos_tierra,
+        "Desempeño sísmico según IEEE-693-Vigente": desempeno_sismico,
+        "Frecuencia natural de vibración": frecuencia_vibracion,
+        "Coeficiente de amortiguamiento crítico": coef_amortiguamiento,
+        "Esfuerzo máximo - Seccionador de conexión": esfuerzo_seccionador_conexion,
+        "Esfuerzo máximo - Seccionador de puesta a tierra": esfuerzo_seccionador_tierra,
+        "Carga estática admisible en bornes": carga_estatica,
+        "Carga dinámica admisible en bornes": carga_dinamica,
+        "Cuchilla de puesta a tierra": cuchilla_tierra,
+        "Clase de suicheo de corrientes inducidas": clase_suicheo,
+        "Corriente inductiva asignada": corriente_inductiva,
+        "Corriente capacitiva asignada": corriente_capacitiva,
+        "Desempeño eléctrico seccionadores de puesta a tierra": desempeno_electrico,
+        "Desempeño mecánico mínimo (puesta a tierra)": desempeno_mecanico_tierra
 
 
         

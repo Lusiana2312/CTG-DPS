@@ -17,7 +17,7 @@ def mostrar_app():
     st.subheader("Seccionador")
     # 1. Fabricante
     fabricante = "Indicar"
-    st.text("### 🏢 Fabricante: " + fabricante)
+    st.text(f"Fabricante: " + **{fabricante}**)
     # 2. País
     pais = "Indicar"
     st.text("### País: " + pais)

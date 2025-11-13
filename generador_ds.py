@@ -121,12 +121,14 @@ def mostrar_app():
 
     # 20. Corriente de corta duración admisible asignada (Ics) - Mostrar como texto fijo
     ics_por_ur = {
-        "145 kV": "25 kA, 31.5 kA o 40 kA",
+        "145 kV": "25 kA / 31.5 kA / 40 kA",
         "245 kV": "40 kA",
         "550 kV": "50 kA"
     }
     ics = ics_por_ur.get(ur, "Indicar")
-    st.markdown(f"### Poder de corte asignado en cortocircuito (Ics): **{ics}**")
+    # Mostrar como texto fijo en la interfaz
+    st.markdown("### ⚡ Corriente de corta duración admisible asignada (Ics)")
+    st.markdown(f"**{ics}**")
 
     
     # 20. Duración del cortocircuito asignado (Ics)

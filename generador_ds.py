@@ -276,6 +276,24 @@ def mostrar_app():
         corriente_capacitiva = "N.A."
         desempeno_electrico = "N.A."
         desempeno_mecanico_tierra = "N.A."
+
+    # 31. Accesorios
+    st.markdown("### 🧩 Accesorios")
+    # a) Mecanismo de bloqueo externo
+    bloqueo_externo = st.selectbox(
+        "¿Incluye mecanismo de bloqueo externo y condena en abierto/cerrado?",
+        ["Sí", "N.A."]
+    )
+    # b) Juego de contracontactos
+    contracontactos = st.selectbox(
+        "¿Incluye juego de contracontactos?",
+        ["Sí", "N.A."]
+    )
+
+    # 32. Espesor del recubrimiento de plata en contactos principales
+    espesor_plata = "Indicar"
+    st.markdown("### 🧪 Espesor del recubrimiento de plata en contactos principales")
+    st.markdown(f"**{espesor_plata}**")
     
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {
@@ -330,9 +348,10 @@ def mostrar_app():
         "Corriente inductiva asignada": corriente_inductiva,
         "Corriente capacitiva asignada": corriente_capacitiva,
         "Desempeño eléctrico seccionadores de puesta a tierra": desempeno_electrico,
-        "Desempeño mecánico mínimo (puesta a tierra)": desempeno_mecanico_tierra
-
-
+        "Desempeño mecánico mínimo (puesta a tierra)": desempeno_mecanico_tierra,
+        "Accesorio - Mecanismo de bloqueo externo": bloqueo_externo,
+        "Accesorio - Juego de contracontactos": contracontactos,
+        "Espesor del recubrimiento de plata en contactos principales": espesor_plata
         
     }
 

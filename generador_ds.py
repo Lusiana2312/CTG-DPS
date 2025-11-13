@@ -447,7 +447,7 @@ def mostrar_app():
             # 🟪 Caja de título
             ws.merge_cells("A2:E4")
             cell = ws.cell(row=2, column=1)
-            cell.value = "FICHA TÉCNICA INTERRUPTOR DE POTENCIA"
+            cell.value = "FICHA TÉCNICA SECCIONADOR"
             cell.font = Font(name=fuente, bold=True, size=14, color="000000")
             cell.alignment = Alignment(horizontal="center", vertical="center")
     

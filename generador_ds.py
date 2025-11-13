@@ -107,15 +107,19 @@ def mostrar_app():
     st.markdown(f"a) A tierra y entre polos: **{up_valores['fase_tierra_up']}**")
     st.markdown(f"b) A través de la distancia de seccionamiento: **{up_valores['distancia_seccionamiento_up']}**")
 
-    # 19. Corriente asignada
+    # 19. Corriente asignada (Ir) - Mostrar como texto fijo
     ir_por_ur = {
-        "145 kV": ["1250 A"],
-        "245 kV": ["2500 A"],
-        "550 kV": ["2500 A"]
+        "145 kV": "1250 A",
+        "245 kV": "2500 A",
+        "550 kV": "2500 A"
     }
-    # Mostrar opciones de Ir según Ur
-    opciones_ir = ir_por_ur.get(ur, [])
-    ir = st.selectbox("Corriente asignada en servicio continuo (Ir)", opciones_ir)
+    
+    # Obtener el valor según la tensión asignada (Ur)
+    ir = ir_por_ur.get(ur, "Indicar")
+    
+    # Mostrar como texto fijo en la interfaz
+    st.markdown(f"### Corriente asignada en servicio continuo (Ir): **{ir}**")
+
 
     # 20. Corriente de corta duración admisible asignada (Ics) según Ur
     ics_por_ur = {

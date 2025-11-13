@@ -367,7 +367,7 @@ def mostrar_app():
             "Temperatura mínima anual (°C)": "°C",
             "Temperatura máxima anual (°C)": "°C",
             "Temperatura media (24 h) (°C)": "°C",
-            "Frecuencia asignada (fr)": "Hz",
+            "Frecuencia asignada": "Hz",
             "Corriente asignada en servicio continuo (Ir)": "A",
             "Poder de corte asignado en cortocircuito (Ics)": "kA",
             "Duración del cortocircuito asignado (Ics)": "s",

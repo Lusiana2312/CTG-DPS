@@ -306,6 +306,7 @@ def mostrar_app():
         "Instalación": instalacion,
         "Tipo de construcción para seccionador de conexión": conexion,
         "Tipo de accionamiento": accionamiento,
+        "Altura de instalación (m.s.n.m)": altura_instalacion,
         "Temperatura mínima anual (°C)": temp_min,
         "Temperatura máxima anual (°C)": temp_max,
         "Temperatura media (24 h) (°C)": temp_media,

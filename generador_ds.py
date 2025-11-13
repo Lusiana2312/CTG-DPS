@@ -119,16 +119,22 @@ def mostrar_app():
     st.markdown(f"Corriente asignada en servicio continuo (Ir): **{ir}**")
 
 
-    # 20. Corriente de corta duración admisible asignada (Ics) - Mostrar como texto fijo
+    # 20. Corriente de corta duración admisible asignada (Ics)
     ics_por_ur = {
-        "145 kV": "25 kA / 31.5 kA / 40 kA",
-        "245 kV": "40 kA",
-        "550 kV": "50 kA"
+        "145 kV": ["25 kA", "31.5 kA", "40 kA"],
+        "245 kV": ["40 kA"],
+        "550 kV": ["50 kA"]
     }
-    ics = ics_por_ur.get(ur, "Indicar")
-    # Mostrar como texto fijo en la interfaz
-    st.markdown("### ⚡ Corriente de corta duración admisible asignada (Ics)")
-    st.markdown(f"**{ics}**")
+    
+    opciones_ics = ics_por_ur.get(ur, [])
+    
+    if ur == "145 kV":
+        ics = st.selectbox("Poder de corte asignado en cortocircuito (Ics)", opciones_ics)
+    else:
+        # Mostrar como texto fijo para 245 kV y 550 kV
+        ics = opciones_ics[0] if opciones_ics else "Indicar"
+        st.markdown("### ⚡ Poder de corte asignado en cortocircuito (Ics)")
+        st.markdown(f"**{ics}**")
 
     
     # 20. Duración del cortocircuito asignado (Ics)
@@ -235,6 +241,11 @@ def mostrar_app():
         "Distancia mínima en aire - Entre polos": distancia_entre_polos,
         "Distancia mínima en aire - A tierra": distancia_a_tierra,
         "Distancia mínima en aire - A través de la distancia de seccionamiento": distancia_seccionamiento,
+        "Aislador - Tipo IEC 60273": tipo_iec,
+        "Aislador - Clase SPS": sps_seleccion,
+        "Aislador - Valor SPS (mm/kV)": valor_sps,
+        "Aislador - Distancia mínima de fuga (mm)": distancia_fuga
+
 
         
     }

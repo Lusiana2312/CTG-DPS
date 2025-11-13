@@ -290,7 +290,7 @@ def mostrar_app():
 
     # 32. Espesor del recubrimiento de plata en contactos principales
     espesor_plata = "Indicar"
-    st.markdown("### 🧪 Espesor del recubrimiento de plata en contactos principales: **{espesor_plata}**")
+    st.markdown(f"### 🧪 Espesor del recubrimiento de plata en contactos principales: **{espesor_plata}**")
     
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {

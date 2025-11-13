@@ -20,7 +20,7 @@ def mostrar_app():
     st.markdown(f" Fabricante: **{fabricante}**")
     # 2. País
     pais = "Indicar"
-    st.text("### País: " + pais)
+    st.markdown(f" País: **{pais}**")
     # 3. Referencia
     referencia = "Indicar"
     st.text("### Referencia: " + referencia)

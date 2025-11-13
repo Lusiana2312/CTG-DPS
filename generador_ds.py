@@ -184,7 +184,7 @@ def mostrar_app():
 
     # a) Tipo IEC 60273
     tipo_iec = "Indicar"
-    st.markdown(f"### Tipo de aislador según IEC 60273: **{tipo_iec}**")
+    st.markdown(f"Tipo de aislador según IEC 60273: **{tipo_iec}**")
     
     # b) Clase de severidad de contaminación del sitio (SPS)
     st.markdown("### Clase de severidad de contaminación del sitio (SPS) según IEC 60815")
@@ -290,8 +290,7 @@ def mostrar_app():
 
     # 32. Espesor del recubrimiento de plata en contactos principales
     espesor_plata = "Indicar"
-    st.markdown("### 🧪 Espesor del recubrimiento de plata en contactos principales")
-    st.markdown(f"**{espesor_plata}**")
+    st.markdown("### 🧪 Espesor del recubrimiento de plata en contactos principales: **{espesor_plata}**")
     
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {

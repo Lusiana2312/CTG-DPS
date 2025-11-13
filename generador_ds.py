@@ -133,15 +133,16 @@ def mostrar_app():
     duracion_ics = "1 s"
     st.text("Duración del cortocircuito asignado (Ics): " + duracion_ics)
 
-    #21. Corriente de soportabilidad pico asignada (lp)
+
+    # 21. Corriente de soportabilidad pico asignada (lp) 
     corriente_lp_ur = {
-        "145 kV": ["82 kA"],
-        "245 kV": ["104 kA"],
-        "550 kV": ["104 kA"]
+        "145 kV": "82 kA",
+        "245 kV": "104 kA",
+        "550 kV": "104 kA"
     }
-    # Mostrar opciones de Ics según Ur
-    opciones_lp = corriente_lp_ur.get(ur, [])
-    corriente_lp = st.selectbox("Corriente de soportabilidad pico asignada (lp)", opciones_lp)
+    # Obtener el valor según la tensión asignada (Ur)
+    corriente_lp = corriente_lp_ur.get(ur, "Indicar")
+    st.markdown(f" Corriente de soportabilidad pico asignada (lp): **{corriente_lp}**")
 
     # 22. Corrientes de transferencia de barras
     st.markdown("### 🔁 Corrientes de transferencia de barras")

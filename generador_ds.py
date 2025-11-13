@@ -113,12 +113,10 @@ def mostrar_app():
         "245 kV": "2500 A",
         "550 kV": "2500 A"
     }
-    
     # Obtener el valor según la tensión asignada (Ur)
     ir = ir_por_ur.get(ur, "Indicar")
-    
     # Mostrar como texto fijo en la interfaz
-    st.markdown(f"###### Corriente asignada en servicio continuo (Ir): **{ir}**")
+    st.markdown("###### Corriente asignada en servicio continuo (Ir): **{ir}**")
 
 
     # 20. Corriente de corta duración admisible asignada (Ics) según Ur

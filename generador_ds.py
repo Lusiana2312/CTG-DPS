@@ -139,7 +139,24 @@ def mostrar_app():
     }
     # Mostrar opciones de Ics según Ur
     opciones_lp = corriente_lp_ur.get(ur, [])
-    corriente_lp = st.markdown("Corriente de soportabilidad pico asignada (lp)", opciones_lp)
+    corriente_lp = st.selectbox("Corriente de soportabilidad pico asignada (lp)", opciones_lp)
+
+    # 22. Corrientes de transferencia de barras
+    st.markdown("### 🔁 Corrientes de transferencia de barras")
+    
+    # Definición de valores según Ur
+    transferencia_por_ur = {
+        "145 kV": {"corriente_transferencia": "≥ 0.8 In", "tension_transferencia": "100 V"},
+        "245 kV": {"corriente_transferencia": "≥ 0.6 In", "tension_transferencia": "220 V"},
+        "550 kV": {"corriente_transferencia": "≥ 0.6 In", "tension_transferencia": "220 V"}
+    }
+    # Obtener valores según Ur seleccionada
+    transferencia_valores = transferencia_por_ur.get(ur, {"corriente_transferencia": "", "tension_transferencia": ""})
+    # Mostrar en pantalla
+    st.markdown(f"a) Corriente de transferencia en barras asignada: **{transferencia_valores['corriente_transferencia']}**")
+    st.markdown(f"b) Tensión de transferencia en barras asignada: **{transferencia_valores['tension_transferencia']}**")
+
+    
 
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {
@@ -169,7 +186,9 @@ def mostrar_app():
         "Corriente asignada en servicio continuo (Ir)": ir,
         "Corriente de corta duración admisible asignada (Ics)": ics,
         "Duración del cortocircuito asignado (Ics)": duracion_ics,
-        "Corriente de soportabilidad pico asignada (lp)": corriente_lp
+        "Corriente de soportabilidad pico asignada (lp)": corriente_lp,
+        "Corriente de transferencia en barras asignada": transferencia_valores["corriente_transferencia"],
+        "Tensión de transferencia en barras asignada": transferencia_valores["tension_transferencia"]
         
     }
 

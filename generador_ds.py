@@ -139,7 +139,7 @@ def mostrar_app():
     }
     # Mostrar opciones de Ics según Ur
     opciones_lp = corriente_lp_ur.get(ur, [])
-    corriente_lp = st.text("Corriente de soportabilidad pico asignada (lp)", opciones_lp)
+    corriente_lp = st.markdown("Corriente de soportabilidad pico asignada (lp)", opciones_lp)
 
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {

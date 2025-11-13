@@ -32,7 +32,7 @@ def mostrar_app():
     st.markdown(f"Norma de calidad: **{norma_calidad}**")
     #6. Número de polos
     num_polos = "3"
-    st.markdown("Número de polos: **{num_polos}**")
+    st.markdown(f"Número de polos: **{num_polos}**")
 
     # 7. Instalación
     instalacion = st.selectbox("Tipo de ejecución", ["Exterior", "Interior"])
@@ -61,11 +61,11 @@ def mostrar_app():
 
     #13. Clafisicación ambiente sitio de instalación para corrosión según ISO 12944
     corrosion ="Indicar"
-    st.markdown("Clafisicación ambiente sitio de instalación para corrosión según ISO 12944: **{corrosion}**")
+    st.markdown(f"Clafisicación ambiente sitio de instalación para corrosión según ISO 12944: **{corrosion}**")
 
     #14. Nivel de polución sitio de instalación según IEC 60815
     polucion = "Indicar"
-    st.markdown("Nivel de polución sitio de instalación según IEC 60815: **{polucion}**")
+    st.markdown(f"Nivel de polución sitio de instalación según IEC 60815: **{polucion}**")
 
     # 15. Tensión asignada Ur
     ur = st.selectbox("Tensión asignada (Ur) [kV]", options=["145", "245", "550"])
@@ -132,8 +132,7 @@ def mostrar_app():
     else:
         # Mostrar como texto fijo para 245 kV y 550 kV
         ics = opciones_ics[0] if opciones_ics else "Indicar"
-        st.markdown("### ⚡ Poder de corte asignado en cortocircuito (Ics)")
-        st.markdown(f"**{ics}**")
+        st.markdown(f"# ⚡ Poder de corte asignado en cortocircuito (Ics): **{ics}**")
 
     
     # 20. Duración del cortocircuito asignado (Ics)

@@ -119,16 +119,16 @@ def mostrar_app():
     st.markdown(f"Corriente asignada en servicio continuo (Ir): **{ir}**")
 
 
-    # 20. Corriente de corta duración admisible asignada (Ics) según Ur
+    # 20. Corriente de corta duración admisible asignada (Ics) - Mostrar como texto fijo
     ics_por_ur = {
-        "145 kV": ["25 kA", "31.5 kA", "40 kA"],
-        "245 kV": ["40 kA"],
-        "550 kV": ["50 kA"]
+        "145 kV": "25 kA, 31.5 kA o 40 kA",
+        "245 kV": "40 kA",
+        "550 kV": "50 kA"
     }
-    # Mostrar opciones de Ics según Ur
-    opciones_ics = ics_por_ur.get(ur, [])
-    ics = st.selectbox("Poder de corte asignado en cortocircuito (Ics)", opciones_ics)
+    ics = ics_por_ur.get(ur, "Indicar")
+    st.markdown(f"### Poder de corte asignado en cortocircuito (Ics): **{ics}**")
 
+    
     # 20. Duración del cortocircuito asignado (Ics)
     duracion_ics = "1 s"
     st.text("Duración del cortocircuito asignado (Ics): " + duracion_ics)

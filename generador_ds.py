@@ -9,7 +9,7 @@ from openpyxl.styles import Font, Alignment, Border, Side, PatternFill
 import textwrap
 
 
-################## CTG DISCONNECTOW SWITCH// SECCIONADOR
+################## CTG DISCONNECTOR SWITCH// SECCIONADOR
 def mostrar_app():
     st.set_page_config(page_title="Generador CTG - Seccionador", layout="wide")
 
@@ -377,8 +377,39 @@ def mostrar_app():
             "Masa neta para transporte (kg)": "kg",
             "Volumen total para transporte (m³)": "m³",
             "Dimensiones para transporte (Alto x Ancho x Largo) [mm]": "mm",
-            "Masa neta de un polo completo con estructura (kg)": "kg"
-            # Añade más unidades según tus campos
+            "Masa neta de un polo completo con estructura (kg)": "kg",
+
+            "Ud - A tierra y entre polos [kV]": "kV",
+            "Ud - A través de la distancia de seccionamiento [kV]": "kV",
+            "Us - A tierra [kV]": "kV",
+            "Us - Entre polos [kV]": "kV",
+            "Us - A través de la distancia de seccionamiento [kV]": "kV",
+            "Up - A tierra y entre polos [kV]": "kV",
+            "Up - A través de la distancia de seccionamiento [kV]": "kV",
+
+            "Corriente de soportabilidad pico asignada (lp)": "kA",
+            "Corriente de transferencia en barras asignada": "A",
+            "Tensión de transferencia en barras asignada": "V",
+            "Desempeño mecánico mínimo": "Clase",
+            "Distancia mínima en aire - Entre polos": "mm",
+            "Distancia mínima en aire - A tierra": "mm",
+            "Distancia mínima en aire - A través de la distancia de seccionamiento": "mm",
+            "Aislador - Distancia mínima de fuga (mm)": "mm",
+            "Capacitancia - Entre contactos abiertos": "pF",
+            "Capacitancia - Entre contactos y tierra": "pF",
+ 
+            "Frecuencia natural de vibración": "Hz",
+            "Coeficiente de amortiguamiento crítico": "%",
+            "Esfuerzo máximo - Seccionador de conexión": "N",
+            "Esfuerzo máximo - Seccionador de puesta a tierra": "N",
+            "Carga estática admisible en bornes": "N",
+            "Carga dinámica admisible en bornes": "N",
+            "Corriente inductiva asignada": "A",
+            "Corriente capacitiva asignada": "A",
+            "Desempeño eléctrico seccionadores de puesta a tierra": "Clase",
+            "Desempeño mecánico mínimo (puesta a tierra)": "Clase",
+            "Espesor del recubrimiento de plata en contactos principales": "μm"
+            
         }
 
       # Crear DataFrame con estructura personalizada

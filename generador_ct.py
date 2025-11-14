@@ -163,7 +163,129 @@ def mostrar_app():
     um_num = um_valores.get(tension_material, 0)
     distancia_fuga = um_num * valor_sps
     st.markdown(f"**Distancia mínima de fuga requerida:** {distancia_fuga} mm")
+
+    # 11. DESEMPEÑO SÍSMICO SEGÚN IEEE-693
+    st.markdown("### 🌍 Desempeño sísmico según IEEE-693-Vigente (**)")
+    desempeno_sismico = st.selectbox(
+        "Selecciona el nivel de desempeño sísmico",
+        options=["Moderado (0,25 g)", "Alto (0,5 g)"]
+    )
+    st.markdown(f"**Desempeño sísmico seleccionado:** {desempeno_sismico}")
     
+    frecuencia_vibracion = "Indicar"
+    coef_amortiguamiento = "Indicar"
+    
+    st.markdown(f"**a) Frecuencia natural de vibración:** {frecuencia_vibracion}")
+    st.markdown(f"**b) Coeficiente de amortiguamiento crítico:** {coef_amortiguamiento}")
+
+    # 13. CARGAS ADMISIBLES EN BORNES
+    st.markdown("### Cargas admisibles en bornes")
+    
+    # Asignación según Um
+    if tension_material == "145 kV":
+        carga_estatica = 1000
+        carga_dinamica = 3000
+    elif tension_material == "245 kV":
+        carga_estatica = 1500
+        carga_dinamica = 4000
+    elif tension_material == "550 kV":
+        carga_estatica = 2000
+        carga_dinamica = 5500
+    else:
+        carga_estatica = "Indicar"
+        carga_dinamica = "Indicar"
+    
+    st.markdown(f"**a) Carga estática admisible:** {carga_estatica} N")
+    st.markdown(f"**b) Carga dinámica admisible:** {carga_dinamica} N")
+
+    # 11. Temperatura de operación
+    st.markdown("### 🌡️ Temperatura de operación")
+    temp_min = -10
+    st.text(f"### Temperatura mínima anual (°C): {temp_min}")
+    temp_max = +40
+    st.text(f"### Temperatura máxima anual (°C): {temp_max}")
+    temp_media = +35
+    st.text(f"### Temperatura media (24 h) (°C): {temp_media}")
+
+    # 14. GRADO DE PROTECCIÓN CAJA DE TERMINALES SECUNDARIA
+    st.markdown("### 🧰 Grado de protección caja de terminales secundaria")
+    
+    grado_proteccion = "IP55"
+    st.markdown(f"**Grado de protección:** {grado_proteccion}")
+
+    # 15. CLASIFICACIÓN AMBIENTE SITIO DE INSTALACIÓN PARA CORROSIÓN
+    st.markdown("### Clasificación del ambiente del sitio de instalación para corrosión según ISO 12944")
+    
+    clasificacion_corrosion = "Indicar"
+    st.markdown(f"**Clasificación según ISO 12944:** {clasificacion_corrosion}")
+
+    # 16. ACCESORIOS
+    st.markdown("### 🧩 Parámetro 33: Accesorios")
+    
+    accesorio_a = st.selectbox(
+        "a) Tapón de sello roscado para llenado de aceite instalado en la parte superior",
+        options=["Sí", "No"]
+    )
+    accesorio_b = st.selectbox(
+        "b) Indicadores de nivel de aceite fácilmente visible desde el piso con visor resistente a los rayos UV",
+        options=["Sí", "No"]
+    )
+    accesorio_c = st.selectbox(
+        "c) Placa de características de acuerdo con la Norma IEC 61869-2 (incluye indicación de aceite libre de PCB y azufre corrosivo)",
+        options=["Sí", "No"]
+    )
+    accesorio_d = st.selectbox(
+        "d) Tap capacitivo para pruebas de factor de potencia",
+        options=["Sí", "No"]
+    )
+    accesorio_e = st.selectbox(
+        "e) Bornera fija seccionable en núcleos secundarios tipo URTK/S o similar con accesorio de bloqueo (Phoenix Contact S-0308359 o similar)",
+        options=["Sí", "No"]
+    )
+
+    # 17. DISPOSITIVO DE PROTECCIÓN CONTRA SOBRETENSIONES
+    st.markdown("### ⚡ Parámetro 34: Dispositivo de protección contra sobretensiones")
+    
+    proteccion_sobretension = st.selectbox(
+        "¿El equipo incluye dispositivo de protección contra sobretensiones que limite la tensión a 2500 V sin alterar la exactitud del núcleo?",
+        options=["Sí", "No"]
+    )
+
+    # 18. TIEMPO DE DETECCIÓN DE LA FALLA
+    st.markdown("### ⏱️ Parámetro 35: Tiempo de detección de la falla")
+    st.markdown("**Resultado:** ≤ 6 segundos")
+
+    # 19. APLICACIÓN DE NORMA IEC 60255-121
+    st.markdown("### 📘 Parámetro 36: Aplicación de norma IEC 60255-121 para protecciones de distancia")
+    
+    norma_iec_60255 = st.selectbox(
+        "¿Se aplica la norma IEC 60255-121 para el dimensionamiento de los núcleos de protecciones de distancia?",
+        options=["Sí", "No"]
+    )
+
+    # 20. APLICACIÓN DE NORMA IEC 60255-151
+    st.markdown("### ⚙️ Parámetro 37: Aplicación de norma IEC 60255-151 para protecciones de sobrecorriente")
+    
+    norma_iec_60255_151 = st.selectbox(
+        "¿Se aplica la norma IEC 60255-151 para el dimensionamiento de los núcleos de protecciones de sobrecorriente?",
+        options=["Sí", "No"]
+    )
+
+    # 21. CANTIDAD DE ACEITE
+    st.markdown("### 🛢️ Parámetro 38: Cantidad de aceite")
+    cantidad_aceite = "Indicar"
+    st.markdown(f"**Cantidad de aceite:** {cantidad_aceite}")
+
+    # 22. DIMENSIONES PARA TRANSPORTE
+    st.markdown("### 🚚 Parámetro 39: Dimensiones para transporte (Alto x Ancho x Largo)")
+    dimensiones_transporte = "Indicar"
+    st.markdown(f"**Dimensiones para transporte:** {dimensiones_transporte}")
+
+    # 23. MASA NETA PARA TRANSPORTE
+    st.markdown("### ⚖️ Parámetro 40: Masa neta para transporte")
+    masa_neta_transporte = "Indicar"
+    st.markdown(f"**Masa neta para transporte:** {masa_neta_transporte}")
+
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {
         "Fabricante": fabricante,
@@ -206,7 +328,34 @@ def mostrar_app():
         "Capacidad": capacidad,
         "Distancia de arco": distancia_arco,
         "Distancia mínima de fuga requerida (mm)": distancia_fuga,
-        "Clase de severidad de contaminación del sitio (SPS)": sps_seleccion
+        "Clase de severidad de contaminación del sitio (SPS)": sps_seleccion,
+        "Desempeño sísmico según IEEE-693-Vigente": desempeno_sismico,
+        "a - Frecuencia natural de vibración": frecuencia_vibracion,
+        "b - Coeficiente de amortiguamiento crítico": coef_amortiguamiento,
+        "a - Carga estática admisible (N)": carga_estatica,
+        "b - Carga dinámica admisible (N)": carga_dinamica,
+        "Temperatura mínima anual (°C)": temp_min,
+        "Temperatura máxima anual (°C)": temp_max,
+        "Temperatura media (24 h) (°C)": temp_media,
+        "Grado de protección caja de terminales secundaria": grado_proteccion,
+        "Clasificación ambiente sitio de instalación para corrosión según ISO 12944": clasificacion_corrosion,
+        "a - Tapón de sello roscado para llenado de aceite": accesorio_a,
+        "b - Indicadores de nivel de aceite con visor UV": accesorio_b,
+        "c - Placa de características IEC 61869-2 (sin PCB ni azufre corrosivo)": accesorio_c,
+        "d - Tap capacitivo para pruebas de factor de potencia": accesorio_d,
+        "e - Bornera fija seccionable tipo URTK/S con bloqueo": accesorio_e,
+        "Protección contra sobretensiones (2500 V sin alterar exactitud)": proteccion_sobretension,
+        "Tiempo de detección de la falla": "≤ 6 segundos",
+        "Aplicación de norma IEC 60255-121 para protecciones de distancia": norma_iec_60255,
+        "Aplicación de norma IEC 60255-151 para protecciones de sobrecorriente": norma_iec_60255_151,
+        "Cantidad de aceite": cantidad_aceite,
+        "Dimensiones para transporte (Alto x Ancho x Largo)": dimensiones_transporte,
+        "Masa neta para transporte": masa_neta_transporte
+        
+        
+
+        
+        
         
         
         

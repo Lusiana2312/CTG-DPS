@@ -272,19 +272,30 @@ def mostrar_app():
     )
 
     # 21. CANTIDAD DE ACEITE
-    st.markdown("### 🛢️ Parámetro 38: Cantidad de aceite")
+    st.markdown("### Cantidad de aceite")
     cantidad_aceite = "Indicar"
     st.markdown(f"**Cantidad de aceite:** {cantidad_aceite}")
 
     # 22. DIMENSIONES PARA TRANSPORTE
-    st.markdown("### 🚚 Parámetro 39: Dimensiones para transporte (Alto x Ancho x Largo)")
+    st.markdown("###Dimensiones para transporte (Alto x Ancho x Largo)")
     dimensiones_transporte = "Indicar"
     st.markdown(f"**Dimensiones para transporte:** {dimensiones_transporte}")
 
     # 23. MASA NETA PARA TRANSPORTE
-    st.markdown("### ⚖️ Parámetro 40: Masa neta para transporte")
+    st.markdown("### Masa neta para transporte")
     masa_neta_transporte = "Indicar"
     st.markdown(f"**Masa neta para transporte:** {masa_neta_transporte}")
+    
+    # 23. Volumen total
+    st.markdown("### Volumen total")
+    volumen_total = "Indicar"
+    st.markdown(f"**Volumen total:** {volumen_total}")
+
+    # 23. Vida útil del equipo
+    st.markdown("### Volumen total")
+    vida_util = "Indicar"
+    st.markdown(f"**Vida útil del equipo:** {vida_util}")
+    
 
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {
@@ -350,16 +361,9 @@ def mostrar_app():
         "Aplicación de norma IEC 60255-151 para protecciones de sobrecorriente": norma_iec_60255_151,
         "Cantidad de aceite": cantidad_aceite,
         "Dimensiones para transporte (Alto x Ancho x Largo)": dimensiones_transporte,
-        "Masa neta para transporte": masa_neta_transporte
-        
-        
-
-        
-        
-        
-        
-        
-
+        "Masa neta para transporte": masa_neta_transporte,
+        "Volumen total": volumen_total,
+        "Vida útil del equipo": vida_util
         
 
     }

@@ -127,6 +127,42 @@ def mostrar_app():
             "Carga exactitud": carga_exactitud,
             **relaciones_individuales  # Se agregan las relaciones como claves individuales
         })
+
+    #23. CAMBIO DE RELACIÓN EN EL SECUNDARIO
+    st.markdown("### 🔄 Cambio de relación en el secundario")
+    cambio_relacion_secundario = st.selectbox("¿Existe cambio de relación en el secundario?", options=["Sí", "No"])
+
+    #24. Dispositivo de protección primario
+    st.markdown("### Dispositivo de protección primario")
+    
+    fabricante_proteccion = "Indicar"
+    referencia_proteccion = "Indicar"
+    
+    st.markdown(f"**a) Fabricante:** {fabricante_proteccion}")
+    st.markdown(f"**b) Referencia:** {referencia_proteccion}")
+        
+    # 7. CAPACIDAD
+    st.markdown("### Capacidad")
+    capacidad = "Indicar"
+    st.markdown(f"**Capacidad:** {capacidad}")
+
+    # 8. DISTANCIA DE ARCO
+    st.markdown("### Distancia de arco")
+    distancia_arco = "Indicar"
+    st.markdown(f"**Distancia de arco:** {distancia_arco}")
+
+    # 9. DISTANCIA MÍNIMA DE FUGA
+    st.markdown("### Distancia mínima de fuga")
+    
+    # Selección de clase SPS
+    sps_opciones = {"Bajo": 16, "Medio": 20, "Pesado": 25, "Muy Pesado": 31}
+    sps_seleccion = st.selectbox("Selecciona la clase SPS", list(sps_opciones.keys()))
+    valor_sps = sps_opciones[sps_seleccion]
+    
+    um_valores = {"145 kV": 145, "245 kV": 245, "550 kV": 550}
+    um_num = um_valores.get(tension_material, 0)
+    distancia_fuga = um_num * valor_sps
+    st.markdown(f"**Distancia mínima de fuga requerida:** {distancia_fuga} mm")
     
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {
@@ -163,7 +199,16 @@ def mostrar_app():
         "Relación de transformación asignada": relacion_asignada,
         "Relación para exactitud": relacion_exactitud,
         "Clase de exactitud": clase_exactitud,
-        "Carga de exactitud": carga_exactitud
+        "Carga de exactitud": carga_exactitud,
+        "Cambio de relación en el secundario": cambio_relacion_secundario,
+        "Dispositivo de protección primario - Fabricante": fabricante_proteccion,
+        "Dispositivo de protección primario - Referencia": referencia_proteccion,
+        "Capacidad": capacidad,
+        "Distancia de arco": distancia_arco,
+        "Parámetro 27 - Distancia mínima de fuga requerida (mm)": distancia_fuga
+        
+        
+        
 
         
 

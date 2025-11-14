@@ -3,9 +3,11 @@ import streamlit as st
 from openpyxl import Workbook
 from io import BytesIO
 from datetime import datetime
-import numpy as np
+import pandas as pd
+from openpyxl.drawing.image import Image
+from openpyxl.styles import Font, Alignment, Border, Side, PatternFill
+import textwrap
 
-import streamlit as st
 
 def mostrar_app():
     st.set_page_config(page_title="Generador CTG - Transformador de Corriente", layout="wide")

@@ -205,7 +205,8 @@ def mostrar_app():
         "Dispositivo de protección primario - Referencia": referencia_proteccion,
         "Capacidad": capacidad,
         "Distancia de arco": distancia_arco,
-        "Parámetro 27 - Distancia mínima de fuga requerida (mm)": distancia_fuga
+        "Distancia mínima de fuga requerida (mm)": distancia_fuga,
+        "Clase de severidad de contaminación del sitio (SPS)": sps_seleccion
         
         
         

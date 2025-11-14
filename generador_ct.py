@@ -77,35 +77,55 @@ def mostrar_app():
     # 4. CONFIGURACIÓN DE NÚCLEOS
     st.markdown("### 🧲 Configuración de núcleos")
     
-    # 4. CONFIGURACIÓN DE NÚCLEOS
-    st.markdown("### 🧲 Configuración de núcleos")
-    
-    num_nucleos = st.number_input("Número total de núcleos", min_value=1, max_value=10, step=1)
+    # Selección de cantidad de núcleos de medida y protección
+    num_medida = st.selectbox("Número de núcleos de medida (máx. 2)", options=[1, 2])
+    num_proteccion = st.selectbox("Número de núcleos de protección convencional (máx. 4)", options=[1, 2, 3, 4])
     
     nucleos = []
     
-    for i in range(int(num_nucleos)):
-        st.markdown(f"#### Núcleo {i+1}")
-        tipo_nucleo = st.selectbox(f"Tipo de núcleo {i+1}", options=["Medida", "Protección"], key=f"tipo_{i}")
-        clase = st.text_input(f"Clase del núcleo {i+1}", key=f"clase_{i}")
-        relacion_transformacion = st.text_input(f"Relación de transformación {i+1} (Ej: 1000/1)", key=f"relacion_{i}")
-        carga = st.text_input(f"Carga (VA) del núcleo {i+1}", key=f"carga_{i}")
-        precision = st.text_input(f"Precisión del núcleo {i+1}", key=f"precision_{i}")
+    # Núcleos de medida
+    st.markdown("#### ⚙️ Núcleos de Medida")
+    for i in range(num_medida):
+        st.markdown(f"##### Núcleo de Medida {i+1}")
+        clase = st.text_input(f"Clase del núcleo de medida {i+1}", key=f"clase_medida_{i}")
+        relacion = st.text_input(f"Relación de transformación {i+1} (Ej: 1000/1)", key=f"relacion_medida_{i}")
+        carga = st.text_input(f"Carga (VA) del núcleo de medida {i+1}", key=f"carga_medida_{i}")
+        precision = st.text_input(f"Precisión del núcleo de medida {i+1}", key=f"precision_medida_{i}")
     
         nucleos.append({
             "Número": i + 1,
-            "Tipo": tipo_nucleo,
+            "Tipo": "Medida",
             "Clase": clase,
-            "Relación": relacion_transformacion,
+            "Relación": relacion,
             "Carga (VA)": carga,
             "Precisión": precision
         })
     
-    # Mostrar resumen de núcleos
+    # Núcleos de protección
+    st.markdown("#### 🛡️ Núcleos de Protección Convencional")
+    for i in range(num_proteccion):
+        st.markdown(f"##### Núcleo de Protección {i+1}")
+        clase = st.text_input(f"Clase del núcleo de protección {i+1}", key=f"clase_prot_{i}")
+        relacion = st.text_input(f"Relación de transformación {i+1} (Ej: 1000/1)", key=f"relacion_prot_{i}")
+        carga = st.text_input(f"Carga (VA) del núcleo de protección {i+1}", key=f"carga_prot_{i}")
+        precision = st.text_input(f"Precisión del núcleo de protección {i+1}", key=f"precision_prot_{i}")
+    
+        nucleos.append({
+            "Número": num_medida + i + 1,
+            "Tipo": "Protección",
+            "Clase": clase,
+            "Relación": relacion,
+            "Carga (VA)": carga,
+            "Precisión": precision
+        })
+    
+    # Mostrar resumen
     st.markdown("### 📋 Resumen de núcleos configurados")
     for nucleo in nucleos:
         st.write(f"Núcleo {nucleo['Número']}: Tipo: {nucleo['Tipo']}, Clase: {nucleo['Clase']}, "
                  f"Relación: {nucleo['Relación']}, Carga: {nucleo['Carga (VA)']} VA, Precisión: {nucleo['Precisión']}")
+
+
     
     # BOTÓN PARA GENERAR FICHA
     ficha_cb = {

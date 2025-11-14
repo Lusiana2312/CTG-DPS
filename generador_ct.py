@@ -129,10 +129,31 @@ def mostrar_app():
         "Referencia": referencia,
         "Norma de fabricación": norma_fabricacion,
         "Norma de calidad": norma_calidad,
-        "Medio de extinción": medio_extincion,
-        "Número de polos": num_polos,
-        "Campo eléctrico a 1 metro de separación del piso (kV/m)": campo_electrico_1m
-            
+        "Tipo de ejecución": tipo_ejecucion,
+        "Altura de instalación [msnm]": altura_instalacion,
+        "Material del aislador": material_aislador,
+        "Tensión más elevada para el material (Um)": tension_material,
+        "Ud interno": ud_interno,
+        "Ud externo": ud_externo,
+        "Up interno": up_interno,
+        "Up externo": up_externo,
+        "Us interno": us_interno,
+        "Us externo": us_externo,
+        "Frecuencia asignada (fr)": frecuencia,
+        "Corriente primaria asignada (Ipn)": ipn,
+        "Factor de corriente primaria continua": factor_ipn,
+        "Corriente secundaria asignada (Isn)": isn,
+        "Corriente térmica (Ith)": ith,
+        "Corriente dinámica (Idyn)": idyn,
+        "Número de núcleos de medida": num_medida,
+        "Relación de transformación asignada": relacion_asignada,
+        "Relación para exactitud": relacion_exactitud,
+        "Clase de exactitud": clase_exactitud,
+        "Carga de exactitud": carga_exactitud,
+        "Listado de relaciones por núcleo": relaciones_valores
+
+        
+
     }
     
 

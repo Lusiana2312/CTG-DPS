@@ -159,7 +159,7 @@ def mostrar_app():
         "b) Relación para la que debe cumplir la exactitud": relacion_exactitud,
         "c) Clase de exactitud": clase_exactitud,
         "d) Carga de exactitud núcleoa de medida": carga_exactitud,
-        "-Núcleo 1":""
+        "-Núcleo 1":"",
         "Relación de transformación asignada": relacion_asignada,
         "Relación para exactitud": relacion_exactitud,
         "Clase de exactitud": clase_exactitud,

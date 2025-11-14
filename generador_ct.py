@@ -100,19 +100,23 @@ def mostrar_app():
     st.markdown(f"**d) Carga de exactitud núcleos de medida:** {carga_exactitud}")
     
     # Listado de relaciones y valores por núcleo
-    relaciones_valores = [
-        ("625/1   (1S3-1S4)", "2,5"),
-        ("1250/1  (1S2-1S4)", "5"),
-        ("2500/1  (1S1-1S4)", "15"),
-        ("400/1   (1S3-1S4)", "NA"),
-        ("800/1   (1S2-1S4)", "NA"),
-        ("1600/1  (1S1-1S4)", "NA")
-    ]
+    relaciones_valores = {
+        "625/1   (1S3-1S4)": "2,5",
+        "1250/1  (1S2-1S4)": "5",
+        "2500/1  (1S1-1S4)": "15",
+        "400/1   (1S3-1S4)": "NA",
+        "800/1   (1S2-1S4)": "NA",
+        "1600/1  (1S1-1S4)": "NA"
+    }
     
+    # Mostrar cada relación como parámetro individual en Streamlit
     for i in range(num_medida):
-        st.markdown(f"##### Listado de relaciones para núcleo de medida {i+1}")
-        for relacion, valor in relaciones_valores:
-            st.write(f"- {relacion}: {valor}")
+        st.markdown(f"##### Parámetros individuales para núcleo de medida {i+1}")
+        for relacion, valor in relaciones_valores.items():
+            st.write(f"{relacion}: {valor}")
+    
+        # Guardar cada relación como clave individual en el diccionario
+        relaciones_individuales = {f"Núcleo {i+1} - {relacion}": valor for relacion, valor in relaciones_valores.items()}
     
         nucleos.append({
             "Número": i + 1,
@@ -121,7 +125,7 @@ def mostrar_app():
             "Relación exactitud": relacion_exactitud,
             "Clase exactitud": clase_exactitud,
             "Carga exactitud": carga_exactitud,
-            "Listado relaciones": relaciones_valores
+            **relaciones_individuales  # Se agregan las relaciones como claves individuales
         })
     
     # BOTÓN PARA GENERAR FICHA
@@ -152,7 +156,11 @@ def mostrar_app():
         "Relación para exactitud": relacion_exactitud,
         "Clase de exactitud": clase_exactitud,
         "Carga de exactitud": carga_exactitud,
-        "Listado de relaciones por núcleo": relaciones_valores
+        "Número de núcleos de medida": num_medida,
+        "Relación de transformación asignada": relacion_asignada,
+        "Relación para exactitud": relacion_exactitud,
+        "Clase de exactitud": clase_exactitud,
+        "Carga de exactitud": carga_exactitud
 
         
 

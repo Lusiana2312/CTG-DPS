@@ -239,17 +239,7 @@ def mostrar_app():
             "Masa neta de un polo completo con estructura (kg)": "kg"
             # Añade más unidades según tus campos
         }
-        # Agregar dinámicamente los datos de cada núcleo de medida
-        for nucleo in nucleos:
-            numero = nucleo["Número"]
-            ficha_cb[f"Núcleo {numero} - Relación de transformación asignada"] = nucleo["Relación asignada"]
-            ficha_cb[f"Núcleo {numero} - Relación para exactitud"] = nucleo["Relación exactitud"]
-            ficha_cb[f"Núcleo {numero} - Clase de exactitud"] = nucleo["Clase exactitud"]
-            ficha_cb[f"Núcleo {numero} - Carga de exactitud"] = nucleo["Carga exactitud"]
-        
-            # Agregar cada relación individual como parámetro
-            for relacion, valor in relaciones_valores.items():
-                ficha_cb[f"Núcleo {numero} - {relacion}"] = valor
+
             
         # Crear DataFrame con estructura personalizada
         df = pd.DataFrame([

@@ -76,7 +76,7 @@ def mostrar_app():
 
     # 4. CONFIGURACIÓN DE NÚCLEOS
     st.markdown("### 🧲 Configuración de núcleos")
-
+    
     # Selección de cantidad de núcleos de medida y protección
     num_medida = st.selectbox("Número de núcleos de medida (máx. 2)", options=[1, 2])
     num_proteccion = st.selectbox("Número de núcleos de protección convencional (máx. 4)", options=[3, 4])
@@ -86,34 +86,32 @@ def mostrar_app():
     # Características de núcleos de medida
     st.markdown("#### ⚙️ Características de núcleos de medida")
     
+    # Datos fijos
+    relacion_asignada = "2500-1250-625/1"
+    relacion_exactitud = "2500-1250-625/1"
+    clase_exactitud = "0,2 S"
+    carga_exactitud = "Indicar"
+    
+    # Listado de relaciones y valores
+    relaciones_valores = [
+        ("625/1   (1S3-1S4)", "2,5"),
+        ("1250/1  (1S2-1S4)", "5"),
+        ("2500/1  (1S1-1S4)", "15"),
+        ("400/1   (1S3-1S4)", "NA"),
+        ("800/1   (1S2-1S4)", "NA"),
+        ("1600/1  (1S1-1S4)", "NA")
+    ]
+    
     for i in range(num_medida):
         st.markdown(f"##### Núcleo de medida {i+1}")
-        
-        relacion_asignada = "2500-1250-625/1"
-        relacion_exactitud = "2500-1250-625/1"
-        clase_exactitud = "0,2 S"
-        carga_exactitud = "Indicar"
-    
         st.markdown(f"**a) Relación de transformación asignada:** {relacion_asignada}")
         st.markdown(f"**b) Relación para la que debe cumplir la exactitud:** {relacion_exactitud}")
         st.markdown(f"**c) Clase de exactitud:** {clase_exactitud}")
         st.markdown(f"**d) Carga de exactitud núcleos de medida:** {carga_exactitud}")
     
-        nucleos.append({
-            "Número": i + 1,
-            "Tipo": "Medida",
-            "Relación asignada": relacion_asignada,
-            "Relación exactitud": relacion_exactitud,
-            "Clase exactitud": clase_exactitud,
-            "Carga exactitud": carga_exactitud
-        })
-        
-        # Mostrar resumen
-        st.markdown("### 📋 Resumen de núcleos configurados")
-        for nucleo in nucleos:
-            st.write(f"Núcleo {nucleo['Número']}: Tipo: {nucleo['Tipo']}, Clase: {nucleo['Clase']}, "
-                     f"Relación: {nucleo['Relación']}, Carga: {nucleo['Carga (VA)']} VA, Precisión: {nucleo['Precisión']}")
-
+        st.markdown("**Listado de relaciones y valores correspondientes:**")
+        for relacion, valor in relaciones_valores:
+            st.write(f"- {relacion}: {valor}")
 
     
     # BOTÓN PARA GENERAR FICHA

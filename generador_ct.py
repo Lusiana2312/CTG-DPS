@@ -76,54 +76,43 @@ def mostrar_app():
 
     # 4. CONFIGURACIÓN DE NÚCLEOS
     st.markdown("### 🧲 Configuración de núcleos")
-    
+
     # Selección de cantidad de núcleos de medida y protección
     num_medida = st.selectbox("Número de núcleos de medida (máx. 2)", options=[1, 2])
-    num_proteccion = st.selectbox("Número de núcleos de protección convencional (máx. 4)", options=[1, 2, 3, 4])
+    num_proteccion = st.selectbox("Número de núcleos de protección convencional (máx. 4)", options=[3, 4])
     
     nucleos = []
     
-    # Núcleos de medida
-    st.markdown("#### ⚙️ Núcleos de Medida")
+    # Características de núcleos de medida
+    st.markdown("#### ⚙️ Características de núcleos de medida")
+    
     for i in range(num_medida):
-        st.markdown(f"##### Núcleo de Medida {i+1}")
-        clase = st.text_input(f"Clase del núcleo de medida {i+1}", key=f"clase_medida_{i}")
-        relacion = st.text_input(f"Relación de transformación {i+1} (Ej: 1000/1)", key=f"relacion_medida_{i}")
-        carga = st.text_input(f"Carga (VA) del núcleo de medida {i+1}", key=f"carga_medida_{i}")
-        precision = st.text_input(f"Precisión del núcleo de medida {i+1}", key=f"precision_medida_{i}")
+        st.markdown(f"##### Núcleo de medida {i+1}")
+        
+        relacion_asignada = "2500-1250-625/1"
+        relacion_exactitud = "2500-1250-625/1"
+        clase_exactitud = "0,2 S"
+        carga_exactitud = "Indicar"
+    
+        st.markdown(f"**a) Relación de transformación asignada:** {relacion_asignada}")
+        st.markdown(f"**b) Relación para la que debe cumplir la exactitud:** {relacion_exactitud}")
+        st.markdown(f"**c) Clase de exactitud:** {clase_exactitud}")
+        st.markdown(f"**d) Carga de exactitud núcleos de medida:** {carga_exactitud}")
     
         nucleos.append({
             "Número": i + 1,
             "Tipo": "Medida",
-            "Clase": clase,
-            "Relación": relacion,
-            "Carga (VA)": carga,
-            "Precisión": precision
+            "Relación asignada": relacion_asignada,
+            "Relación exactitud": relacion_exactitud,
+            "Clase exactitud": clase_exactitud,
+            "Carga exactitud": carga_exactitud
         })
-    
-    # Núcleos de protección
-    st.markdown("#### 🛡️ Núcleos de Protección Convencional")
-    for i in range(num_proteccion):
-        st.markdown(f"##### Núcleo de Protección {i+1}")
-        clase = st.text_input(f"Clase del núcleo de protección {i+1}", key=f"clase_prot_{i}")
-        relacion = st.text_input(f"Relación de transformación {i+1} (Ej: 1000/1)", key=f"relacion_prot_{i}")
-        carga = st.text_input(f"Carga (VA) del núcleo de protección {i+1}", key=f"carga_prot_{i}")
-        precision = st.text_input(f"Precisión del núcleo de protección {i+1}", key=f"precision_prot_{i}")
-    
-        nucleos.append({
-            "Número": num_medida + i + 1,
-            "Tipo": "Protección",
-            "Clase": clase,
-            "Relación": relacion,
-            "Carga (VA)": carga,
-            "Precisión": precision
-        })
-    
-    # Mostrar resumen
-    st.markdown("### 📋 Resumen de núcleos configurados")
-    for nucleo in nucleos:
-        st.write(f"Núcleo {nucleo['Número']}: Tipo: {nucleo['Tipo']}, Clase: {nucleo['Clase']}, "
-                 f"Relación: {nucleo['Relación']}, Carga: {nucleo['Carga (VA)']} VA, Precisión: {nucleo['Precisión']}")
+        
+        # Mostrar resumen
+        st.markdown("### 📋 Resumen de núcleos configurados")
+        for nucleo in nucleos:
+            st.write(f"Núcleo {nucleo['Número']}: Tipo: {nucleo['Tipo']}, Clase: {nucleo['Clase']}, "
+                     f"Relación: {nucleo['Relación']}, Carga: {nucleo['Carga (VA)']} VA, Precisión: {nucleo['Precisión']}")
 
 
     

@@ -62,13 +62,13 @@ def mostrar_app():
     frecuencia_asignada = "60 Hz"
     st.text(f"### Frecuencia asignada (fr): " + frecuencia_asignada)
     # 14. Tensión asignada Ur
-    ur = st.selectbox("Tensión asignada (Ur)", options=["123 kV", "245 kV", "550 kV"])
+    ur = st.selectbox("Tensión asignada (Ur)", options=["145 kV", "245 kV", "550 kV"])
     
     # 15. Tensión asignada a frecuencia industrial
     # Asignación automática de Ud según Ur
     ud_por_ur = {
-        "123 kV": {"fase_tierra_ud": "#", "entre_fases_ud": "#", "interruptor_abierto_ud": "#"},
-        "245 kV": {"fase_tierra_ud": "460", "entre_fases_ud": "460", "interruptor_abierto_ud": "#"},
+        "145 kV": {"fase_tierra_ud": "750", "entre_fases_ud": "750", "interruptor_abierto_ud": "860"},
+        "245 kV": {"fase_tierra_ud": "460", "entre_fases_ud": "460", "interruptor_abierto_ud": 520"},
         "550 kV": {"fase_tierra_ud": "830 kV", "entre_fases_ud": "830 kV", "interruptor_abierto_ud": "1150 kV"}
     }
     ud_valores = ud_por_ur.get(ur,{"fase_tierra_ud": "", "entre_fases_ud": "", "interruptor_abierto_ud": ""})
@@ -80,7 +80,7 @@ def mostrar_app():
     # 16. Tensión asignada a impulso maniobra
     # Asignación automática de Us por componente según Ur
     us_por_ur = {
-        "123 kV": {"fase_tierra_us": "N.A.", "entre_fases_us": "N.A.", "interruptor_abierto_us": "N.A."},
+        "145 kV": {"fase_tierra_us": "N.A.", "entre_fases_us": "N.A.", "interruptor_abierto_us": "N.A."},
         "245 kV": {"fase_tierra_us": "N.A.", "entre_fases_us": "N.A.", "interruptor_abierto_us": "N.A."},
         "550 kV": {"fase_tierra_us": "1300 kV", "entre_fases_us": "2210 kV", "interruptor_abierto_us": "1300 kV"}
     }
@@ -94,8 +94,8 @@ def mostrar_app():
     # 17. Tensión asignada a impulso tipo rayo
     # Asignación automática de Up según Ur
     up_por_ur = {
-        "123 kV": {"fase_tierra_up": "#", "entre_fases_up": "#", "interruptor_abierto_up": "#"},
-        "245 kV": {"fase_tierra_up": "1050 kV", "entre_fases_up": "1050 kV", "interruptor_abierto_up": "#"},
+        "145 kV": {"fase_tierra_up": "750 kV", "entre_fases_up": "750 kV", "interruptor_abierto_up": "860 kV"},
+        "245 kV": {"fase_tierra_up": "1175 kV", "entre_fases_up": "1175 kV", "interruptor_abierto_up": "1175(+205)"},
         "550 kV": {"fase_tierra_up": "1800 kV", "entre_fases_up": "1800 kV", "interruptor_abierto_up": "1800 (+455) kV"}
     }
     up_valores = up_por_ur.get(ur, {"fase_tierra_up": "", "entre_fases_up": "", "interruptor_abierto_up": ""})
@@ -106,7 +106,7 @@ def mostrar_app():
 
     # 18. Corriente asignada
     ir_por_ur = {
-        "123 kV": ["1200 A"],
+        "145 kV": ["1200 A"],
         "245 kV": ["4000 A"],
         "550 kV": ["2500 A"]
     }
@@ -116,7 +116,7 @@ def mostrar_app():
     
     # 19. Poder de corte asignado (Ics) según Ur
     ics_por_ur = {
-        "123 kV": ["25 kA", "31.5 kA", "40 kA"],
+        "145 kV": ["25 kA", "31.5 kA", "40 kA"],
         "245 kV": ["40 kA"],
         "550 kV": ["50 kA"]
     }
@@ -185,7 +185,7 @@ def mostrar_app():
     
     # Rangos de referencia según Ur
     rangos_trv = {
-        "123 kV": {"Uc": "# kV", "t3_1": "# µs", "t3_2": "# µs"},
+        "145 kV": {"Uc": "225 kV", "t3_1": "105 µs", "t3_2": "187 µs"},
         "245 kV": {"Uc": "380 kV", "t3_1": "167 µs", "t3_2": "297 µs"},
         "550 kV": {"Uc": "1240 kV", "t3_1": "300 µs", "t3_2": "536 µs"}
     }
@@ -213,7 +213,7 @@ def mostrar_app():
 
     # 28. Número de corte λ ("Chopping Number λ")
     st.markdown("### 🔢 Número de corte λ (Chopping Number λ)")
-    if ur == "123 kV":
+    if ur == "145 kV":
         numero_corte_lambda = "<=3x10^4"
     elif ur == "245 kV":
         numero_corte_lambda = "<=5x10^4"
@@ -368,7 +368,7 @@ def mostrar_app():
 
     # 51. Cargas admisibles en bornes
     st.markdown("### Cargas admisibles en bornes")
-    if ur == "123 kV":
+    if ur == "145 kV":
         carga_estatica_admisible = "1000 N"
         carga_dinamica_admisible = "2000 N"
     elif ur == "245 kV":

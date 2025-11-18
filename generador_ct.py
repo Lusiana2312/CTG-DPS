@@ -100,14 +100,40 @@ def mostrar_app():
     st.markdown(f"**d) Carga de exactitud núcleos de medida:** {carga_exactitud}")
     
     # Listado de relaciones y valores por núcleo
-    relaciones_valores = {
-        "625/1   (1S3-1S4)": "2,5",
-        "1250/1  (1S2-1S4)": "5",
-        "2500/1  (1S1-1S4)": "15",
-        "400/1   (1S3-1S4)": "NA",
-        "800/1   (1S2-1S4)": "NA",
-        "1600/1  (1S1-1S4)": "NA"
-    }
+
+    def obtener_relaciones_por_um(um):
+    if um == "145 kV":
+        return {
+            "625/1   (1S3-1S4)": "2,5",
+            "1250/1  (1S2-1S4)": "5",
+            "800/1   (1S1-1S4)": "15",
+            "400/1   (1S3-1S4)": "NA",
+            "700/1   (1S2-1S4)": "NA",
+            "600/1   (1S1-1S4)": "NA"
+        }
+    elif um == "245 kV":
+        return {
+            "625/1   (1S3-1S4)": "2,5",
+            "1250/1  (1S2-1S4)": "5",
+            "2500/1  (1S1-1S4)": "15",
+            "400/1   (1S3-1S4)": "NA",
+            "800/1   (1S2-1S4)": "NA",
+            "1600/1  (1S1-1S4)": "NA"
+        }
+    elif um == "550 kV":
+        return {
+            "625/1   (1S3-1S4)": "2,5",
+            "100/1   (1S2-1S4)": "5",
+            "500/1   (1S1-1S4)": "15",
+            "400/1   (1S3-1S4)": "NA",
+            "800/1   (1S2-1S4)": "NA",
+            "1200/1  (1S1-1S4)": "NA"
+        }
+    else:
+        return {}
+    # Obtener las relaciones según el valor de Um seleccionado
+    relaciones_valores = obtener_relaciones_por_um(tension_material)
+
     
     # Mostrar cada relación como parámetro individual en Streamlit
     for i in range(num_medida):

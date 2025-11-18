@@ -101,8 +101,8 @@ def mostrar_app():
     
     # Listado de relaciones y valores por núcleo
 
-    def obtener_relaciones_por_um(um):
-    if um == "145 kV":
+    def obtener_relaciones_por_um(tension_material):
+    if tension_material == "145 kV":
         return {
             "625/1   (1S3-1S4)": "2,5",
             "1250/1  (1S2-1S4)": "5",
@@ -111,7 +111,7 @@ def mostrar_app():
             "700/1   (1S2-1S4)": "NA",
             "600/1   (1S1-1S4)": "NA"
         }
-    elif um == "245 kV":
+    elif tension_material == "245 kV":
         return {
             "625/1   (1S3-1S4)": "2,5",
             "1250/1  (1S2-1S4)": "5",
@@ -120,7 +120,7 @@ def mostrar_app():
             "800/1   (1S2-1S4)": "NA",
             "1600/1  (1S1-1S4)": "NA"
         }
-    elif um == "550 kV":
+    elif tension_material == "550 kV":
         return {
             "625/1   (1S3-1S4)": "2,5",
             "100/1   (1S2-1S4)": "5",

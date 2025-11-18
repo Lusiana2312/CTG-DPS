@@ -101,6 +101,8 @@ def mostrar_app():
     
     # Listado de relaciones y valores por núcleo
 
+    # Listado de relaciones y valores por núcleo
+
     def obtener_relaciones_por_um(tension_material):
         if tension_material == "145 kV":
             return {

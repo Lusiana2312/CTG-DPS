@@ -67,8 +67,8 @@ def mostrar_app():
     # 15. Tensión asignada a frecuencia industrial
     # Asignación automática de Ud según Ur
     ud_por_ur = {
-        "145 kV": {"fase_tierra_ud": "750", "entre_fases_ud": "750", "interruptor_abierto_ud": "860"},
-        "245 kV": {"fase_tierra_ud": "460", "entre_fases_ud": "460", "interruptor_abierto_ud": 520"},
+        "145 kV": {"fase_tierra_ud": "750 kV", "entre_fases_ud": "750 kV", "interruptor_abierto_ud": "860 kV"},
+        "245 kV": {"fase_tierra_ud": "460 kV", "entre_fases_ud": "460 kV", "interruptor_abierto_ud": "520 kV"},
         "550 kV": {"fase_tierra_ud": "830 kV", "entre_fases_ud": "830 kV", "interruptor_abierto_ud": "1150 kV"}
     }
     ud_valores = ud_por_ur.get(ur,{"fase_tierra_ud": "", "entre_fases_ud": "", "interruptor_abierto_ud": ""})

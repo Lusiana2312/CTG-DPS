@@ -37,13 +37,13 @@ def mostrar_app():
 
     # 10. Ud
     st.markdown("### 🔌 10. Tensión asignada soportada a la frecuencia industrial (Ud)")
-    ud_interno = {"123 kV": "360 kV", "245 kV": "460 kV", "550 kV": "700 kV"}[tension_um]
+    ud_interno = {"145 kV": "360 kV", "245 kV": "460 kV", "550 kV": "700 kV"}[tension_um]
     st.text(f"Tensión asignada soportada a la frecuencia industrial (Ud)-Aislamiento Interno a condiciones normales de prueba: {ud_interno}")
     st.text(f"Tensión asignada soportada a la frecuencia industrial (Ud)-Aislamiento Externo a condiciones normales de prueba (*): {ud_interno} a {int(altura_instalacion)} msnm")
 
     # 11. Up
     st.markdown("### ⚡ 11. Tensión asignada soportada al impulso tipo rayo (Up)")
-    up_interno = {"123 kV": "750 kV", "245 kV": "1050 kV", "550 kV": "1550 kV"}[tension_um]
+    up_interno = {"145 kV": "750 kV", "245 kV": "1050 kV", "550 kV": "1550 kV"}[tension_um]
     st.text(f"Tensión asignada soportada al impulso tipo rayo (Up)-Aislamiento Interno a condiciones normales de prueba: {up_interno}")
     st.text(f"Tensión asignada soportada al impulso tipo rayo (Up)-Aislamiento Externo a condiciones normales de prueba (*): {up_interno} a {int(altura_instalacion)} msnm")
 
@@ -66,7 +66,7 @@ def mostrar_app():
     st.text("b) Durante 30 s: " + factor_30s)
 
     # 15. Capacidad total
-    if tension_um == "123 kV":
+    if tension_um == "145 kV":
         capacidad_minima = 2000
     elif tension_um == "245 kV":
         capacidad_minima = 4000
@@ -141,7 +141,7 @@ def mostrar_app():
     valor_sps = sps_opciones[sps_seleccion]
     
     # Conversión de tensión Um a valor numérico
-    um_valores = {"123 kV": 123, "245 kV": 245, "550 kV": 550}
+    um_valores = {"145 kV": 145, "245 kV": 245, "550 kV": 550}
     um_num = um_valores.get(tension_um, 0)
 
     distancia_fuga = um_num * valor_sps
@@ -328,6 +328,7 @@ def mostrar_app():
             file_name="CTG_Transformador_Tension.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
 
 
 

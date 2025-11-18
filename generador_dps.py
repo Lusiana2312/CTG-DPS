@@ -47,10 +47,10 @@ def mostrar_app():
     numero_cuerpos = st.text_input("### 🔢 Número de cuerpos", value="Indicar")
 
     # 11. Tensión más elevada para el material (Um)
-    um = st.selectbox("### ⚡ Tensión más elevada para el material (Um)", ["123 kV", "245 kV", "550 kV"])
+    um = st.selectbox("### ⚡ Tensión más elevada para el material (Um)", ["145 kV", "245 kV", "550 kV"])
 
     # 12. Tensión asignada (Ur)
-    ur_por_um = {"123 kV": "110 kV", "245 kV": "198 kV", "550 kV": "444 kV"}
+    ur_por_um = {"145 kV": "110 kV", "245 kV": "198 kV", "550 kV": "444 kV"}
     ur = ur_por_um.get(um, "")
     st.text(f"### ⚡ Tensión asignada (Ur): {ur}")
 
@@ -91,7 +91,7 @@ def mostrar_app():
     st.text("Ures - 20 kA: " + ures_rayo_20ka)
 
     # 19. Clase de descarga de línea (automática según Um)
-    clase_por_um = {"123 kV": 3, "245 kV": 4, "550 kV": 5}
+    clase_por_um = {"145 kV": 3, "245 kV": 4, "550 kV": 5}
     clase_descarga = clase_por_um.get(um, "No definida")
     st.text(f"### ⚡ Clase de descarga de línea: {clase_descarga}")
 
@@ -126,7 +126,7 @@ def mostrar_app():
 
     # 26. Distancia mínima de fuga = Um * SPS
     st.markdown("### 📏 Distancia mínima de fuga requerida")
-    um_valores = {"123 kV": 123, "245 kV": 245, "550 kV": 550}
+    um_valores = {"145 kV": 123, "245 kV": 245, "550 kV": 550}
     um_num = um_valores.get(um, 0)
     distancia_fuga = um_num * valor_sps
     st.text(f"Distancia mínima de fuga: {distancia_fuga} mm")
@@ -151,7 +151,7 @@ def mostrar_app():
     # 29. Cargas admisibles en bornes (automáticas según Um)
     st.markdown("### 🧱 Cargas admisibles en bornes")
     cargas_por_um = {
-        "123 kV": {"estatica": "500 N", "dinamica": "1000 N"},
+        "145 kV": {"estatica": "500 N", "dinamica": "1000 N"},
         "245 kV": {"estatica": "1000 N", "dinamica": "2000 N"},
         "550 kV": {"estatica": "2000 N", "dinamica": "5000 N"}
     }
@@ -418,6 +418,7 @@ def mostrar_app():
     
     
     
+
 
 
 

@@ -8,7 +8,6 @@ from openpyxl.utils import get_column_letter
 from openpyxl.drawing.image import Image
     
 def mostrar_app():
-    st.set_page_config(page_title="Generador CTG", layout="wide")
     st.title("📄 Generador de Archivos CTG")
 
     # 1. Altura de instalación

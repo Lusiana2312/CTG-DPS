@@ -326,13 +326,16 @@ def mostrar_app():
     
             # Logo
             logo_path = "siemens_logo.png"
-            try:
-                img = Image(logo_path)
-                img.width = 300
-                img.height = 100
-                ws.add_image(img, "C1")
-            except FileNotFoundError:
-                st.warning("⚠️ No se encontró el logo 'siemens_logo.png'. Asegúrate de subirlo al repositorio.")
+                try:
+                    # Intentamos cargar la imagen
+                    img = Image(logo_path)
+                    img.width = 300
+                    img.height = 100
+                    ws.add_image(img, "C1")
+                except Exception as e:
+                    # Si falla por el formato .webp o cualquier otra cosa, 
+                    # la app NO se detiene, solo muestra un aviso.
+                    st.warning(f"⚠️ No se pudo insertar el logo: {e}. El Excel se generará sin imagen.")
     
             # Borde negro
             black_border = Border(

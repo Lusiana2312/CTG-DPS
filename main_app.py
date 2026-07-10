@@ -1,28 +1,45 @@
 import streamlit as st
 
+# 1️⃣ PRIMERA LÍNEA DE STREAMLIT (SIEMPRE ABAJO DE LOS IMPORTS)
 st.set_page_config(page_title="Generador CTG", layout="wide")
-st.title("🔐 Acceso privado")
 
-
-# 🔐 Login
+# 🔐 Configuración de Login
 usuarios_autorizados = {
     "lusiana": "clave123",
     "fer": "hola6"
 }
 
-usuario = st.text_input("Usuario")
-clave = st.text_input("Contraseña", type="password")
+st.title("🔐 Acceso privado")
 
-if usuario not in usuarios_autorizados or usuarios_autorizados[usuario] != clave:
-    st.warning("🔒 Ingresa tus credenciales para continuar")
-    st.stop()
+# Usamos session_state para que no pida login a cada rato
+if 'autenticado' not in st.session_state:
+    st.session_state.autenticado = False
 
-st.success("✅ Acceso concedido")
+if not st.session_state.autenticado:
+    usuario = st.text_input("Usuario")
+    clave = st.text_input("Contraseña", type="password")
+    
+    if st.button("Ingresar"):
+        if usuario in usuarios_autorizados and usuarios_autorizados[usuario] == clave:
+            st.session_state.autenticado = True
+            st.rerun()
+        else:
+            st.error("❌ Credenciales incorrectas")
+    st.stop() # Detiene la ejecución aquí si no está autenticado
+
+# --- Si llega aquí, es que el usuario ya está logueado ---
+
+st.success(f"✅ Acceso concedido")
 
 # 🧭 Selector de equipo
-equipo = st.selectbox("Selecciona el tipo de equipo", ["Descargador de sobretensiones", "Transformador de corriente", "Transformador de tensión", "Interruptor", "Seccionador"])
+equipo = st.selectbox("Selecciona el tipo de equipo", 
+                     ["Descargador de sobretensiones", 
+                      "Transformador de corriente", 
+                      "Transformador de tensión", 
+                      "Interruptor", 
+                      "Seccionador"])
 
-# ▶️ Ejecutar solo la función correspondiente
+# ▶️ Ejecutar la función correspondiente
 try:
     if equipo == "Descargador de sobretensiones":
         import generador_dps
@@ -46,11 +63,8 @@ try:
 
 except ModuleNotFoundError as e:
     st.error(f"❌ No se encontró el módulo: {e.name}")
-except AttributeError:
-    st.error("⚠️ El módulo existe pero no tiene la función 'mostrar_app()'. Verifica que esté correctamente definida.")
 except Exception as e:
     st.error(f"⚠️ Ocurrió un error inesperado: {e}")
-
 
 
 

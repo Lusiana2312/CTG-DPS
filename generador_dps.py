@@ -6,6 +6,7 @@ from io import BytesIO
 from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 from openpyxl.utils import get_column_letter
 from openpyxl.drawing.image import Image
+from PIL import Image as PILImage
     
 def mostrar_app():
     st.title("📄 Generador de Archivos CTG")
@@ -327,16 +328,20 @@ def mostrar_app():
             # Logo
             logo_path = "siemens_logo.png"
             try:
-                # Intentamos cargar la imagen
-                img = Image(logo_path)
-                img.width = 300
-                img.height = 100
-                ws.add_image(img, "C1")
+                # Abrimos con PIL para limpiar cualquier formato raro (.webp)
+                img_aux = PILImage.open(logo_path)
+                img_converted = BytesIO()
+                img_aux.save(img_converted, format="PNG") # Forzamos formato PNG real
+                img_converted.seek(0)
+            
+                # Ahora openpyxl recibe un PNG garantizado
+                img_for_excel = Image(img_converted)
+                img_for_excel.width = 280
+                img_for_excel.height = 90
+                ws.add_image(img_for_excel, "C1")
             except Exception as e:
-                # Si falla por el formato .webp o cualquier otra cosa, 
-                # la app NO se detiene, solo muestra un aviso.
-                st.warning(f"⚠️ No se pudo insertar el logo: {e}. El Excel se generará sin imagen.")
-    
+                st.warning(f"⚠️ El logo no pudo ser insertado (Formato incompatible). El Excel se generará sin logo.")
+
             # Borde negro
             black_border = Border(
                 left=Side(style='thin', color='000000'),

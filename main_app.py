@@ -1,13 +1,14 @@
 import streamlit as st
 
+st.set_page_config(page_title="Generador CTG", layout="wide")
+st.title("🔐 Acceso privado")
+
+
 # 🔐 Login
 usuarios_autorizados = {
     "lusiana": "clave123",
     "fer": "hola6"
 }
-
-st.set_page_config(page_title="Generador CTG", layout="wide")
-st.title("🔐 Acceso privado")
 
 usuario = st.text_input("Usuario")
 clave = st.text_input("Contraseña", type="password")

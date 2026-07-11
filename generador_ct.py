@@ -7,10 +7,11 @@ import pandas as pd
 from openpyxl.drawing.image import Image
 from openpyxl.styles import Font, Alignment, Border, Side, PatternFill
 import textwrap
+from PIL import Image as PILImage
 
 
 def mostrar_app():
-    st.set_page_config(page_title="Generador CTG - Transformador de Corriente", layout="wide")
+
 
     st.title("📄 Generador de Ficha CTG")
     st.subheader("Transformador de Corriente")
@@ -447,12 +448,19 @@ def mostrar_app():
             # 🖼️ Insertar imagen del logo (opcional)
             logo_path = "siemens_logo.png"
             try:
-                img = Image(logo_path)
-                img.width = 300
-                img.height = 100
+                # Abrimos con PIL para procesar cualquier formato (incluyendo webp disfrazado)
+                img_aux = PILImage.open(logo_path)
+                img_converted = BytesIO()
+                img_aux.save(img_converted, format="PNG") # Forzamos PNG
+                img_converted.seek(0)
+                
+                # Insertamos en Excel
+                img = Image(img_converted)
+                img.width = 280
+                img.height = 90
                 ws.add_image(img, "C1")
-            except FileNotFoundError:
-                st.warning("⚠️ No se encontró el logo 'siemens_logo.png'. Asegúrate de subirlo al repositorio.")
+            except Exception as e:
+                st.warning(f"⚠️ No se pudo insertar el logo: {e}. El archivo se generará sin imagen.")
     
             # 🟪 Caja de título
             ws.merge_cells("A2:E4")

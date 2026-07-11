@@ -7,7 +7,7 @@ import pandas as pd
 from openpyxl.drawing.image import Image
 from openpyxl.styles import Font, Alignment, Border, Side, PatternFill
 import textwrap
-from PIL import Image as PILImage|
+from PIL import Image as PILImage
 
 
 ################## CTG DISCONNECTOR SWITCH// SECCIONADOR
